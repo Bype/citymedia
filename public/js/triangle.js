@@ -1,12 +1,16 @@
 define(['kinetic'], function() {
-	var canvas = document.getElementById('myCanvas');
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
 
-	var context = canvas.getContext('2d');
-	var ht = canvas.height / 12;
+	var stage = new Kinetic.Stage({
+		container : 'container',
+		width : $(document).width(),
+		height : $(document).height()
+	});
+
+	var layer = new Kinetic.Layer();
+
+	var ht = stage.getHeight() / 12;
 	var wt = (ht * 2) / Math.sqrt(3);
-	var wn = Math.floor(canvas.width / wt);
+	var wn = Math.floor(stage.getWidth() / wt);
 
 	function p2p(i, j) {
 		j = j + 6;
@@ -17,65 +21,74 @@ define(['kinetic'], function() {
 		}
 	}
 
-	function drawUp(i, j, c) {
+	function drawUp(i, j) {
 		var p = p2p(i, j);
-		context.beginPath();
-		context.fillStyle = c;
-		context.lineWidth = 1;
-		context.strokeStyle = '#aaa';
-		context.moveTo(p.bx, p.by);
-		context.lineTo(p.bx + (wt / 2), p.by + ht);
-		context.lineTo(p.bx - (wt / 2), p.by + ht);
-		context.lineTo(p.bx, p.by);
-		context.fill();
-		context.stroke();
+		var aRet = [];
+		aRet.push([p.bx, p.by]);
+		aRet.push([p.bx - (wt / 2), p.by + ht]);
+		aRet.push([p.bx + (wt / 2), p.by + ht]);
+		aRet.push([p.bx, p.by]);
+		return aRet;
 	}
 
-	function drawDown(i, j, c) {
+	function drawDown(i, j) {
 		var p = p2p(i, j);
-		context.beginPath();
-		context.fillStyle = c;
-		context.lineWidth = 1;
-		context.strokeStyle = '#aaa';
-		context.moveTo(p.bx, p.by);
-		context.lineTo(p.bx - (wt / 2), p.by - ht);
-		context.lineTo(p.bx + (wt / 2), p.by - ht);
-		context.lineTo(p.bx, p.by);
-		context.fill();
-		context.stroke();
-	}
-
-	function writeDownCenter(i, j, c, t) {
-		var p = p2p(i, j);
-		context.font = '10pt sans';
-		context.textAlign = 'center';
-		context.textBaseline = 'middle';
-		context.fillStyle = c;
-		context.fillText(t, p.bx, p.by + (ht / Math.sqrt(3)));
-	}
-
-	function writeUpCenter(i, j, c, t) {
-		var p = p2p(i, j);
-
-		context.font = '10pt sans';
-		context.textAlign = 'center';
-		context.textBaseline = 'middle';
-		context.fillStyle = c;
-		context.fillText(t, p.bx, p.by - (ht / Math.sqrt(3)));
+		var aRet = [];
+		aRet.push([p.bx, p.by]);
+		aRet.push([p.bx - (wt / 2), p.by - ht]);
+		aRet.push([p.bx + (wt / 2), p.by - ht]);
+		aRet.push([p.bx, p.by]);
+		return aRet;
 	}
 
 	function drawHex(i, j, c) {
-		drawUp(i, j, c);
-		drawDown(i, j, c);
-		drawDown(i, j + 1, c);
-		drawUp(i, j - 1, c);
+		var group = new Kinetic.Group();
+		group.add(new Kinetic.Polygon({
+			points : drawUp(i, j),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
+		group.add(new Kinetic.Polygon({
+			points : drawDown(i, j + 1),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
 
-		drawDown(i - 1, j + 1, c);
-		drawUp(i + 1, j - 1, c);
+		group.add(new Kinetic.Polygon({
+			points : drawUp(i, j - 1),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
+
+		group.add(new Kinetic.Polygon({
+			points : drawDown(i, j),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
+
+		group.add(new Kinetic.Polygon({
+			points : drawDown(i - 1, j + 1),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
+
+		group.add(new Kinetic.Polygon({
+			points : drawUp(i + 1, j - 1),
+			fill : c,
+			stroke : '#eee',
+			strokeWidth : .4
+		}));
+
+		return group;
 	}
 
 	function drawPar(i0, j0, i1, j1, c) {
-
+		var group = new Kinetic.Group();
 		if (j1 < j0) {
 			var t = j0;
 			j0 = j1;
@@ -84,19 +97,46 @@ define(['kinetic'], function() {
 		if (i1 < i0) {
 			for (var j = j0; j < j1; j++)
 				for (var i = i0 - j + j0 - 1; i1 + j1 - j - 1 < i; i--) {
-					console.log(i, j);
-					drawUp(i, j, c);
-					drawDown(i, j + 1, c);
-					writeDownCenter(i, j, '#fff', i + ',' + j)
+					group.add(new Kinetic.Polygon({
+						points : drawUp(i, j),
+						fill : c,
+						stroke : '#eee',
+						strokeWidth : .4
+					}));
+
+					group.add(new Kinetic.Polygon({
+						points : drawDown(i, j + 1),
+						fill : c,
+						stroke : '#eee',
+						strokeWidth : .4
+					}));
 				}
 		} else {
 			for (var j = j0; j < j1; j++)
 				for (var i = i0 + 1; i <= i1; i++) {
-					drawUp(i, j, c);
-					drawDown(i - 1, j + 1, c);
+					group.add(new Kinetic.Polygon({
+						points : drawUp(i, j),
+						fill : c,
+						stroke : '#eee',
+						strokeWidth : .4
+					}));
+					group.add(new Kinetic.Polygon({
+						points : drawDown(i - 1, j + 1),
+						fill : c,
+						stroke : '#eee',
+						strokeWidth : .4
+					}));
 				}
 		}
+		return group;
 	}
+
+
+	layer.add(drawHex(-1, -4, '#5d5'));
+
+	layer.add(drawPar(-2, -2, 3, 3, '#f55'));
+
+	stage.add(layer);
 
 	function animate() {
 
@@ -104,8 +144,6 @@ define(['kinetic'], function() {
 			animate();
 		});
 	}
-
-	drawHex(0, 0, '#f55');
 
 	return {
 		drawUp : drawUp,
