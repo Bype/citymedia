@@ -1,4 +1,4 @@
-define(['kinetic'], function() {
+define(['kinetic', 'shapebase'], function(k, sb) {
 
 	var stage = new Kinetic.Stage({
 		container : 'container',
@@ -12,141 +12,30 @@ define(['kinetic'], function() {
 	var wt = (ht * 2) / Math.sqrt(3);
 	var wn = Math.floor(stage.getWidth() / wt);
 
-	function p2p(i, j) {
-		j = j + 6;
-		i = i + (wn / 2) - 3;
-		return {
-			bx : (j / 2 + i) * wt,
-			by : j * ht
-		}
-	}
+	sb.init({
+		ht : ht,
+		wt : wt,
+		wn : wn
+	});
 
-	function drawUp(i, j) {
-		var p = p2p(i, j);
-		var aRet = [];
-		aRet.push([p.bx, p.by]);
-		aRet.push([p.bx - (wt / 2), p.by + ht]);
-		aRet.push([p.bx + (wt / 2), p.by + ht]);
-		aRet.push([p.bx, p.by]);
-		return aRet;
-	}
-
-	function drawDown(i, j) {
-		var p = p2p(i, j);
-		var aRet = [];
-		aRet.push([p.bx, p.by]);
-		aRet.push([p.bx - (wt / 2), p.by - ht]);
-		aRet.push([p.bx + (wt / 2), p.by - ht]);
-		aRet.push([p.bx, p.by]);
-		return aRet;
-	}
-
-	function drawHex(i, j, c) {
-		var group = new Kinetic.Group();
-		group.add(new Kinetic.Polygon({
-			points : drawUp(i, j),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-		group.add(new Kinetic.Polygon({
-			points : drawDown(i, j + 1),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-
-		group.add(new Kinetic.Polygon({
-			points : drawUp(i, j - 1),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-
-		group.add(new Kinetic.Polygon({
-			points : drawDown(i, j),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-
-		group.add(new Kinetic.Polygon({
-			points : drawDown(i - 1, j + 1),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-
-		group.add(new Kinetic.Polygon({
-			points : drawUp(i + 1, j - 1),
-			fill : c,
-			stroke : '#eee',
-			strokeWidth : .4
-		}));
-
-		return group;
-	}
-
-	function drawPar(i0, j0, i1, j1, c) {
-		var group = new Kinetic.Group();
-		if (j1 < j0) {
-			var t = j0;
-			j0 = j1;
-			j1 = t;
-		}
-		if (i1 < i0) {
-			for (var j = j0; j < j1; j++)
-				for (var i = i0 - j + j0 - 1; i1 + j1 - j - 1 < i; i--) {
-					group.add(new Kinetic.Polygon({
-						points : drawUp(i, j),
-						fill : c,
-						stroke : '#eee',
-						strokeWidth : .4
-					}));
-
-					group.add(new Kinetic.Polygon({
-						points : drawDown(i, j + 1),
-						fill : c,
-						stroke : '#eee',
-						strokeWidth : .4
-					}));
-				}
-		} else {
-			for (var j = j0; j < j1; j++)
-				for (var i = i0 + 1; i <= i1; i++) {
-					group.add(new Kinetic.Polygon({
-						points : drawUp(i, j),
-						fill : c,
-						stroke : '#eee',
-						strokeWidth : .4
-					}));
-					group.add(new Kinetic.Polygon({
-						points : drawDown(i - 1, j + 1),
-						fill : c,
-						stroke : '#eee',
-						strokeWidth : .4
-					}));
-				}
-		}
-		return group;
-	}
-
-
-	layer.add(drawHex(-1, -4, '#5d5'));
-
-	layer.add(drawPar(-2, -2, 3, 3, '#f55'));
+	var center = sb.p2k(0, 0);
+	
+	layer.add(sb.drawDown(5, -2, '#d53'));
+	layer.add( par = sb.drawPar(5, -2, -3, 2, '#5de'));
+	layer.add(sb.drawUp(-3, 2, '#d53'));
 
 	stage.add(layer);
+	var angularSpeed = Math.PI / 2;
+	var anim = new Kinetic.Animation(function(frame) {
+		var time = frame.time, timeDiff = frame.timeDiff, frameRate = frame.frameRate;
+		var angleDiff = frame.timeDiff * angularSpeed / 1000;
+		//par.rotate(angleDiff);
+		// update stuff
+	}, layer);
 
-	function animate() {
-
-		requestAnimFrame(function() {
-			animate();
-		});
-	}
+	anim.start();
 
 	return {
-		drawUp : drawUp,
-		drawDown : drawDown
 	}
 });
+
