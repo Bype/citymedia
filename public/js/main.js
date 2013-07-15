@@ -16,7 +16,7 @@ require(['jquery', 'underscore', 'bootstrap'], function($, _) {
 		$(window).resize(function() {
 			location.reload();
 		});
-		require(['triangle'], function() {
+		require(['triangle'], function(t) {
 		});
 	});
 });
