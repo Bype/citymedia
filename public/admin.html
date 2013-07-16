@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Citymedia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel='stylesheet' href='/css/admin.css' />
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a href="/admin.html" class="brand">Citymedia</a>
+						<div>
+							<ul class="nav pull-right">
+								<li>
+									<a onclick="$('#projects').toggle(200);">Projets</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='container hide' id='projects'>
+				<h2>Liste des projets</h2>
+				<div class="container">
+					<table class='table table-striped span12'>
+						<thead>
+							<tr>
+								<th> Nom du projet </th>
+								<th> Présentation </th>
+								<th> &nbsp; </th>
+							</tr>
+						</thead>
+						<tbody id='prjlist'></tbody>
+					</table>
+					<a onclick="" href="#projectbox" role="button" data-toggle="modal" class="btn">Ajouter un projet</a>
+				</div>
+			</div>
+			<div class='container hide' id='modules'>
+				<h1 id='prjmodtitle'>Project</h1>
+				<h2>Liste des modules associés</h2>
+				<div class="container">
+					<table class='table table-striped span12'>
+						<thead>
+							<tr>
+								<th> Type </th>
+								<th> Info </th>
+								<th> URL </th>
+								<th> &nbsp; </th>
+							</tr>
+						</thead>
+						<tbody id='modulelist'></tbody>
+					</table>
+					<a onclick="" href="#modulebox" role="button" data-toggle="modal" class="btn">Ajouter un module</a>
+				</div>
+			</div>
+		</div>
+		<div id="projectbox" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+					×
+				</button><h3>Définition d'un projet</h3>
+			</div>
+			<div class="modal-body">
+				<form id="projectform" action="/project/add" method="post" enctype="multipart/form-data" style="">
+					<fieldset>
+						<div class="control-group">
+							<label for="prjtitle" class="control-label">Titre</label>
+							<input id="prjtitle" type="text" name="prjtitle" placeholder="Titre" onchange="$.changeTitle()" class="controls input-xlarge">
+							<input id="prjname" type="text" name="prjname" readonly="" class="controls">
+						</div>
+						<div class="control-group">
+							<label for="appsubtitle" class="control-label">Présentation</label>
+							<input id="appsubtitle" rows='3' type='text' name="appsubtitle" placeholder="URL" class="controls input-xlarge">
+						</div>
+						<div class="modal-footer">
+							<input value="Annuler" aria-hidden="true" data-dismiss="modal" class="btn">
+							<input type="submit" value="Enregistrer" class="btn btn-primary">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div id="modulebox" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+					×
+				</button><h3>Définition d'un module</h3>
+			</div>
+			<div class="modal-body">
+				<form id="moduleform" action="/project//add" method="post" enctype="multipart/form-data" style="">
+					<fieldset>
+						<div class="control-group">
+							<label for="moduletype" class="control-label">Titre</label>
+							<select id="moduletype" name="type" class="controls input-medium">
+								<option value="url">Lien http</option>
+								<option value="vimeo">Canal Vimeo</option>
+								<option value="rss">Flux RSS</option>
+								<option value="flickr">Album Flickr</option>
+								<option value="gcalendar">Agenda Google</option>
+								<option value="gmaps">Carte Google</option>
+								<option value="@tweeter">Utilisateur Twitter</option>
+								<option value="#tweeter">hashtag Twitter</option>
+								<option value="facebook">Page Facebook</option>
+								<option value="soundcloud">Utilisateur Soundcloud</option>
+							</select>
+						</div>
+						<div class="control-group">
+							<label for="appinfo" class="control-label">Info</label>
+							<input id="appinfo" rows='3' type='text' name="info" placeholder="Courte présentation" class="controls input-xlarge">
+						</div>
+						<div class="modal-footer">
+							<input value="Annuler" aria-hidden="true" data-dismiss="modal" class="btn">
+							<input type="submit" value="Enregistrer" class="btn btn-primary">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<script data-main="js/admin" src="js/lib/require-jquery.js"></script>
+	</body>
+</html>
