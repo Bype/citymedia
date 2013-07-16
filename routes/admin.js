@@ -16,10 +16,12 @@ exports.projectadd = function(req, res) {
 exports.modulelist = function(req, res) {
 	db.project.findOne({
 		"_id" : new db.project.ObjectID(req.params.id)
-	},function(err, data) {
-		res.json(data.modules);
+	}, function(err, data) {
+		if (data.modules)
+			res.json(data.modules);
+		else
+			res.json({});
 	});
-
 };
 
 exports.moduleadd = function(req, res) {
