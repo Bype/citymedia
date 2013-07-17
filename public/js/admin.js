@@ -12,46 +12,15 @@ requirejs.config({
 	}
 });
 
-require(['jquery', 'underscore', 'mustache', 'lib/jquery.form', 'bootstrap', 'lib/bootbox.min'], function($, _, Mustache) {
+require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstrap', 'lib/bootbox.min'], function($, _, Mustache, util) {
 	$(function() {
 
 		$.changeTitle = function() {
 			$('#prjname').val($("#prjtitle").val().toLowerCase().replace(/[^a-zA-Z0-9]+/g, "_"));
 		};
 
-		function computeURL(type, val) {
-
-			switch(type) {
-				case 'url':
-				case 'rss':
-				case 'gcalendar':
-				case 'gmaps':
-					return val;
-					break;
-				case 'vimeo':
-					return 'https://vimeo.com/channels/' + val;
-					break;
-				case 'flickr':
-					return 'http://www.flickr.com/photos/davido/sets/' + val;
-					break;
-				case 'tweeter':
-					return 'https://twitter.com/' + val;
-					break;
-				case 'hashtag':
-					return 'https://twitter.com/search?q=%23' + val;
-					break;
-				case 'facebook':
-					return 'https://www.facebook.com/' + val;
-					break;
-				case 'soundcloud':
-					return 'https://soundcloud.com/' + val;
-					break;
-			}
-		}
-
-
 		$.changeModule = function() {
-			$('#moduleurl').val(computeURL($('#moduletype').val(), $('#modinfo').val()));
+			$('#moduleurl').val(util.toUrl($('#moduletype').val(), $('#modinfo').val()));
 
 			switch($('#moduletype').val()) {
 				case 'url':
@@ -59,6 +28,9 @@ require(['jquery', 'underscore', 'mustache', 'lib/jquery.form', 'bootstrap', 'li
 					break;
 				case 'vimeo':
 					$('#modinfo').attr('placeholder', 'identifiant du canal');
+					break;
+				case 'youtube':
+					$('#modinfo').attr('placeholder', 'identifiant de la playlist');
 					break;
 				case 'rss':
 					$('#modinfo').attr('placeholder', 'http://<url du flux rss>');
@@ -143,8 +115,12 @@ require(['jquery', 'underscore', 'mustache', 'lib/jquery.form', 'bootstrap', 'li
 		});
 
 		function showModule(data) {
-			data.url = computeURL(data.type, data.info);
-			var line = Mustache.render("<tr id='{{id1}}'><td>{{type}}</td><td>{{info}}</td><td><a href='{{url}}' target='_blank'>lien</a></td><td><i class='icon-remove'onclick='$.moddel(\"{{id}}\",{{idx}})'></i></td>", data);
+			data.url = util.toUrl(data.type, data.info);
+			var html = "<tr id='{{id1}}'><td>{{type}}</td><td>{{info}}</td><td><a href='{{url}}' target='_blank'>lien</a></td>";
+			if (data.idx!=null)
+				html += "<td><i class='icon-remove'onclick='$.moddel(\"{{id}}\",{{idx}})'></i></td>";
+			html += "</tr>";
+			var line = Mustache.render(html, data);
 			$('#modulelist').append(line);
 		}
 

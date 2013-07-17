@@ -32,6 +32,7 @@ exports.moduleadd = function(req, res) {
 			modules : req.body
 		}
 	}, function(err, data) {
+		req.body.id = req.params.id;
 		res.json(req.body);
 	});
 
