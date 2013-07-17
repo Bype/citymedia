@@ -11,12 +11,16 @@ requirejs.config({
 	}
 });
 
-require(['jquery', 'underscore', 'bootstrap'], function($, _) {
+require(['jquery', 'underscore', 'bootstrap','lib/jquery.qrcode.min'], function($, _) {
 	$(function() {
 		$(window).resize(function() {
 			location.reload();
 		});
+		/*
 		require(['triangle'], function(t) {
+		});
+		*/
+		require(['contents'], function(t) {
 		});
 	});
 });

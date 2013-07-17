@@ -2,14 +2,14 @@ var eyes = require('eyes'), haibu = require('haibu');
 
 // Create a new client for communicating with the haibu server
 var client = new haibu.drone.Client({
-	host : 'http.bype.org',
+	host : 'localhost',
 	port : 9002
 });
 
 // A basic package.json for a node.js application on haibu
 var app = {
 	"user" : "dolivari",
-	"name" : "template",
+	"name" : "Citymedia",
 	"domain" : "bype.org",
 	"repository" : {
 		"type" : "git",
