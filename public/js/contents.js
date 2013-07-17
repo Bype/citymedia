@@ -1,7 +1,8 @@
 define(['flickr', 'youtube', 'gcalendar'], function(flickr, youtube, gcalendar) {
 	$.get('/project/list', function(lstprj) {
 		_.each(lstprj, function(prj) {
-			$('#container').append( prjelt = document.createElement('div'));
+			var prjelt = document.createElement('div')
+			$('#container').append(prjelt);
 			$(prjelt).addClass('project');
 			$(prjelt).append('<h1>' + prj.prjtitle + '</h1>');
 			$.get('/project/' + prj._id + '/list', function(lstprj) {
