@@ -72,7 +72,7 @@
 						</div>
 						<div class="control-group">
 							<label for="appsubtitle" class="control-label">Présentation</label>
-							<input id="appsubtitle" rows='3' type='text' name="appsubtitle" placeholder="URL" class="controls input-xlarge">
+							<textarea id="appsubtitle" rows='3' type='text' name="appsubtitle" placeholder="Petit texte d'introduction" class="controls input-xxlarge"></textarea>
 						</div>
 						<div class="modal-footer">
 							<input value="Annuler" aria-hidden="true" data-dismiss="modal" class="btn">
@@ -93,22 +93,24 @@
 					<fieldset>
 						<div class="control-group">
 							<label for="moduletype" class="control-label">Titre</label>
-							<select id="moduletype" name="type" class="controls input-medium">
+							<select id="moduletype" name="type" class="controls input-medium" onchange="$.changeModule()">
 								<option value="url">Lien http</option>
 								<option value="vimeo">Canal Vimeo</option>
 								<option value="rss">Flux RSS</option>
 								<option value="flickr">Album Flickr</option>
 								<option value="gcalendar">Agenda Google</option>
 								<option value="gmaps">Carte Google</option>
-								<option value="@tweeter">Utilisateur Twitter</option>
-								<option value="#tweeter">hashtag Twitter</option>
+								<option value="tweeter">Utilisateur Twitter</option>
+								<option value="hashtag">hashtag Twitter</option>
 								<option value="facebook">Page Facebook</option>
 								<option value="soundcloud">Utilisateur Soundcloud</option>
 							</select>
 						</div>
 						<div class="control-group">
-							<label for="appinfo" class="control-label">Info</label>
-							<input id="appinfo" rows='3' type='text' name="info" placeholder="Courte présentation" class="controls input-xlarge">
+							<label for="modinfo" class="control-label">Info</label>
+							<input id="modinfo" type='text' name="info" placeholder="http://<url du site>" class="controls input-xxlarge" onchange="$.changeModule()">
+							<label for="modurl" class="control-label">URL</label>
+							<input id="moduleurl" type="text" name="modurl" readonly="" class="controls input-xxlarge"/>
 						</div>
 						<div class="modal-footer">
 							<input value="Annuler" aria-hidden="true" data-dismiss="modal" class="btn">

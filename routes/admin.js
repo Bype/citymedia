@@ -37,6 +37,23 @@ exports.moduleadd = function(req, res) {
 
 };
 
+exports.moduledel = function(req, res) {
+	db.project.findOne({
+		"_id" : new db.project.ObjectID(req.params.id)
+	}, function(err, data) {
+		db.project.update({
+			"_id" : new db.project.ObjectID(req.params.id)
+		}, {
+			$pull : {
+				modules : data.modules[req.params.idx]
+			}
+		}, function(err, ret) {
+			res.json({});
+		});
+	});
+
+};
+
 exports.projectdel = function(req, res) {
 	db.project.remove({
 		"_id" : new db.project.ObjectID(req.params.id)

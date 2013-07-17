@@ -19,8 +19,10 @@ define(['kinetic', 'shapebase'], function(k, sb) {
 	});
 
 	var center = sb.p2k(0, 0);
-	layer.add(par= sb.drawPar(-2, -3, 2, 2, '#aaa',"http://farm2.staticflickr.com/1028/1417194380_25cd4f708b.jpg"));
-	//layer.add( sb.drawPar(5, -2, -5, 2, '#aaa'));
+	layer.add(par= sb.drawPar(-2, -3, 1, 2, '#aaa',"http://farm2.staticflickr.com/1028/1417194380_25cd4f708b.jpg"));
+	layer.add( sb.drawHex(5, -2, '#aaa'));
+	layer.add( sb.drawUp(-3, -2, '#a4a'));
+	layer.add( sb.drawDown(-3, -2, '#a44'));
 	layer.add( sb.drawPar(8, -2, 4, 2, '#888'));
 	
 	stage.add(layer);
@@ -29,7 +31,6 @@ define(['kinetic', 'shapebase'], function(k, sb) {
 		var time = frame.time, timeDiff = frame.timeDiff, frameRate = frame.frameRate;
 		var angleDiff = frame.timeDiff * angularSpeed / 1000;
 		// update stuff
-		par.rotate(angleDiff);
 	}, layer);
 
 	anim.start();
