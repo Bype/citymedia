@@ -10,6 +10,6 @@
     "hjs": "*",
     "less-middleware": "*",
     "mongoskin":"*",
-    "ical","*"
+    "ical":"*"
   }
 }
