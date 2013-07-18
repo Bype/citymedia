@@ -66,8 +66,10 @@ exports.twitter2json = function(req, res) {
 			console.error(e);
 		else
 			res.json(JSON.parse(data));
-		//console.log(require('util').inspect(data));
-
 	});
 }
+
+
+
+
 

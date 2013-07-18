@@ -1,4 +1,4 @@
-define(['flickr', 'youtube', 'gcalendar', 'rss', 'twitter'], function(flickr, youtube, gcalendar, rss, twitter) {
+define(['flickr', 'youtube', 'gcalendar', 'rss', 'twitter', 'gdoc'], function(flickr, youtube, gcalendar, rss, twitter, gdoc) {
 	$.get('/project/list', function(lstprj) {
 		_.each(lstprj, function(prj) {
 			var prjelt = document.createElement('div')
@@ -29,7 +29,9 @@ define(['flickr', 'youtube', 'gcalendar', 'rss', 'twitter'], function(flickr, yo
 					if (mod.type == 'tweeter') {
 						twitter.render(mod.info, $(modelt));
 					}
-
+					if (mod.type == 'gdoc') {
+						gdoc.render(mod.info, $(modelt));
+					}
 					if (mod.type == 'url') {
 						$(modelt).qrcode({
 							width : 128,

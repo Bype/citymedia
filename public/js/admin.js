@@ -28,6 +28,9 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 				case 'url':
 					$('#modinfo').attr('placeholder', 'http://<url du site>');
 					break;
+				case 'gdoc':
+					$('#modinfo').attr('placeholder', 'identifiant du fichier');
+					break;
 				case 'vimeo':
 					$('#modinfo').attr('placeholder', 'identifiant du canal');
 					break;

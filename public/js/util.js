@@ -9,6 +9,9 @@ define([], function() {
 				case 'gmaps':
 					return val;
 					break;
+				case 'gdoc':
+					return 'https://docs.google.com/document/d/' + val;
+				case 'vimeo':
 				case 'youtube':
 					return 'http://www.youtube.com/playlist?list=' + val;
 				case 'vimeo':
