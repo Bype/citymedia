@@ -12,6 +12,8 @@ requirejs.config({
 	}
 });
 
+var currentid;
+
 require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstrap', 'lib/bootbox.min'], function($, _, Mustache, util) {
 	$(function() {
 
@@ -72,15 +74,12 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 			bootbox.confirm("Êtes vous sur de vouloir supprimer ce module ?", function(result) {
 				$.get('/project/' + id + '/del/' + idx, function() {
 					$(('#' + id) + idx).remove();
+					refreshModules(id);
 				});
 			});
 		};
 
-		$.prjedit = function(id, prjname) {
-
-			$('#projects').toggle(200);
-			$('#prjmodtitle').text('Projet ' + prjname);
-			$('#moduleform').attr("action", "/project/" + id + "/add");
+		function refreshModules(id) {
 			$('#modulelist').empty();
 			$.get('/project/' + id + '/list', function(lstprj) {
 				_.each(lstprj, function(val, idx) {
@@ -91,6 +90,15 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 				});
 				$('#modules').fadeIn(200);
 			});
+		}
+
+
+		$.prjedit = function(id, prjname) {
+			$('#projects').toggle(200);
+			$('#prjmodtitle').text('Projet ' + prjname);
+			$('#moduleform').attr("action", "/project/" + id + "/add");
+			refreshModules(id);
+			currentid = id;
 		};
 
 		$('#projectform').ajaxForm(function(data) {
@@ -108,7 +116,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 			},
 			clearForm : true,
 			success : function(data) {
-				showModule(data);
+				refreshModules(currentid);
 				$('#modulebox').modal('hide');
 				$('#moduleform')[0].reset();
 			}
@@ -117,7 +125,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		function showModule(data) {
 			data.url = util.toUrl(data.type, data.info);
 			var html = "<tr id='{{id1}}'><td>{{type}}</td><td>{{info}}</td><td><a href='{{url}}' target='_blank'>lien</a></td>";
-			if (data.idx!=null)
+			if (data.idx != null)
 				html += "<td><i class='icon-remove'onclick='$.moddel(\"{{id}}\",{{idx}})'></i></td>";
 			html += "</tr>";
 			var line = Mustache.render(html, data);
