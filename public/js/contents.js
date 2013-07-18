@@ -1,4 +1,4 @@
-define(['flickr', 'youtube', 'gcalendar'], function(flickr, youtube, gcalendar) {
+define(['flickr', 'youtube', 'gcalendar', 'rss', 'twitter'], function(flickr, youtube, gcalendar, rss, twitter) {
 	$.get('/project/list', function(lstprj) {
 		_.each(lstprj, function(prj) {
 			var prjelt = document.createElement('div')
@@ -10,7 +10,7 @@ define(['flickr', 'youtube', 'gcalendar'], function(flickr, youtube, gcalendar) 
 					$(prjelt).append( modelt = document.createElement('div'));
 					$(modelt).addClass('module');
 					$(modelt).append('<h2>Module ' + mod.type + '</h2>');
-					$(modelt).append('<p>' + mod.info + '</p>');
+					$(modelt).append('<p>' + mod.info + '</p><br/>');
 					if (mod.type == 'gmaps') {
 						$(modelt).append('<iframe width="480" height="270" src="' + mod.info + '&output=embed"/>');
 					}
@@ -22,6 +22,12 @@ define(['flickr', 'youtube', 'gcalendar'], function(flickr, youtube, gcalendar) 
 					}
 					if (mod.type == 'gcalendar') {
 						gcalendar.render(mod.info, $(modelt));
+					}
+					if (mod.type == 'rss') {
+						rss.render(mod.info, $(modelt));
+					}
+					if (mod.type == 'tweeter') {
+						twitter.render(mod.info, $(modelt));
 					}
 
 					if (mod.type == 'url') {

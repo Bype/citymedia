@@ -1,7 +1,6 @@
-define(['lib/mustache'], function(Mustache) {
+define([], function() {
 	return {
 		render : function(info, elt) {
-			elt.append('<h3>Youtube Playlist</h3>');
 			var albelt = document.createElement('div');
 			elt.append(albelt);
 			$.getJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyCQsEOzxwht2kmbrg50e0TTTt7JVWR7f90&playlistId=' + info, function(data) {
