@@ -4,6 +4,7 @@ requirejs.config({
 		bootstrap : 'lib/bootstrap',
 		kinetic : 'lib/kinetic-v4.5.4.min',
 		moment : "lib/moment.min",
+
 	},
 	shim : {
 		'underscore' : {
@@ -62,11 +63,12 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min']
 		$(window).resize(function() {
 			location.reload();
 		});
+
+		require(['graphic/contents'], function(t) {
+		});
 		/*
-		 require(['triangle'], function(t) {
+		 require(['flat/contents'], function(t) {
 		 });
 		 */
-		require(['contents'], function(t) {
-		});
 	});
 });

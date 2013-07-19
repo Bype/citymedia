@@ -1,7 +1,7 @@
 define([], function() {
 	var ht, wt, wn;
 
-	var debug = true;
+	var debug = false;
 
 	function init(c) {
 		ht = c.ht;
@@ -179,7 +179,7 @@ define([], function() {
 		var base = {
 			stroke : '#eee',
 			strokeWidth : .1,
-			opacity: 1
+			opacity : 1
 		}
 		if (imgsrc) {
 			var img = new Image();
@@ -222,36 +222,32 @@ define([], function() {
 		return group;
 	}
 
-	function writeUp(i, j, c, t) {
+	function writeUp(i, j, c, t, s) {
 		var p = p2k(i, j);
 		var ret = new Kinetic.Text({
 			x : p.bx,
-			y : p.by - (ht / Math.sqrt(3)),
+			y : p.by - (2 * ht / 3),
 			text : t,
-			fontSize : 10,
-			fontFamily : 'Amatic SC',
+			fontSize : s,
+			fontFamily : 'Dosis',
 			fill : c,
-			align : 'center',
-			width : ht
-		});
-		ret.setOffset({
-			x : ret.getWidth() / 2
+			align : 'left',
+			opacity : 0
 		});
 		return ret;
 	}
 
-	function writeDown(i, j, c, t) {
+	function writeDown(i, j, c, t, s) {
 		var p = p2k(i, j);
 		var ret = new Kinetic.Text({
 			x : p.bx,
-			y : p.by + (ht / Math.sqrt(3)),
+			y : p.by + (ht / 3),
 			text : t,
-			fontSize : 10,
-			fontFamily : 'Amatic SC',
+			fontSize : s,
+			fontFamily : 'Dosis',
 			fill : c,
-		});
-		ret.setOffset({
-			x : ret.getWidth() / 2
+			align : 'left',
+			opacity : 0
 		});
 		return ret;
 	}

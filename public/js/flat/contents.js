@@ -1,12 +1,12 @@
-define(['flickr', 'youtube', 'gcalendar', 'rss', 'twitter', 'gdoc'], function(flickr, youtube, gcalendar, rss, twitter, gdoc) {
+define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/gdoc'], function(flickr, youtube, gcalendar, rss, twitter, gdoc) {
 	$.get('/project/list', function(lstprj) {
 		_.each(lstprj, function(prj) {
 			var prjelt = document.createElement('div')
 			$('#container').append(prjelt);
 			$(prjelt).addClass('project');
 			$(prjelt).append('<h1>' + prj.prjtitle + '</h1>');
-			$.get('/project/' + prj._id + '/list', function(lstprj) {
-				_.each(lstprj, function(mod) {
+			$.get('/project/' + prj._id + '/list', function(lstmod) {
+				_.each(lstmod, function(mod) {
 					$(prjelt).append( modelt = document.createElement('div'));
 					$(modelt).addClass('module');
 					$(modelt).append('<h2>Module ' + mod.type + '</h2>');
