@@ -64,12 +64,24 @@ exports.twitter2json = function(req, res) {
 	oauth.get('https://api.twitter.com/1.1/search/tweets.json?count=8&q=' + req.query.q, '12613832-QoV1CORW5WTi2LS2DU0eBDLnx8NDGCPjUqMASOqdo', 'WgRu4n52AM9JE78Taupe6RxJgDvtG60lUzcFZjqvjI', function(e, data) {
 		if (e)
 			console.error(e);
-		else
-			res.json(JSON.parse(data));
+		else {
+			res.type('application/json');
+			res.send(data);
+
+		}
 	});
 }
 
-
-
-
+exports.facebook2json = function(req, res) {
+	var tokurl = 'https://graph.facebook.com/oauth/access_token?client_id=520332708022054&client_secret=308c4bbca0d8a7e9274592ae324cc98e&grant_type=client_credentials';
+	request(tokurl, function(error, response, token) {
+		url = 'https://graph.facebook.com/' + req.query.id + '?fields=id,name,posts.limit(8).fields(message,full_picture,link)&' + token;
+		request(url, function(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				res.type('application/json');
+				res.send(body);
+			}
+		});
+	});
+}
 

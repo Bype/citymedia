@@ -15,4 +15,5 @@ module.exports = function(app) {
 	app.get('/gcal2json', trans.gcal2json);
 	app.get('/rss2json', trans.rss2json);
 	app.get('/twitter2json', trans.twitter2json);
+	app.get('/facebook2json', trans.facebook2json);
 }

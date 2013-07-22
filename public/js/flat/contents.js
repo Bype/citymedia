@@ -1,4 +1,4 @@
-define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/gdoc'], function(flickr, youtube, gcalendar, rss, twitter, gdoc) {
+define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/fb', 'flat/gdoc'], function(flickr, youtube, gcalendar, rss, twitter, fb, gdoc) {
 	$.get('/project/list', function(lstprj) {
 		_.each(lstprj, function(prj) {
 			var prjelt = document.createElement('div')
@@ -28,6 +28,9 @@ define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitt
 					}
 					if (mod.type == 'tweeter') {
 						twitter.render(mod.info, $(modelt));
+					}
+					if (mod.type == 'facebook') {
+						fb.render(mod.info, $(modelt));
 					}
 					if (mod.type == 'gdoc') {
 						gdoc.render(mod.info, $(modelt));
