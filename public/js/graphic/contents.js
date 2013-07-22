@@ -5,10 +5,17 @@ define(['kinetic', 'graphic/triangle', 'graphic/shapebase'], function(k, triangl
 
 			require(['graphic/gflickr'], function(gflickr) {
 				var stage = triangle.init();
-
+				var yshift = -4;
 				_.each(lstmod, function(mod) {
+					
+
 					if (mod.type == 'flickr') {
-						gflickr.render(mod.info, sb, stage);
+						
+						gflickr.render(mod.info, sb, stage, {
+							x : Math.floor(-3+Math.random()*6),
+							y : yshift
+						});
+						yshift += 4;
 					}
 					/*
 					 layer.add( par = sb.drawPar(-2, -3, 1, 2, '#aaa', "http://farm2.staticflickr.com/1028/1417194380_25cd4f708b.jpg"));

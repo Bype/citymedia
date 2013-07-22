@@ -19,7 +19,7 @@ define(['kinetic', 'graphic/shapebase'], function(k, sb) {
 				height : $(document).height()
 			});
 
-			var ht = stage.getHeight() / 12;
+			var ht = stage.getHeight() / 16;
 			var wt = (ht * 2) / Math.sqrt(3);
 			var wn = Math.floor(stage.getWidth() / wt);
 
