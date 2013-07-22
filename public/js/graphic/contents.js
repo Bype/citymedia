@@ -9,11 +9,11 @@ define(['kinetic', 'graphic/triangle', 'graphic/shapebase'], function(k, triangl
 			var img = new Image();
 			img.onload = function() {
 				console.log("there");
-				layer.add(sb.drawParUp(-9,3, 6, 4, '#444', img));
+				layer.add(sb.drawParUp(-8,3, 5, 3, '#444', img));
 				layer.add(sb.drawHex(0, 0, '#4aa'));
 				stage.add(layer);
 			};
-			img.src = 'http://www.digitalarti.com/files/visuelsFestivals/secondenature.jpg'
+			img.src = 'http://userserve-ak.last.fm/serve/_/4897824/Seconde+Nature+SN+FLYER.jpg'
 			require(['graphic/gflickr'], function(gflickr) {
 
 				_.each(lstmod, function(mod) {
