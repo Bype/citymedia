@@ -66,9 +66,9 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min']
 
 		require(['graphic/contents'], function(t) {
 		});
-
+/*
 		require(['flat/contents'], function(t) {
 		});
-
+*/
 	});
 });

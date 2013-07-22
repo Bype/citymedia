@@ -163,13 +163,8 @@ define([], function() {
 		return group;
 	}
 
-	function drawPar(i0, j0, i1, j1, c, imgsrc) {
+	function drawParDown(i0, j0, i1, j1, c, imgsrc) {
 		var group;
-		if (j1 < j0) {
-			var t = j0;
-			j0 = j1;
-			j1 = t;
-		}
 		var p = p2k(i0, j0);
 		group = new Kinetic.Group({
 			x : p.bx,
@@ -182,43 +177,55 @@ define([], function() {
 			opacity : 1
 		}
 		if (imgsrc) {
-			var img = new Image();
-			img.src = imgsrc;
-			base.fillPatternImage = img;
+			base.fillPatternImage = imgsrc;
 			base.fillPatternRepeat = "no-repeat";
 			base.fill = null;
 		} else {
 			base.fill = c;
 		}
-		if (i1 < i0) {
-
-			var jd = (j1 - j0);
-			var id = (i0 - i1);
-
-			for (var j = 0; j < jd; j++) {
-				for (var i = -j - 1; jd - id - j <= i; i--) {
-					base.points = tUp(i, j);
-					group.add(new Kinetic.Polygon(base));
-					base.points = tDown(i, j + 1);
-					group.add(new Kinetic.Polygon(base));
-				}
+		for (var j = 0; j < j1; j++)
+			for (var i = 1; i <= i1; i++) {
+				base.points = tUp(i, j);
+				group.add(new Kinetic.Polygon(base));
+				base.points = tDown(i - 1, j + 1);
+				group.add(new Kinetic.Polygon(base));
 			}
-		} else {
+		return group;
+	}
 
-			if (j1 < j0) {
-				var t = j0;
-				j0 = j1;
-				j1 = t;
-			}
-			for (var j = 0; j < (j1 - j0); j++)
-				for (var i = 1; i <= (i1 - i0); i++) {
-					base.points = tUp(i, j);
-					group.add(new Kinetic.Polygon(base));
-					base.points = tDown(i - 1, j + 1);
-					group.add(new Kinetic.Polygon(base));
-				}
+	function drawParUp(i0, j0, i1, j1, c, imgsrc) {
+
+		var group;
+		var p = p2k(i0, j0);
+
+		group = new Kinetic.Group({
+			x : p.bx,
+			y : p.by,
+
+		});
+		var base = {
+			stroke : '#eee',
+			strokeWidth : .1,
+			opacity : 1
 		}
 
+		if (imgsrc) {
+			base.fillPatternImage = imgsrc;
+			base.fillPatternRepeat = "no-repeat";
+			base.fillPatternOffset = [0, j1*ht];
+			base.fill = null;
+		} else {
+			base.fill = c;
+		}
+
+		for (var j = 1; j <= j1; j++)
+			for (var i = 0; i < i1; i++) {
+
+				base.points = tUp(i + j, -j);
+				group.add(new Kinetic.Polygon(base));
+				base.points = tDown(i + j, 1 - j);
+				group.add(new Kinetic.Polygon(base));
+			}
 		return group;
 	}
 
@@ -260,7 +267,8 @@ define([], function() {
 		drawUp : drawUp,
 		drawDown : drawDown,
 		drawHex : drawHex,
-		drawPar : drawPar,
+		drawParUp : drawParUp,
+		drawParDown : drawParDown,
 		writeUp : writeUp,
 		writeDown : writeDown
 	}
