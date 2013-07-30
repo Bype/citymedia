@@ -3,13 +3,13 @@ define([], function() {
 		render : function(info, elt) {
 			vpos += 4 * ht;
 			var $albelt = $(document.createElement('div'));
-			var pos = wt;
+			var pos = 3*wt/4;
 			elt.append($albelt);
 			$albelt.addClass('youtubemod');
 			var $albtit = $(document.createElement('div'));
 			$albtit.addClass('title');
 			$albtit.css({
-				left : 6 * wt / 4,
+				left : 5 * wt / 4,
 				top : -ht
 			});
 			

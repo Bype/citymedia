@@ -1,12 +1,20 @@
-define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/fb', 'flat/gdoc','flat/url'], function(flickr, youtube, gcalendar, rss, twitter, fb, gdoc,url) {
+define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/fb', 'flat/gdoc', 'flat/url'], function(flickr, youtube, gcalendar, rss, twitter, fb, gdoc, url) {
 	$.get('/project/list', function(lstprj) {
 
 		_.each(lstprj, function(prj) {
-			var prjelt = document.createElement('div')
-			$('#container').append(prjelt);
-			$(prjelt).addClass('project');
-			$(prjelt).append('<h1>' + prj.prjtitle + '</h1>');
+
 			$.get('/project/' + prj._id + '/list', function(lstmod) {
+				var prjelt = document.createElement('div')
+				$('#container').append(prjelt);
+				$(prjelt).addClass('project');
+				var $titprj = $(document.createElement('div'));
+				$titprj.addClass('title');
+				$titprj.append(prj.prjtitle);
+				$titprj.css({
+					top : vpos
+				});
+				$(prjelt).append($titprj);
+				vpos += 2*ht;
 				_.each(lstmod, function(mod) {
 					$(prjelt).append( modelt = document.createElement('div'));
 					$(modelt).addClass('module');
@@ -43,6 +51,7 @@ define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitt
 						url.render(mod.info, $(modelt));
 					}
 				});
+
 			});
 		});
 	});
