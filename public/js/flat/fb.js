@@ -19,7 +19,7 @@ define([], function() {
 						height : 200,
 						text : element.link
 					});
-					$(eltitem).append(qritem);
+					//$(eltitem).append(qritem);
 					$(evmod).append(eltitem);
 				});
 			})

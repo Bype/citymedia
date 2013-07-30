@@ -16,7 +16,7 @@ define(['lib/mustache'], function(Mustache) {
 						var p = sb.p2k(center.x - 5 + index, center.y - 1);
 						var img = new Image();
 						img.onload = function() {
-							layer.add( ti = sb.drawParDown(center.x - 5, center.y - 1, 1,3, '#aaa', img));
+							layer.add( ti = sb.drawParDown(center.x - 5, center.y - 1, 1, 3, '#aaa', img));
 							tweenson.push(new Kinetic.Tween({
 								node : ti,
 								duration : .500,
@@ -39,7 +39,7 @@ define(['lib/mustache'], function(Mustache) {
 					var st = sb.drawUp(center.x - 4, center.y - 2, '#a44')
 					layer.add(st);
 					var off = true;
-					st.on('mousedown', function() {
+					st.on('mouseup', function() {
 						_.each(tweenson, function(tw, index, list) {
 							if (off)
 								tw.play();

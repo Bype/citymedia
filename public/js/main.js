@@ -12,7 +12,9 @@ requirejs.config({
 		}
 	}
 });
-
+var wt = 74;
+var ht = 64;
+var vpos=2*ht;
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min'], function($, _, moment) {
 	moment.lang('fr', {
 		months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
@@ -63,10 +65,10 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min']
 		$(window).resize(function() {
 			location.reload();
 		});
-
-		require(['graphic/contents'], function(t) {
-		});
-
+		/*
+		 require(['graphic/contents'], function(t) {
+		 });
+		 */
 		require(['flat/contents'], function(t) {
 		});
 	});

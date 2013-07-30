@@ -1,5 +1,6 @@
-define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/fb', 'flat/gdoc'], function(flickr, youtube, gcalendar, rss, twitter, fb, gdoc) {
+define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitter', 'flat/fb', 'flat/gdoc','flat/url'], function(flickr, youtube, gcalendar, rss, twitter, fb, gdoc,url) {
 	$.get('/project/list', function(lstprj) {
+
 		_.each(lstprj, function(prj) {
 			var prjelt = document.createElement('div')
 			$('#container').append(prjelt);
@@ -9,8 +10,11 @@ define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitt
 				_.each(lstmod, function(mod) {
 					$(prjelt).append( modelt = document.createElement('div'));
 					$(modelt).addClass('module');
-					$(modelt).append('<h2>Module ' + mod.type + '</h2>');
-					$(modelt).append('<p>' + mod.info + '</p><br/>');
+					$(modelt).css({
+						top : vpos
+					});
+					//$(modelt).append('<h2>Module ' + mod.type + '</h2>');
+					//$(modelt).append('<p>' + mod.info + '</p><br/>');
 					if (mod.type == 'gmaps') {
 						$(modelt).append('<iframe width="480" height="270" src="' + mod.info + '&output=embed"/>');
 					}
@@ -36,11 +40,7 @@ define(['flat/flickr', 'flat/youtube', 'flat/gcalendar', 'flat/rss', 'flat/twitt
 						gdoc.render(mod.info, $(modelt));
 					}
 					if (mod.type == 'url') {
-						$(modelt).qrcode({
-							width : 128,
-							height : 128,
-							text : mod.info
-						});
+						url.render(mod.info, $(modelt));
 					}
 				});
 			});
