@@ -46,8 +46,8 @@ define([], function() {
 					// pt2:  {x:#, y:#}  target position in screen coords
 
 					// draw a line from pt1 to pt2
-					ctx.strokeStyle = "rgba(0,0,0, .333)";
-					ctx.lineWidth = 3;
+					ctx.strokeStyle = "grey";
+					ctx.lineWidth = 1;
 					ctx.beginPath();
 					ctx.moveTo(pt1.x, pt1.y);
 					ctx.lineTo(pt2.x, pt2.y);
@@ -60,11 +60,10 @@ define([], function() {
 
 					// draw a rectangle centered at pt
 					var w = 10;
-					ctx.fillStyle = (node.data.alone) ? "orange" : "black";
+					ctx.strokeStyle = "orange";
 					ctx.beginPath();
-					ctx.arc(pt.x, pt.y, wt/10, 0, 2 * Math.PI);
+					ctx.arc(pt.x, pt.y, wt*3, 0, 2 * Math.PI);
 					ctx.stroke();
-					ctx.fill();
 
 					if (node.data.elt) {
 						node.data.elt.css({
