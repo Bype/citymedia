@@ -15,8 +15,8 @@ requirejs.config({
 		}
 	}
 });
-var wt = 74;
-var ht = 64;
+var wt = 37;
+var ht = 32;
 var vpos = 0;
 var sys;
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui'], function($, _, moment) {

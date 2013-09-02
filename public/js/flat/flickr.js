@@ -41,7 +41,7 @@ define(['lib/mustache'], function(Mustache) {
 
 					_.each(data.photoset.photo, function(element, index, list) {
 						var $eltimg = $(document.createElement('img'));
-						var url = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_z.jpg", element);
+						var url = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_m.jpg", element);
 						var $eltdiv = $(document.createElement('div'));
 						$eltimg.attr('src', url);
 						$eltdiv.append($eltimg);

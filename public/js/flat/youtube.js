@@ -37,7 +37,7 @@ define([], function() {
 				_.each(data.items, function(element, index, list) {
 					var $eltimg = $(document.createElement('img'));
 					var $eltdiv = $(document.createElement('div'));
-					$eltimg.attr('src', element.snippet.thumbnails.high.url);
+					$eltimg.attr('src', element.snippet.thumbnails.medium.url);
 					$eltimg.attr('alt', element.snippet.title);
 					$eltimg.attr('id', element.snippet.resourceId.videoId);
 					$eltdiv.attr('endpos', pos);

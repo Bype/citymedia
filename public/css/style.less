@@ -1,7 +1,7 @@
 @import "reset.css";
 @import "animate.min.css";
-@ht :64px;
-@wt :74px;
+@ht :32px;
+@wt :37px;
 @import url(http://fonts.googleapis.com/css?family=Dosis:400,700);
 body {
     font-family: Dosis, sans;
@@ -14,7 +14,7 @@ body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     /* -webkit-transform:scale(.5); */
-
+ font-size: 11px;
 }
 
 #viewport {
@@ -40,8 +40,8 @@ body {
 }
 
 .prj {
-    width: 5 *@wt;
-    height: 3 *@ht;
+    width: 7 *@wt;
+    height: 5 *@ht;
     -webkit-transform: skew(30deg,0deg);
     background: -webkit-linear-gradient(-45deg, #445 0%,#454 100%);
     color: white;
@@ -81,7 +81,7 @@ h3 {
 .twitter {
     position: absolute;
     width: 6 *@wt;
-    height: 2 *@ht;
+    height: 3 *@ht;
     -webkit-transform: skew(30deg,0deg);
     background-color: #4099FF;
     color: white;
@@ -105,7 +105,7 @@ h3 {
     height: @ht;
 }
 .twitter .inner p {
-    font-size: 18px;
+    font-size: 100%;
 }
 .twittermod .title {
     width: 5 *@wt;
@@ -144,7 +144,6 @@ h3 {
     width: 4 *@wt;
     height: 4 *@ht;
     -webkit-transform: skew(-30deg,0deg);
-    background-color: #4099FF;
     color: white;
     display: block;
     overflow: hidden;
