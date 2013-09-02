@@ -67,8 +67,8 @@ define([], function() {
 
 					if (node.data.elt) {
 						node.data.elt.css({
-							left : pt.x,
-							top : pt.y
+							left : pt.x-wt*2,
+							top : pt.y-ht
 						});
 					}
 
