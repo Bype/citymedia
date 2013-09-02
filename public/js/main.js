@@ -4,6 +4,9 @@ requirejs.config({
 		bootstrap : 'lib/bootstrap',
 		kinetic : 'lib/kinetic-v4.5.4.min',
 		moment : "lib/moment.min",
+		arbor : 'lib/arbor',
+		arbor_tween : 'lib/arbor-tween',
+		jqui : "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min"
 
 	},
 	shim : {
@@ -14,8 +17,9 @@ requirejs.config({
 });
 var wt = 74;
 var ht = 64;
-var vpos=0;
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min'], function($, _, moment) {
+var vpos = 0;
+var sys;
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui'], function($, _, moment) {
 	moment.lang('fr', {
 		months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
 		monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
@@ -65,11 +69,11 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min']
 		$(window).resize(function() {
 			location.reload();
 		});
-		/*
-		 require(['graphic/contents'], function(t) {
-		 });
-		 */
-		require(['flat/contents'], function(t) {
+		require(['dynsys'], function(t) {
+			sys = t;
+			require(['flat/contents'], function(t) {
+			});
 		});
+
 	});
 });

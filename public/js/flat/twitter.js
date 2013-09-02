@@ -15,6 +15,24 @@ define([], function() {
 			$evmod.append($albtit);
 			var pos = wt;
 			$.getJSON('/twitter2json?q=' + info, function(data) {
+				$evmod.click(function(e) {
+					if (this.getAttribute("show") == 1) {
+						$(this).attr('show', 0);
+						$(this).children('.twitter').each(function(index, elt) {
+							$(elt).animate({
+								left : wt
+							});
+						});
+					} else {
+						$(this).attr('show', 1);
+						$(this).children('.twitter').each(function(index, elt) {
+							$(elt).animate({
+								left : elt.getAttribute("endpos")
+							});
+						});
+					}
+				});
+				$evmod.attr('show', 0);
 				_.each(data.statuses, function(element, index, list) {
 					var $eltitem = $(document.createElement('div'));
 					$eltitem.addClass('twitter');
@@ -32,8 +50,9 @@ define([], function() {
 					$content.append(html);
 					if (element.entities.media)
 						$content.append("<br><img width='160' src='" + element.entities.media[0].media_url + "'/>");
+					$eltitem.attr('endpos', pos);
 					$eltitem.animate({
-						left : pos
+						left : wt
 					});
 					pos += 12 * wt / 2;
 					$evmod.append($eltitem);

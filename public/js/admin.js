@@ -136,7 +136,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		}
 
 		function showPrj(data) {
-			var line = Mustache.render("<tr id='{{_id}}'><td>{{prjtitle}}</td><td>{{appsubtitle}}</td><td><i class='icon-wrench' onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'></i><i class='icon-remove'onclick='$.prjdel(\"{{_id}}\")'></i></td>", data);
+			var line = Mustache.render("<tr id='{{_id}}'><td onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'>{{prjtitle}}</td><td>{{appsubtitle}}</td><td><i class='icon-wrench' onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'></i><i class='icon-remove'onclick='$.prjdel(\"{{_id}}\")'></i></td>", data);
 			$('#prjlist').append(line);
 		}
 

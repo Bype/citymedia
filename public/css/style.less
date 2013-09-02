@@ -10,17 +10,47 @@ body {
     rgba(128, 128, 128, 0.7));
     margin: 0;
     padding: 0;
-    width: 2560px;
-    height: 1600px;
-}
-.project {
+    overflow:hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    /* -webkit-transform:scale(.5); */
 
 }
-.project .title {
+
+#viewport {
+    opacity: 0.3;
+    border:solid 1px red;
+}
+.project {
+}
+.prj .title {
+    margin-top: 2ex;
+    margin-left: 2ex;
     font-size: 200%;
     font-weight: bold;
-    position: absolute;
+    -webkit-transform: skew(-30deg,0deg);
 }
+.prj .subtitle {
+    font-size: 120%;
+    -webkit-transform: skew(-30deg,0deg);
+    margin-top: 2ex;
+    margin-left: 4ex;
+    margin-right: 4ex;
+    text-align: justify;
+}
+
+.prj {
+    width: 5 *@wt;
+    height: 3 *@ht;
+    -webkit-transform: skew(30deg,0deg);
+    background: -webkit-linear-gradient(-45deg, #445 0%,#454 100%);
+    color: white;
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1000;
+}
+
 h2 {
     font-size: 180%;
     margin-bottom: .3ex;
@@ -74,16 +104,14 @@ h3 {
     width: 5 *@wt;
     height: @ht;
 }
-
 .twitter .inner p {
     font-size: 18px;
 }
-
 .twittermod .title {
     width: 5 *@wt;
     height: @ht;
     -webkit-transform: skew(-30deg,0deg);
-    background-color: #44a;
+    background: -webkit-linear-gradient(-45deg, #6e9e2e 0%,#6cd691 100%);
     color: white;
     display: block;
     overflow: hidden;
@@ -95,12 +123,11 @@ h3 {
     margin-top: 1ex;
     font-size: @ht/2;
 }
-
 .flickrmod .title {
     width: 5 *@wt;
     height: @ht;
     -webkit-transform: skew(30deg,0deg);
-    background-color: #4a4;
+    background: -webkit-linear-gradient(-45deg, #2e9e6f 0%,#6ca1d6 100%);
     color: white;
     display: block;
     overflow: hidden;
@@ -112,7 +139,6 @@ h3 {
     margin-top: 1ex;
     font-size: @ht/2;
 }
-
 .thumbnail {
     position: absolute;
     width: 4 *@wt;
@@ -129,12 +155,11 @@ h3 {
     display: block;
     position: relative;
 }
-
 .youtubemod .title {
     width: 5 *@wt;
     height: @ht;
     -webkit-transform: skew(30deg,0deg);
-    background-color: #a44;
+    background: -webkit-linear-gradient(-45deg, #9e2e5d 0%,#d6a16c 100%);
     color: white;
     display: block;
     overflow: hidden;
@@ -156,7 +181,6 @@ h3 {
     display: block;
     overflow: hidden;
 }
-
 .frame img {
     -webkit-transform: skew(30deg,0deg);
     left: -@wt;
@@ -164,7 +188,6 @@ h3 {
     display: block;
     position: relative;
 }
-
 .facebook {
     width: 640px;
     margin-top: 1ex;
@@ -181,7 +204,6 @@ em {
 b {
     font-weight: bold;
 }
-
 .urlmod {
     position: relative;
 }
@@ -194,8 +216,8 @@ b {
 .urlmod:before {
     content: "";
     border-bottom: 2 *@ht solid #4aa;
-    border-left:     @wt solid transparent;
-    border-right:     @wt solid transparent;
+    border-left:       @wt solid transparent;
+    border-right:       @wt solid transparent;
     height: 0;
     width: 2 *@wt;
     position: absolute;
@@ -205,12 +227,14 @@ b {
 .urlmod:after {
     content: "";
     border-top: 2 *@ht solid #4aa;
-    border-left:     @wt solid transparent;
-    border-right:     @wt solid transparent;
+    border-left:       @wt solid transparent;
+    border-right:       @wt solid transparent;
     height: 0;
     width: 2 *@wt;
     position: absolute;
     top: @ht;
     z-index: -10;
 }
-
+img {
+    -webkit-user-drag: none;
+}
