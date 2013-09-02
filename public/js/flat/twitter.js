@@ -13,14 +13,14 @@ define([], function() {
 				top : -ht
 			});
 			$evmod.append($albtit);
-			var pos = wt;
+			var pos = 5*wt/4;
 			$.getJSON('/twitter2json?q=' + info, function(data) {
 				$evmod.click(function(e) {
 					if (this.getAttribute("show") == 1) {
 						$(this).attr('show', 0);
 						$(this).children('.twitter').each(function(index, elt) {
 							$(elt).animate({
-								left : wt
+								left : 5*wt/4
 							});
 						});
 					} else {
@@ -52,7 +52,7 @@ define([], function() {
 						$content.append("<br><img width='160' src='" + element.entities.media[0].media_url + "'/>");
 					$eltitem.attr('endpos', pos);
 					$eltitem.animate({
-						left : wt
+						left : 5*wt/4
 					});
 					pos += 12 * wt / 2;
 					$evmod.append($eltitem);
