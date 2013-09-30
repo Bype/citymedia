@@ -18,7 +18,7 @@ define([], function() {
 					return 'https://vimeo.com/channels/' + val;
 					break;
 				case 'flickr':
-					return 'http://www.flickr.com/photos/davido/sets/' + val;
+					return 'http://www.flickr.com/photos/sets/' + val;
 					break;
 				case 'tweeter':
 					return 'https://twitter.com/' + val;
@@ -34,5 +34,5 @@ define([], function() {
 					break;
 			}
 		}
-	}
+	};
 });

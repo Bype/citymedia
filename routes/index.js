@@ -4,6 +4,7 @@
 
 var admin = require('./admin');
 var trans = require('./translator');
+var view = require('./view');
 
 module.exports = function(app) {
 	app.get('/project/list', admin.projectlist);
@@ -16,4 +17,6 @@ module.exports = function(app) {
 	app.get('/rss2json', trans.rss2json);
 	app.get('/twitter2json', trans.twitter2json);
 	app.get('/facebook2json', trans.facebook2json);
-}
+	app.get('/view/map', view.map);
+	app.get('/view/data', view.data);
+};

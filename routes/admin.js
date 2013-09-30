@@ -72,4 +72,4 @@ exports.projectlist = function(req, res) {
 	}).toArray(function(err, prjs) {
 		res.json(prjs);
 	});
-}
+};
