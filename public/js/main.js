@@ -6,7 +6,8 @@ requirejs.config({
 		moment : "lib/moment.min",
 		arbor : 'lib/arbor',
 		arbor_tween : 'lib/arbor-tween',
-		jqui : "lib/jquery-ui"
+		jqui : "lib/jquery-ui",
+		zui : "lib/zui53"
 
 	},
 	shim : {
@@ -15,14 +16,15 @@ requirejs.config({
 		}
 	}
 });
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui'], function($, _, moment) {
 	$(function() {
-		$(window).resize(function() {
-			location.reload();
-		});
-		$('#container').draggable();
 		require(['map'], function(m) {
 			m.show();
+			zui = new ZUI53.Viewport('zui');
+			pan_tool = new ZUI53.Tools.Pan(zui);
+			pan_tool.attach();
+			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
+			zui.addSurface(sur);
 		});
 	});
 });

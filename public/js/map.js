@@ -41,7 +41,6 @@ define([], function() {
 					}
 
 					var space = Math.floor(12 / prj.modules.length);
-					console.log(space);
 					var posidx = Math.floor(12 * Math.random());
 					_.each(prj.modules, function(pos, idx) {
 						var $elt = $(document.createElement('div'));

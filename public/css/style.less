@@ -8,7 +8,7 @@ html {
     height: 100%;
 }
 body {
-    font-family: Dosis, sans;
+    font-family: sans;
     background: -webkit-radial-gradient(rgba(250, 250, 250, 0.5),
     rgba(230, 230, 230, 0.5) 35%,
     rgba(128, 128, 128, 0.7));
@@ -19,8 +19,9 @@ body {
     -webkit-user-select: none;
     /* -webkit-transform:scale(.5); */
     font-size: 11px;
-    -webkit-font-smoothing: none;
     height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-transform: translateZ(0);
 }
 #container {
     background-color: transparent;
@@ -29,6 +30,14 @@ body {
     background-size: @step*2 @step* 2;
     background-position: @step/2 @step;
 }
+
+#zui {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
 
 .prj {
     position: absolute;
