@@ -39,8 +39,8 @@ define(['content'], function(c) {
 						});
 						if (1 <= zui.getPanAndScale()[2]) {
 
-							zui.panBy(Math.floor($(document).width() / 6) - (step + $(this).parent().offset().left / 3), Math.floor($(document).height() / 6) - (step + $(this).parent().offset().top / 3));
-							zui.zoomSet(3, $(this).parent().offset().left, $(this).parent().offset().top);
+							zui.panBy(Math.floor($(document).width() / 3) - (step + $(this).parent().offset().left / 2), Math.floor($(document).height() / 3) - (step + $(this).parent().offset().top / 2));
+							zui.zoomSet(2, $(this).parent().offset().left, $(this).parent().offset().top);
 						} else {
 							zui.reset();
 						}
