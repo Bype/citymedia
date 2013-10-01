@@ -1,6 +1,7 @@
 @import "reset.css";
 @import "animate.min.css";
 @import url(http://fonts.googleapis.com/css?family=Dosis:400,700);
+@import 'help.css';
 
 @step:128px;
 
@@ -42,10 +43,22 @@ body {
 	position: absolute;
 }
 
+.circle {
+	position: absolute;
+	border: dotted 4px grey;
+	width: 7 *@step;
+	height: 7 *@step;
+	top:-2.3*@step;
+	left:-2.3*@step;
+	border-radius: 3.5*@step;
+	z-index:-10;
+}
+
 .sq {
 	position: absolute;
 	width: @step;
 	height: @step;
+	
 }
 
 .title {
@@ -87,6 +100,14 @@ body {
 .flickr {
 	background-color: #E1E6A3;
 }
+.flickr .content {
+	outline: 2px solid #E1E6A3;
+	outline-offset: -2px;
+}
+.flickr .qimg {
+	width: @step/3;
+	height: @step/3;
+}
 
 .youtube {
 	background-color: #77ABB8;
@@ -96,8 +117,19 @@ body {
 	background-color: #508BAB;
 }
 .url {
+	background-color: #E3A47D;
+}
+
+.content {
+	display: none;
+}
+
+.url .content {
 	background-color: white;
-	outline: solid 8px #E3A47D;
+	width: @step;
+	height: @step;
+	outline: 4px solid #E3A47D;
+	outline-offset: -4px;
 }
 .url .qrcode {
 	position: absolute;
@@ -106,13 +138,15 @@ body {
 }
 .url .urltext {
 	position: absolute;
+	left: 10px;
 	bottom: @step/8;
-	width: 100%;
+	width: @step   - 20px;
 }
-.url .urltext p{
-	font-size: 6px;
+.url .urltext p {
+	font-size: 5px;
 	text-align: center;
 	font-family: mono;
+	word-wrap: break-word;
 }
 .facebook {
 	background-color: #EDC679;
