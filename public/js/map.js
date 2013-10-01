@@ -1,5 +1,5 @@
-define([], function() {
-	var step = 128;
+define(['content'], function(c) {
+
 	var nbcol = Math.floor($(document).width() / step);
 	var nbrow = Math.floor($(document).height() / step);
 	var leftOffset = nbcol / 2;
@@ -34,7 +34,7 @@ define([], function() {
 					$prj.append($tit);
 					var $sub = $(document.createElement('div'));
 					$sub.addClass('subtitle');
-					$sub.html('<p>'+prj.appsubtitle+'</p>');
+					$sub.html('<p>' + prj.appsubtitle + '</p>');
 					setPos($sub, [0, 0]);
 					$prj.append($sub);
 					for (var i = 0; i < 4; i++) {
@@ -44,7 +44,6 @@ define([], function() {
 						setPos($elt, [i % 2, (Math.floor(i / 2))]);
 						$prj.append($elt);
 					}
-
 					var space = Math.floor(12 / prj.modules.length);
 					var posidx = Math.floor(12 * Math.random());
 					_.each(prj.modules, function(pos, idx) {
@@ -58,6 +57,7 @@ define([], function() {
 					});
 					curPos++;
 				});
+			c.render();
 			});
 		}
 	};

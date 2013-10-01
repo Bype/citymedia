@@ -16,6 +16,9 @@ requirejs.config({
 		}
 	}
 });
+
+var step = 128;
+
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui'], function($, _, moment) {
 	$(function() {
 		require(['map'], function(m) {
