@@ -98,8 +98,6 @@ body {
 .url {
 	background-color: white;
 	outline: solid 8px #E3A47D;
-	margin-left: @step/8;
-	margin-right: @step/8;
 }
 .url .qrcode {
 	position: absolute;
@@ -109,12 +107,13 @@ body {
 .url .urltext {
 	position: absolute;
 	bottom: @step/8;
-	font-size: 6px;
 	width: 100%;
+}
+.url .urltext p{
+	font-size: 6px;
 	text-align: center;
 	font-family: mono;
 }
-
 .facebook {
 	background-color: #EDC679;
 }

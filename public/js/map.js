@@ -4,6 +4,7 @@ define(['content'], function(c) {
 	var nbrow = Math.floor($(document).height() / step);
 	var leftOffset = nbcol / 2;
 	var topOffset = nbrow / 2;
+	
 	function setPos($elt, pos) {
 		$elt.css({
 			left : pos[0] * step,
@@ -15,7 +16,7 @@ define(['content'], function(c) {
 		show : function() {
 			var $container = $('#container');
 			var curPos = 0;
-			var prjPos = [[-10, -2], [-2, -2], [6, -2], [-8, 2], [0, 2], [8, 2]];
+			var prjPos = [[-10, -2], [-2, -2], [6, -2], [-8, 4], [0, 4], [8, 4]];
 			var firstCircle = [[-1, -1], [0, -1], [1, -1], [2, -1], [2, 0], [2, 1], [2, 2], [1, 2], [0, 2], [-1, 2], [-1, 1], [-1, 0]];
 			$.get('/view/data', function(lst) {
 				_.each(lst, function(prj, idx) {

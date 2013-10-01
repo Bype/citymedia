@@ -10,9 +10,9 @@ define([], function() {
 					height : step * 2,
 					text : $elt.attr('info')
 				});
-				var $urldiv = $(document.createElement('p'));
+				var $urldiv = $(document.createElement('div'));
 				$urldiv.addClass("urltext");
-				$urldiv.text($elt.attr('info'));
+				$urldiv.html('<p>'+$elt.attr('info')+'</p>');
 				$elt.append($qrdiv);
 				$elt.append($urldiv);
 			});
