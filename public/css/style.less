@@ -2,88 +2,102 @@
 @import "animate.min.css";
 @import url(http://fonts.googleapis.com/css?family=Dosis:400,700);
 
-@step:64px;
+@step:128px;
 
 html {
-    height: 100%;
+	height: 100%;
 }
 body {
-    font-family: sans;
-    background: -webkit-radial-gradient(rgba(250, 250, 250, 0.5),
-    rgba(230, 230, 230, 0.5) 35%,
-    rgba(128, 128, 128, 0.7));
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    /* -webkit-transform:scale(.5); */
-    font-size: 11px;
-    height: 100%;
-    -webkit-font-smoothing: antialiased;
-    -webkit-transform: translateZ(0);
+	font-family: Dosis, sans;
+	background: -webkit-radial-gradient(rgba(250, 250, 250, 0.5),
+	rgba(230, 230, 230, 0.5) 35%,
+	rgba(128, 128, 128, 0.7));
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	/* -webkit-transform:scale(.5); */
+	font-size: 11px;
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-webkit-transform: translateZ(0);
 }
 #container {
-    background-color: transparent;
-    //background-image: linear-gradient(0deg, transparent 24%, rgba(16, 16, 16, .05) 25%, rgba(16, 16, 16, .05) 26%, transparent 27%, transparent 74%, rgba(16, 16, 16, .05) 75%, rgba(16, 16, 16, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(16, 16, 16, .05) 25%, rgba(16, 16, 16, .05) 26%, transparent 27%, transparent 74%, rgba(16, 16, 16, .05) 75%, rgba(16, 16, 16, .05) 76%, transparent 77%, transparent);
-    height: 100%;
-    background-size: @step*2 @step* 2;
-    background-position: @step/2 @step;
+	background-color: transparent;
+	//background-image: linear-gradient(0deg, transparent 24%, rgba(16, 16, 16, .05) 25%, rgba(16, 16, 16, .05) 26%, transparent 27%, transparent 74%, rgba(16, 16, 16, .05) 75%, rgba(16, 16, 16, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(16, 16, 16, .05) 25%, rgba(16, 16, 16, .05) 26%, transparent 27%, transparent 74%, rgba(16, 16, 16, .05) 75%, rgba(16, 16, 16, .05) 76%, transparent 77%, transparent);
+	height: 100%;
+	background-size: @step*2 @step* 2;
+	background-position: @step/2 @step;
 }
 
 #zui {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
 }
 
-
 .prj {
-    position: absolute;
+	position: absolute;
 }
 
 .sq {
-    position: absolute;
-    width: @step;
-    height: @step;
-    background-color: #444;
-    //outline: solid 1px rgba(255, 255, 255, .2);
+	position: absolute;
+	width: @step;
+	height: @step;
 }
 
 .title {
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-    background-color: #e84;
-    color: white;
-    z-index: 100;
-    padding: @step/8 @step/4 @step/8 @step/4;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, .4);
-    margin-left: -@step/4;
-    margin-top: @step/8;
-    width: @step* 2;
-    text-align: center;
+	position: absolute;
+	font-weight: bold;
+	font-size: 30px;
+	background-color: #e84;
+	color: white;
+	z-index: 100;
+	padding: @step/8 @step/4 @step/8 @step/4;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, .4);
+	margin-left: -@step/4;
+	margin-top: @step/8;
+	width: @step* 2;
+	text-align: center;
+}
+
+.subtitle {
+	position: absolute;
+	font-size: 17px;
+	width: @step* 2;
+	height: @step* 2;
+	color: #eef;
+	z-index: 80;
+	text-align: left;
+}
+
+.subtitle p {
+	padding-top: @step/2;
+	padding-left: @step/5;
+	padding-right: @step/5;
+	padding-bottom: @step/5;
 }
 
 .c0 {
-    background-color: #444;
+	background-color: #444;
 }
 
 .flickr {
-    background-color: #E1E6A3;
+	background-color: #E1E6A3;
 }
 
 .youtube {
-    background-color: #77ABB8;
+	background-color: #77ABB8;
 }
 
 .tweeter {
-    background-color: #508BAB;
+	background-color: #508BAB;
 }
 .url {
-    background-color: #E3A47D;
+	background-color: #E3A47D;
 }
 .facebook {
-    background-color: #EDC679;
+	background-color: #EDC679;
 }

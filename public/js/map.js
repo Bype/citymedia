@@ -1,5 +1,5 @@
 define([], function() {
-	var step = 64;
+	var step = 128;
 	var nbcol = Math.floor($(document).width() / step);
 	var nbrow = Math.floor($(document).height() / step);
 	var leftOffset = nbcol / 2;
@@ -15,7 +15,7 @@ define([], function() {
 		show : function() {
 			var $container = $('#container');
 			var curPos = 0;
-			var prjPos = [[-10, -4], [-2, -4], [6, -4], [-10, 4], [-2, 4], [6, 4]];
+			var prjPos = [[-10, -2], [-2, -2], [6, -2], [-8, 2], [0, 2], [8, 2]];
 			var firstCircle = [[-1, -1], [0, -1], [1, -1], [2, -1], [2, 0], [2, 1], [2, 2], [1, 2], [0, 2], [-1, 2], [-1, 1], [-1, 0]];
 			$.get('/view/data', function(lst) {
 				_.each(lst, function(prj, idx) {
@@ -29,9 +29,14 @@ define([], function() {
 					var $tit = $(document.createElement('div'));
 					$tit.addClass('title');
 					$tit.text(prj.prjtitle);
-					setPos($tit, [0, 0]);
+					setPos($tit, [0, -.2]);
 					$container.append($prj);
 					$prj.append($tit);
+					var $sub = $(document.createElement('div'));
+					$sub.addClass('subtitle');
+					$sub.html('<p>'+prj.appsubtitle+'</p>');
+					setPos($sub, [0, 0]);
+					$prj.append($sub);
 					for (var i = 0; i < 4; i++) {
 						var $elt = $(document.createElement('div'));
 						$elt.addClass('sq');
@@ -46,6 +51,7 @@ define([], function() {
 						var $elt = $(document.createElement('div'));
 						$elt.addClass('sq');
 						$elt.addClass(pos.type);
+						$elt.attr('info', pos.info);
 						setPos($elt, [firstCircle[posidx][0], firstCircle[posidx][1]]);
 						posidx = (posidx + space) % 12;
 						$prj.append($elt);
