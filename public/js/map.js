@@ -21,49 +21,42 @@ define(['content'], function(c) {
 			var prjPos = [[-4, -4], [4, -2], [3, 4], [-3, 3], [-8, 4], [-8, -8], [10, -8]];
 			var firstCircle = [[-1, -1], [0, -1], [1, -1], [2, -1], [2, 1], [2, 2], [1, 2], [0, 2], [-1, 2], [-1, 1]];
 
-			var a = [];
-			a.push('x0y0');
-			a.push('x0y-1');
-			a.push('x1y-1');
-			a.push('x1y0');
-			var curX = 1, curY = 0;
-			function nextPos() {
-				var ret = [curX, curY];
-				a.push('x' + curX + 'y' + curY);
-				if (0 <= curX) {
-					if (0 <= curY) {
-						// first quandrant
-						if (0 <= _.indexOf(a, 'x' + curX + 'y' + curY + 1)) {
-							curX++;
-						} else {
-							curY++;
+			var r = 1;
+			var a =0;
+			
+			function spiral(i) {
+				var diam = Math.ceil(i / 8);
+				var inFaceIdx = Math.floor((1 + Math.sqrt(8 * i + 1)) / 16);
+				var faceNum = Math.floor(inFaceIdx / 4);
+				var pos;
+				switch (faceNum) {
+					case 0:
+						{
+							pos = [-diam, -diam];
+							pos[0] += (inFaceIdx % (diam * 2));
 						}
-					} else {
-						// second quandrant
-						if (0 <= _.indexOf(a, 'x' + curX - 1 + 'y' + curY)) {
-							curY++;
-						} else {
-							curX--;
+						break;
+					case 1:
+						{
+							pos = [diam, -diam];
+							pos[1] += (inFaceIdx % (diam * 2));
 						}
-					}
-				} else {
-					if (0 <= curY) {
-						// fourth quadrant
-						if (0 <= _.indexOf(a, 'x' + curX + 1 + 'y' + curY)) {
-							curY--;
-						} else {
-							curX++;
+						break;
+					case 2:
+						{
+							pos = [diam, diam];
+							pos[0] -= (inFaceIdx % (diam * 2));
 						}
-					} else {
-						// third quadrant
-						if (0 <= _.indexOf(a, 'x' + curX + 'y' + curY - 1)) {
-							curX--;
-						} else {
-							curY--;
+						break;
+					case 3:
+						{
+							pos = [-diam, diam];
+							pos[1] -= (inFaceIdx % (diam * 2));
 						}
-					}
-				}
-				return ret;
+						break;
+				};
+				console.log("i : ", i, " d :", diam, " if : ", inFaceIdx, " fn : ", faceNum, "     -->     ", pos);
+				return pos;
 			}
 
 
@@ -123,7 +116,7 @@ define(['content'], function(c) {
 						$elt.addClass(pos.type);
 						$elt.attr('info', pos.info);
 						$prj.append($elt);
-						setPos($elt, nextPos());
+						setPos($elt, spiral(curPos));
 
 					});
 					curPos++;
