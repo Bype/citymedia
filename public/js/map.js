@@ -22,40 +22,41 @@ define(['content'], function(c) {
 			var firstCircle = [[-1, -1], [0, -1], [1, -1], [2, -1], [2, 1], [2, 2], [1, 2], [0, 2], [-1, 2], [-1, 1]];
 
 			var r = 1;
-			var a =0;
-			
-			function spiral(i) {
-				var diam = Math.ceil(i / 8);
-				var inFaceIdx = Math.floor((1 + Math.sqrt(8 * i + 1)) / 16);
-				var faceNum = Math.floor(inFaceIdx / 4);
-				var pos;
-				switch (faceNum) {
+			var a = 0;
+
+			function spiral(r, a) {
+				if (r * 8 < a) {
+					return undefined;
+				}
+				var fi = r * 2;
+				var pos = [0, 0];
+				switch(Math.floor(a/(r*2))) {
 					case 0:
 						{
-							pos = [-diam, -diam];
-							pos[0] += (inFaceIdx % (diam * 2));
+							pos[0] = a - r;
+							pos[1] = -r;
 						}
 						break;
 					case 1:
 						{
-							pos = [diam, -diam];
-							pos[1] += (inFaceIdx % (diam * 2));
+							pos[0] = r;
+							pos[1] = (a % fi) - r;
+
 						}
 						break;
 					case 2:
 						{
-							pos = [diam, diam];
-							pos[0] -= (inFaceIdx % (diam * 2));
+							pos[0] = r - (a % fi);
+							pos[1] = r;
 						}
 						break;
 					case 3:
 						{
-							pos = [-diam, diam];
-							pos[1] -= (inFaceIdx % (diam * 2));
+							pos[0] = -r;
+							pos[1] = r - (a % fi);
 						}
 						break;
-				};
-				console.log("i : ", i, " d :", diam, " if : ", inFaceIdx, " fn : ", faceNum, "     -->     ", pos);
+				}
 				return pos;
 			}
 
