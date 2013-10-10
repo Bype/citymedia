@@ -3,8 +3,9 @@ define([], function() {
 		render : function() {
 			$('.url').each(function(idx, elt) {
 				var $elt = $(elt);
-				var $div = $(document.createElement('div'));
-				$div.addClass("content");
+				
+				var $url = $(document.createElement('div'));
+				$url.addClass("content");
 				var $qrdiv = $(document.createElement('div'));
 				$qrdiv.addClass("qrcode");
 				$qrdiv.qrcode({
@@ -15,9 +16,9 @@ define([], function() {
 				var $urldiv = $(document.createElement('div'));
 				$urldiv.addClass("urltext");
 				$urldiv.html('<p>' + $elt.attr('info') + '</p>');
-				$div.append($qrdiv);
-				$div.append($urldiv);
-				$elt.append($div);
+				$url.append($qrdiv);
+				$url.append($urldiv);
+				$div.append($url);
 				
 			});
 

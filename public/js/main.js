@@ -22,8 +22,9 @@ var zui;
 
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui'], function($, _, moment) {
 	$(function() {
-		require(['map'], function(m) {
+		require(['map', 'position'], function(m) {
 			m.show(function() {
+				
 				zui = new ZUI53.Viewport('zui');
 				pan_tool = new ZUI53.Tools.Pan(zui);
 				pan_tool.attach();
@@ -40,6 +41,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 						});
 					}, 1000);
 				});
+				
 				setInterval(function() {
 					if (1 < zui.getPanAndScale()[2]) {
 						$('.content').fadeIn();
