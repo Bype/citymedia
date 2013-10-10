@@ -6,11 +6,9 @@ define(['content/render'], function(render) {
 		};
 		var mod = modules[modindex];
 		if (mod) {
-			if ('flickr' == mod.type) {
-				render.flickr($elt, spi, mod.info, next);
-			} else if ('url' == mod.type) {
-				render.url($elt, spi, mod.info, next);
-			} else {
+			try {
+				render[mod.type]($elt, spi, mod.info, next);
+			} catch(err) {
 				next(spi);
 			}
 		} else {
