@@ -7,7 +7,9 @@ requirejs.config({
 		arbor : 'lib/arbor',
 		arbor_tween : 'lib/arbor-tween',
 		jqui : "lib/jquery-ui",
-		zui : "lib/zui53"
+		zui : "lib/zui53",
+		fancybox:"lib/jquery.fancybox",
+		"fancybox-media":"lib/helpers/jquery.fancybox-media"
 
 	},
 	shim : {
@@ -20,8 +22,10 @@ requirejs.config({
 var step = 128;
 var zui;
 
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui','fancybox'], function($, _, moment) {
 	$(function() {
+		
+		
 		require(['map', 'position'], function(m) {
 			m.show(function() {
 				
@@ -41,7 +45,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 						});
 					}, 1000);
 				});
-				
+								
 				setInterval(function() {
 					if (1 < zui.getPanAndScale()[2]) {
 						$('.content').fadeIn();
