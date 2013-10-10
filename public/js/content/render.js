@@ -82,7 +82,8 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 							'type' : 'swf',
 							'swf' : {
 								'wmode' : 'transparent',
-								'allowfullscreen' : 'true'
+								'allowfullscreen' : 'true',
+								'allownetworking' : 'internal'
 							}
 						});
 
