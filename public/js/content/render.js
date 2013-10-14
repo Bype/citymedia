@@ -3,12 +3,16 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 	function insert($elt, spi, collection, type, renderer, fn) {
 		async.each(collection, function(element, done) {
 			var $div = $(document.createElement('div'));
+			$div.hide();
 			$.spiral(spi, $div);
 			$div.addClass("sq");
 			$div.addClass(type);
 			renderer($div, element);
 			$elt.append($div);
 			spi++;
+			setTimeout(function() {
+				$div.fadeIn(100);
+			}, spi * 50);
 			done();
 		}, function(err) {
 			fn(spi);
@@ -93,6 +97,18 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					$eltdiv.append($eltimg);
 					$eltdiv.append($elttitle);
 					$eltdiv.append($eltplay);
+					$div.append($eltdiv);
+				}, fn);
+			});
+		},
+		tweeter : function($elt, idx, info, fn) {
+			$.getJSON('/twitter2json?q=' + info, function(data) {
+				insert($elt, idx, data.statuses, 'tweeter', function($div, element) {
+					var $eltdiv = $(document.createElement('div'));
+					$eltdiv.addClass('content');
+					var html = '<p><em>' + moment(element.created_at).fromNow() + '... </em><br/>';
+					html += element.text + '<br/><b>@' + element.user.screen_name + ' depuis ' + element.user.location + '</b></p>';
+					$eltdiv.append(html);
 					$div.append($eltdiv);
 				}, fn);
 			});
