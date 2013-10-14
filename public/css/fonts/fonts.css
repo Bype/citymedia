@@ -1,0 +1,22 @@
+@font-face{
+	font-family:"Geogrotesque";
+	font-weight: normal;
+	src:url('Geogtq-Lg.otf')
+}
+@font-face{
+	font-family:"Geogrotesque";
+	font-weight: bold;
+	src:url('Geogtq-Rg.otf')
+}
+@font-face{
+	font-family:"Geogrotesque";
+	font-weight: lighter;
+	src:url('Geogtq-Ul.otf')
+}
+
+@font-face{
+	font-family:"Geogrotesque";
+	font-weight: lighter;
+	font-style: italic;
+	src:url('Geogtq-UlIt.otf')
+}
