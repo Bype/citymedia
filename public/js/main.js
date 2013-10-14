@@ -50,7 +50,10 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				}
 			}, 500);
 			m.show(function() {
-
+				$('.sq').bind('mousedown mousemove mouseup', function(e) {
+					$(zui.viewport).trigger(e);
+					return true;
+				});
 			});
 		});
 	});

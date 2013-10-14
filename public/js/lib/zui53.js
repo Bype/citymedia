@@ -3548,13 +3548,10 @@ function namespace(name, callback)
       };
 
       Pan.prototype.start = function(e) {
-        if (this.disabled) {
+      	if (this.disabled) {
           return;
         }
         if (e.shiftKey) {
-          return;
-        }
-        if (!this.eventInSurface(e)) {
           return;
         }
         $('body').addClass('panning');

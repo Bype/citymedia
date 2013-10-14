@@ -3,185 +3,177 @@
 @import 'help.css';
 @import 'jquery.fancybox.css';
 @import 'fonts/fonts.css';
-
 @step:128px;
 html {
-	height: 100%;
+	height:100%;
 }
 body {
-	font-family: Geogrotesque;
-	background: -webkit-radial-gradient(rgba(250, 250, 250, 0.5),
+	font-family:Geogrotesque;
+	background:-webkit-radial-gradient(rgba(250, 250, 250, 0.5),
 	rgba(230, 230, 230, 0.5) 35%,
 	rgba(128, 128, 128, 0.7));
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
 	/* -webkit-transform:scale(.5); */
-	font-size: 11px;
-	height: 100%;
-	-webkit-font-smoothing: antialiased;
-	-webkit-transform: translateZ(0);
-	-webkit-backface-visibility: visible;
+	font-size:11px;
+	height:100%;
+	-webkit-font-smoothing:antialiased;
+	-webkit-transform:translateZ(0);
+	-webkit-backface-visibility:visible;
 }
 #container {
-	background-color: transparent;
-	height: 100%;
-	background-size: @step*2 @step* 2;
-	background-position: @step/2 @step;
+	background-color:transparent;
+	height:100%;
+	background-size:@step*2 @step* 2;
+	background-position:@step/2 @step;
 }
 #zui {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: 100%;
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
 }
 .prj {
-	position: absolute;
+	position:absolute;
 }
 .circle {
-	position: absolute;
-	border: dotted 4px grey;
-	width: 7 *@step;
-	height: 7 *@step;
-	top: -2.3 *@step;
-	left: -2.3 *@step;
-	border-radius: 3.5 *@step;
-	z-index: -10;
+	position:absolute;
+	border:dotted 4px grey;
+	width:7 *@step;
+	height:7 *@step;
+	top:-2.3 *@step;
+	left:-2.3 *@step;
+	border-radius:3.5 *@step;
+	z-index:-10;
 }
 .sq {
-	position: absolute;
-	width: @step;
-	height: @step;
+	position:absolute;
+	width:@step;
+	height:@step;
 }
 .title {
-	position: absolute;
-	font-weight: normal;
-	font-size: 24px;
-	background-color: black;
-	color: white;
-	z-index: 100;
-	padding-top: @step/16;
-	padding-bottom: @step/16;//
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, .4);
-	margin-left: 0;
-	margin-top: @step/5;
-	width: @step* 2;
-	text-align: center;
-	text-transform: uppercase;
+	position:absolute;
+	font-weight:normal;
+	font-size:24px;
+	background-color:black;
+	color:white;
+	z-index:100;
+	padding-top:@step/16;
+	padding-bottom:@step/16;//
+	box-shadow:3px 3px 10px rgba(0, 0, 0, .4);
+	margin-left:0;
+	margin-top:@step/5;
+	width:@step* 2;
+	text-align:center;
+	text-transform:uppercase;
 }
 .subtitle {
-	position: absolute;
-	font-size: 17px;
-	width: @step* 2;
-	height: @step* 2;
-	color: white;
-	z-index: 80;
-	text-align: left;
+	position:absolute;
+	font-size:17px;
+	width:@step* 2;
+	height:@step* 2;
+	color:white;
+	z-index:80;
+	text-align:left;
 }
 .subtitle p {
-	padding-top: @step/2.5;
-	padding-left: @step/5;
-	padding-right: @step/5;
-	padding-bottom: @step/5;
-	font-weight: lighter;
+	padding-top:@step/2.5;
+	padding-left:@step/5;
+	padding-right:@step/5;
+	padding-bottom:@step/5;
+	font-weight:lighter;
 }
 .c0 {
-	background-color: #606060;
+	background-color:#606060;
 }
 .flickr {
-	background-color: #EDC951;
+	background-color:#EDC951;
 }
 .tweeter {
-	background-color: #00A0B0;
+	background-color:#00A0B0;
 }
 .url {
-	background-color: #CC333F;
+	background-color:#CC333F;
 }
 .youtube {
-	background-color: #EB6841;
+	background-color:#EB6841;
 }
 .facebook {
-	background-color: #EB6841;
+	background-color:#EB6841;
 }
-
 .flickr .content {
-	outline: 2px solid #EDC951;
-	outline-offset: -2px;
+	outline:2px solid #EDC951;
+	outline-offset:-2px;
 }
 .flickr .qimg {
-	width: @step;
-	height: @step;
+	width:@step;
+	height:@step;
 }
 .ytimg {
-	width: @step;
+	width:@step;
 }
 .ytplay {
-	height: @step /3;
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	margin: auto;
+	height:@step /3;
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	margin:auto;
 }
-
 .youtube .content {
-	text-align: center;
+	text-align:center;
 }
 .youtube .content p {
-	font-size: 6px;
-	margin-top: 4px;
-	color: black;
-	text-overflow: ellipsis;
-	width: @step;
-	font-weight: lighter;
+	font-size:6px;
+	margin-top:4px;
+	color:black;
+	text-overflow:ellipsis;
+	width:@step;
+	font-weight:lighter;
 }
-
 .content {
-	display: none;
+	display:none;
 }
 .url .content {
-	background-color: white;
-	width: @step;
-	height: @step;
-	outline: 4px solid #CC333F;
-	outline-offset: -4px;
+	background-color:white;
+	width:@step;
+	height:@step;
+	outline:4px solid #CC333F;
+	outline-offset:-4px;
 }
 .url .qrcode {
-	position: absolute;
-	-webkit-transform-origin: @step/3 @step/3;
-	-webkit-transform: scale(.25);
+	position:absolute;
+	-webkit-transform-origin:@step/3 @step/3;
+	-webkit-transform:scale(.25);
 }
 .url .urltext {
-	position: absolute;
-	left: 10px;
-	bottom: @step/8;
-	width: @step             - 20px;
+	position:absolute;
+	left:10px;
+	bottom:@step/8;
+	width:@step              - 20px;
 }
 .url .urltext p {
-	font-size: 5px;
-	text-align: center;
-	font-family: mono;
-	word-wrap: break-word;
+	font-size:5px;
+	text-align:center;
+	font-family:mono;
+	word-wrap:break-word;
 }
-
 .tweeter p {
-	color: white;
-	padding: @step/8 @step/8 @step/8 @step/8;
-	font-size: 9px;
-	font-weight: bold;
+	color:white;
+	padding:@step/8 @step/8 @step/8 @step/8;
+	font-size:9px;
+	font-weight:bold;
 }
-
 .tweeter p em {
-	font-style: italic;
-	font-weight: lighter;
+	font-style:italic;
+	font-weight:lighter;
 }
-
 .tweeter p b {
-	font-weight: lighter;
-	font-size: 8px;
+	font-weight:lighter;
+	font-size:8px;
 }
-
 .tweeter p br {
-	line-height: 13px;
+	line-height:13px;
 }
