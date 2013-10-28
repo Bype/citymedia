@@ -1,9 +1,0 @@
-@import 'bootstrap.css';
-
-@import 'bootstrap-responsive.css';
-body {
-  padding-top: 32px;
-}
-body .modal {
-  width: 580px;
-}
