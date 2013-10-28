@@ -4,6 +4,7 @@
 		<title>Citymedia</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel='stylesheet' href='/css/admin.css' />
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQsEOzxwht2kmbrg50e0TTTt7JVWR7f90&sensor=false"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -62,8 +63,8 @@
 					×
 				</button><h3>Définition d'un projet</h3>
 			</div>
-			<div class="modal-body">
-				<form id="projectform" action="/project/add" method="post" enctype="multipart/form-data" style="">
+			<div class="modal-body" style="max-height:800px">
+				<form id="projectform" action="/project/add" method="post" enctype="multipart/form-data"  >
 					<fieldset>
 						<div class="control-group">
 							<label for="prjtitle" class="control-label">Titre</label>
@@ -74,6 +75,17 @@
 							<label for="appsubtitle" class="control-label">Présentation</label>
 							<textarea id="appsubtitle" rows='3' type='text' name="appsubtitle" placeholder="Petit texte d'introduction" class="controls input-xxlarge"></textarea>
 						</div>
+						<div class="control-group">
+							<label for="address" class="control-label">Géo Localisation</label>
+							<input id="address" type="text" class="controls input-xxlarge" value="Office de tourisme, Aix En Provence"><br>
+							<input type="button" class="btn" value="Trouver" id='geofind'>
+						</div>
+						<div class="container" id='mapcont' style="width: 530px; height: 300px; display:none;">
+							<div id="mapcanvas"></div>
+						</div>
+						<br/>
+						<input type='hidden' name='lat' id='geolat' value=''>
+						<input type='hidden' name='lon' id='geolon' value=''>
 						<div class="modal-footer">
 							<input value="Annuler" aria-hidden="true" data-dismiss="modal" class="btn">
 							<input type="submit" value="Enregistrer" class="btn btn-primary">
@@ -95,7 +107,7 @@
 							<label for="moduletype" class="control-label">Titre</label>
 							<select id="moduletype" name="type" class="controls input-medium" onchange="$.changeModule()">
 								<option value="url">Lien http</option>
-								<option value="gdoc">Document Google Drive</option>
+								<option value="epad">Etherpad</option>
 								<option value="vimeo">Canal Vimeo</option>
 								<option value="youtube">Playlist Youtube</option>
 								<option value="rss">Flux RSS</option>

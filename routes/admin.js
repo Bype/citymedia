@@ -7,6 +7,7 @@ db.bind('project');
 
 exports.projectadd = function(req, res) {
 	db.project.insert(req.body, function(err, data) {
+		console.log(req.body);
 		data.success = true;
 		data.mongoid = data['_id'];
 		res.json(data);

@@ -13,13 +13,18 @@ requirejs.config({
 });
 
 var currentid;
+var map;
 
 require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstrap', 'lib/bootbox.min'], function($, _, Mustache, util) {
+
 	$(function() {
 
 		$.changeTitle = function() {
 			$('#prjname').val($("#prjtitle").val().toLowerCase().replace(/[^a-zA-Z0-9]+/g, "_"));
 		};
+		require(['map_admin'], function(ma) {
+			ma.setup();
+		});
 
 		$.changeModule = function() {
 			$('#moduleurl').val(util.toUrl($('#moduletype').val(), $('#modinfo').val()));
@@ -28,8 +33,8 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 				case 'url':
 					$('#modinfo').attr('placeholder', 'http://<url du site>');
 					break;
-				case 'gdoc':
-					$('#modinfo').attr('placeholder', 'identifiant du fichier');
+				case 'epad':
+					$('#modinfo').attr('placeholder', 'identifiant du pad');
 					break;
 				case 'vimeo':
 					$('#modinfo').attr('placeholder', 'identifiant du canal');
@@ -62,7 +67,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 					$('#modinfo').attr('placeholder', 'identifiant soundcloud');
 					break;
 			};
-		}
+		};
 
 		$.prjdel = function(id) {
 			bootbox.confirm("Êtes vous sur de vouloir supprimer ce projet ?", function(result) {

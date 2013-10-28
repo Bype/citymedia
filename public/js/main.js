@@ -25,6 +25,18 @@ var zui;
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox'], function($, _, moment) {
 	$(function() {
 
+		function initialize() {
+			var mapOptions = {
+				zoom : 14,
+				center : new google.maps.LatLng(43.5296189,5.4438398),
+				mapTypeId : google.maps.MapTypeId.TERRAIN
+			};
+
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+		}
+
+		initialize();
+
 		require(['map', 'position'], function(m) {
 			zui = new ZUI53.Viewport('zui');
 			pan_tool = new ZUI53.Tools.Pan(zui);
