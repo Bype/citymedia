@@ -26,12 +26,11 @@ body {
 }
 
 #map-canvas {
-	position:fixed;
+	position: fixed;
 	height: 100%;
 	margin: 0px;
-	padding: 0px
-	top:0;
-	left:0;
+	padding: 0px top :0;
+	left: 0;
 }
 
 #container {
@@ -47,7 +46,7 @@ body {
 	height: 100%;
 }
 .prj {
-	position: absolute;
+	position: relative;
 }
 .circle {
 	position: absolute;
@@ -63,6 +62,7 @@ body {
 	position: absolute;
 	width: @step;
 	height: @step;
+	float: left;
 }
 .title {
 	position: absolute;
@@ -115,8 +115,10 @@ body {
 	background-color: #EB6841;
 }
 .flickr .content {
-	//outline: 2px solid #EDC951;
-	//outline-offset: -2px;
+	/*
+	 outline: 2px solid #EDC951;
+	 outline-offset: -2px;
+	 */
 }
 .flickr .qimg {
 	width: @step;
@@ -146,6 +148,19 @@ body {
 .content {
 	display: none;
 }
+
+.ico {
+
+}
+
+.mapico {
+	position: absolute;
+	top: -@step/2;
+	left: -@step/2;
+	width:@step;
+	height:@step;
+}
+
 .url .content {
 	background-color: white;
 	width: @step;
@@ -162,7 +177,7 @@ body {
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step               - 20px;
+	width: @step                     - 20px;
 }
 .url .urltext p {
 	font-size: 5px;

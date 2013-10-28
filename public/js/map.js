@@ -14,6 +14,12 @@ define(['content', 'lib/async'], function(c, async) {
 			$.get('/view/data', function(lst) {
 				async.each(lst, function(prj, done) {
 
+					var mappos = new google.maps.LatLng(prj.lat, prj.lon);
+					marker = new google.maps.Marker({
+						map : map,
+						position : mappos
+					});
+
 					var $prj = $(document.createElement('div'));
 					$container.append($prj);
 					$prj.attr('id', prj.prjname);
@@ -22,6 +28,21 @@ define(['content', 'lib/async'], function(c, async) {
 						left : (leftOffset + prjPos[curPos][0]) * step,
 						top : (topOffset + prjPos[curPos][1]) * step
 					});
+
+					google.maps.event.addListener(marker, 'click', function() {
+						$.showMap(false, function() {
+							$('#container ').css({
+								"-webkit-transition" : " all 1.5s ease-in-out"
+							});
+							zui.reset();
+							setTimeout(function() {
+								$('#container ').css({
+									"-webkit-transition" : ""
+								});
+							}, 1500);
+						});
+					});
+
 					curPos++;
 					var $tit = $(document.createElement('div'));
 					$prj.append($tit);
@@ -66,12 +87,29 @@ define(['content', 'lib/async'], function(c, async) {
 					$prj.append($elt);
 
 					for (var i = 0; i < 3; i++) {
-						var $elt = $(document.createElement('div'));
+						$elt = $(document.createElement('div'));
 						$elt.addClass('sq');
 						$elt.addClass("c0");
 						$prj.append($elt);
 						$.spiral(i, $elt);
 					}
+
+					var $mapico = $(document.createElement('img'));
+					$elt.append($mapico);
+					$mapico.addClass('ico');
+					$mapico.addClass('mapico');
+					$mapico.attr("src", 'img/map.svg');
+					$mapico.css({
+						right : 0,
+						bottom : 0
+					});
+
+					$mapico.click(function() {
+						$.showMap(true, function() {
+							map.setCenter(mappos);
+						});
+
+					});
 
 					c.render($prj, 3, prj.modules, 0, done);
 
