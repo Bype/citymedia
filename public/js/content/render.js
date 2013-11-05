@@ -19,9 +19,24 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 		});
 	}
 
+	function iconHeader($elt, idx, type) {
+		var $div = $(document.createElement('div'));
+		$div.hide();
+		$.spiral(idx, $div);
+		$div.addClass("sq");
+		$div.addClass(type);
+		$elt.append($div);
+		$div.append("<img class='ico' src='img/" + type + ".svg'/>");
+		setTimeout(function() {
+			$div.fadeIn(100);
+		}, idx * 50);
+	}
+
 	return {
 		flickr : function($elt, idx, info, fn) {
 			$.getJSON('http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=b27e622e07f348e026d868f2ee68830c&photoset_id=' + info + '&per_page=10&format=json&jsoncallback=?', function(data) {
+				iconHeader($elt, idx, 'flickr');
+				idx++;
 				insert($elt, idx, data.photoset.photo, 'flickr', function($div, element) {
 					var $img = $(document.createElement('img'));
 					var url = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_q.jpg", element);
@@ -53,6 +68,8 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 		},
 		youtube : function($elt, idx, info, fn) {
 			$.getJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyCQsEOzxwht2kmbrg50e0TTTt7JVWR7f90&playlistId=' + info, function(data) {
+				iconHeader($elt, idx, 'youtube');
+				idx++;
 				insert($elt, idx, data.items, 'youtube', function($div, element) {
 					var $eltdiv = $(document.createElement('div'));
 					$eltdiv.addClass('content');
@@ -103,6 +120,8 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 		},
 		tweeter : function($elt, idx, info, fn) {
 			$.getJSON('/twitter2json?q=' + info, function(data) {
+				iconHeader($elt, idx, 'tweeter');
+				idx++;
 				insert($elt, idx, data.statuses, 'tweeter', function($div, element) {
 					var $eltdiv = $(document.createElement('div'));
 					$eltdiv.addClass('content');

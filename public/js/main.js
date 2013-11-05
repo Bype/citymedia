@@ -28,9 +28,9 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 		function initialize() {
 			var mapOptions = {
-				zoom : 16,
+				zoom : 18,
 				center : new google.maps.LatLng(43.5296189, 5.4438398),
-				mapTypeId : google.maps.MapTypeId.TERRAIN
+				mapTypeId : google.maps.MapTypeId.SATELLITE
 			};
 
 			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -42,12 +42,12 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			if (t) {
 				fn();
 				$('html, body').delay(200).animate({
-					scrollTop : $("#map-canvas").offset().top
+					scrollTop : $("#liftbut").offset().top
 				}, 1000, "swing");
 			} else {
 				$('html, body').animate({
 					scrollTop : 0
-				}, 1000, "swing",fn);
+				}, 1000, "swing", fn);
 			}
 		};
 		require(['map', 'position'], function(m) {
@@ -56,11 +56,12 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			pan_tool.attach();
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
+			zui.zoomSet(.5, $(document).width() / 2, $(document).height() / 2);
 			$('#zui').dblclick(function(evt) {
 				$('#container ').css({
 					"-webkit-transition" : " all 1s ease-in-out"
 				});
-				zui.reset();
+				zui.zoomSet(.5, $(document).width() / 2, $(document).height() / 2);
 				setTimeout(function() {
 					$('#container ').css({
 						"-webkit-transition" : ""
@@ -70,10 +71,10 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			setInterval(function() {
 				if (1 < zui.getPanAndScale()[2]) {
 					$('.content').fadeIn();
-					$('.ico').fadeOut();
+					//		$('.ico').fadeOut();
 				} else {
 					$('.content').fadeOut();
-					$('.ico').fadeIn();
+					//		$('.ico').fadeIn();
 				}
 			}, 500);
 			m.show(function() {

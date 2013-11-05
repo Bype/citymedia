@@ -16,7 +16,7 @@ define([], function() {
 		// points by face
 
 		var a = (1 + n - p) % (r * 8);
-		// compute de position and shift it so the first is (-r,-r) but (-r+1,-r)
+		// compute the position and shift it so the first is (-r,-r) but (-r+1,-r)
 		// so square can connect
 
 		var pos = [0, 0];
@@ -55,4 +55,4 @@ define([], function() {
 			});
 		return pos;
 	};
-}); 
+});
