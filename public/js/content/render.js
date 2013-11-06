@@ -38,13 +38,20 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 				iconHeader($elt, idx, 'flickr');
 				idx++;
 				insert($elt, idx, data.photoset.photo, 'flickr', function($div, element) {
+					var urlm = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_b.jpg", element);
+					var $href = $(document.createElement('a'));
+					$href.addClass("fancybox");
+					$href.attr('href', urlm);
 					var $img = $(document.createElement('img'));
-					var url = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_q.jpg", element);
-					$img.attr('src', url);
+					var urls = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_q.jpg", element);
+					$img.attr('src', urls);
 					$img.addClass('qimg content');
-					$div.append($img);
+					$href.append($img);
+					$div.append($href);
+					$href.fancybox();
 				}, fn);
 			});
+
 		},
 		url : function($elt, idx, info, fn) {
 			var a = [info];
@@ -94,8 +101,6 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 						$.fancybox({
 							'padding' : 0,
 							'autoScale' : true,
-							'transitionIn' : 'none',
-							'transitionOut' : 'none',
 							'title' : this.title,
 							'width' : 1280,
 							'height' : 720,

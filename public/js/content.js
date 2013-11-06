@@ -4,12 +4,16 @@ define(['content/render'], function(render) {
 		var next = function(idx) {
 			recMod($elt, idx, modules, modindex + 1, fn);
 		};
-		var mod = modules[modindex];
-		if (mod) {
-			try {
-				render[mod.type]($elt, spi, mod.info, next);
-			} catch(err) {
-				next(spi);
+		if (modules) {
+			var mod = modules[modindex];
+			if (mod) {
+				try {
+					render[mod.type]($elt, spi, mod.info, next);
+				} catch(err) {
+					next(spi);
+				}
+			} else {
+				fn();
 			}
 		} else {
 			fn();
