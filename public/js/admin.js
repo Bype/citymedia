@@ -14,6 +14,7 @@ requirejs.config({
 
 var currentid;
 var map;
+var geocoder;
 
 require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstrap', 'lib/bootbox.min'], function($, _, Mustache, util) {
 

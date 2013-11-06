@@ -10,14 +10,15 @@ define([], function() {
 			$('#geofind').click(function() {
 
 				function setPos(pos) {
-					$('#geolat').val(pos.lb);
-					$('#geolon').val(pos.mb);
+					$('#geolat').val(pos.lat());
+					$('#geolon').val(pos.lng());
 					marker.setPosition(pos);
 					map.panTo(pos);
+					console.log(pos);
 				}
 
 				var marker;
-				var geocoder;
+				
 				if (!map) {
 					map = new google.maps.Map(document.getElementById("mapcanvas"), mapOptions);
 					google.maps.event.addListener(map, 'click', function(e) {
