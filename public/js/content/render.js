@@ -136,6 +136,21 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					$div.append($eltdiv);
 				}, fn);
 			});
+		},
+		rss : function($elt, idx, info, fn) {
+			$.getJSON('/rss2json?url=' + info, function(data) {
+				iconHeader($elt, idx, 'rss');
+				idx++;
+				insert($elt, idx, data.items.slice(0,10), 'rss', function($div, element) {
+					$eltitem = $(document.createElement('div'));
+					$eltitem.addClass('news');
+					var html = '<p><em>' + moment(element.pubdate).fromNow() + '... </em></p>';
+					html += '<h1>' + element.title + '</h1>';
+					html += '<p class="content">' + element.description.replace(/(<([^>]+)>)/ig, ""); + '</p>';
+					$eltitem.append(html);
+					$div.append($eltitem);
+				},fn);
+			});
 		}
 	};
 });

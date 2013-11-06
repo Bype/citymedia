@@ -8,13 +8,13 @@ define([], function() {
 				_.each(data.items.slice(0, 8), function(element, index, list) {
 					var eltitem = document.createElement('div');
 					$(eltitem).addClass('news');
-					var html = '<p><em>' + moment(element.pubdate).fromNow() + '... </em>';
-					html += '<b>' + element.title + '</b></p>';
+					var html = '<p><em>' + moment(element.pubdate).fromNow() + '... </em></p>';
+					html += '<p><b>' + element.title + '</b></p>';
 					html += '<p>' + element.description.replace(/(<([^>]+)>)/ig, ""); + '</p>';
 					$(eltitem).append(html);
 					$(evmod).append(eltitem);
 				});
-			})
+			});
 		}
 	};
 });

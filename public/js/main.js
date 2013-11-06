@@ -9,7 +9,8 @@ requirejs.config({
 		jqui : "lib/jquery-ui",
 		zui : "lib/zui53",
 		fancybox : "lib/jquery.fancybox",
-		"fancybox-media" : "lib/helpers/jquery.fancybox-media"
+		"fancybox-media" : "lib/helpers/jquery.fancybox-media",
+		videoBG : "lib/jquery.videoBG"
 
 	},
 	shim : {
@@ -23,7 +24,7 @@ var step = 128;
 var zui;
 var map;
 
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'videoBG'], function($, _, moment) {
 	$(function() {
 
 		function initialize() {
