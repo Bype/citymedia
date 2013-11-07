@@ -38,43 +38,49 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		}
 
 		initialize();
-		$.movingBy = function(dx, dy) {};
-/*
 		$.movingBy = function(dx, dy) {
-			var os1 = $('#bg1').offset();
-			$('#bg1').css({
-				left : os1.left + dx / 4,
-				top : os1.top + dy / 4
-			});
-			var os2 = $('#bg2').offset();
-			$('#bg2').css({
-				left : os2.left + dx / 8,
-				top : os2.top + dy / 8
-			});
 		};
 
-		for (var i = 0; i < 20; i++) {
+		var aDX = 0, aDY = 0, aScale = 1;
+		var applyParallax = function() {
+			$('#bg1').transform({
+				matrix : [aScale, 0.0, 0.0, aScale, aDX / 2, aDY / 2]
+			});
+			$('#bg2').transform({
+				matrix : [aScale, 0.0, 0.0, aScale, aDX, aDY]
+			});
+		};
+		$.movingBy = function(dx, dy) {
+			aDX -= dx;
+			aDY -= dy;
+			applyParallax();
+		};
+		$.scaleBy = function(scale) {
+			//aScale = scale;
+			applyParallax();
+		};
+		for (var i = 0; i < 400; i++) {
 			var $div = $(document.createElement('div'));
 			$div.addClass('triangle1');
 			$div.css({
-				left : 100 * Math.floor(Math.random() * 30),
-				top : 100 * Math.floor(Math.random() * 20),
+				left : 100 * Math.floor(Math.random() * 100) - 4000,
+				top : 100 * Math.floor(Math.random() * 100) - 4000,
 				'-webkit-transform' : 'rotate(' + Math.floor(Math.random() * 90) + 'deg)'
 			});
 			$('#bg1').append($div);
 		}
 
-		for (var i = 0; i < 20; i++) {
+		for (var i = 0; i < 600; i++) {
 			var $div = $(document.createElement('div'));
 			$div.addClass('triangle2');
 			$div.css({
-				left : 100 * Math.floor(Math.random() * 30),
-				top : 100 * Math.floor(Math.random() * 20),
+				left : 100 * Math.floor(Math.random() * 100) - 4000,
+				top : 100 * Math.floor(Math.random() * 100) - 4000,
 				'-webkit-transform' : 'rotate(' + Math.floor(Math.random() * 90) + 'deg)'
 			});
 			$('#bg2').append($div);
 		}
-*/
+
 		$.showMap = function(t, fn) {
 			if (t) {
 				fn();
@@ -107,7 +113,9 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			});
 			setInterval(function() {
 				if (1 < zui.getPanAndScale()[2]) {
-					$('.content').fadeIn();
+					if (!$('body').hasClass('panning')) {
+						$('.content').fadeIn();
+					}
 					//		$('.ico').fadeOut();
 				} else {
 					$('.content').fadeOut();

@@ -3584,6 +3584,8 @@ function namespace(name, callback) {
 		function ctor() {
 			this.constructor = child;
 		}
+
+
 		ctor.prototype = parent.prototype;
 		child.prototype = new ctor();
 		child.__super__ = parent.prototype;
@@ -3725,6 +3727,8 @@ function namespace(name, callback) {
 		function ctor() {
 			this.constructor = child;
 		}
+
+
 		ctor.prototype = parent.prototype;
 		child.prototype = new ctor();
 		child.__super__ = parent.prototype;
@@ -4008,6 +4012,7 @@ function namespace(name, callback) {
 			};
 
 			CSS.prototype.apply = function(panX, panY, scale) {
+				$.scaleBy(scale);
 				return $(this.node).transform({
 					matrix : [scale, 0.0, 0.0, scale, panX, panY]
 				});
