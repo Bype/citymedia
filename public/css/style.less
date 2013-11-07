@@ -12,6 +12,7 @@ body {
 	background:-webkit-radial-gradient(rgba(250, 250, 250, 0.5),
 	rgba(230, 230, 230, 0.5) 35%,
 	rgba(128, 128, 128, 0.7));
+	z-index:-1000;
 	margin:0;
 	padding:0;
 	overflow:hidden;
@@ -182,7 +183,7 @@ body {
 	position:absolute;
 	left:10px;
 	bottom:@step/8;
-	width:@step                         - 20px;
+	width:@step                          - 20px;
 }
 .url .urltext p {
 	font-size:5px;
@@ -232,7 +233,6 @@ body {
 	left:-250px;
 	z-index:-150;
 }
-
 @-webkit-keyframes blink {
 0% { border-right-color: #eee; }
 50% { border-right-color: #888; }

@@ -84,14 +84,17 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		rAF = window.requestAnimationFrame;
 
 		function update(timestamp) {
-			$('.triangle1').eq(Math.floor(Math.random() * 400)).animate({
-				left : 100 * Math.floor(Math.random() * 100) - 4000,
-				top : 100 * Math.floor(Math.random() * 100) - 4000				
-			}, 20000);
-			$('.triangle2').eq(Math.floor(Math.random() * 400)).animate({
-				left : 100 * Math.floor(Math.random() * 100) - 4000,
-				top : 100 * Math.floor(Math.random() * 100) - 4000
-			}, 20000);
+
+			if (Math.floor(timestamp % 500) < 10)
+				$('.triangle1').eq(Math.floor(Math.random() * 400)).animate({
+					left : 100 * Math.floor(Math.random() * 100) - 4000,
+					top : 100 * Math.floor(Math.random() * 100) - 4000
+				}, 10000);
+			if (Math.floor(timestamp % 300) < 10)
+				$('.triangle2').eq(Math.floor(Math.random() * 400)).animate({
+					left : 100 * Math.floor(Math.random() * 100) - 4000,
+					top : 100 * Math.floor(Math.random() * 100) - 4000
+				}, 10000);
 			rAF(update);
 		}
 
