@@ -38,7 +38,43 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		}
 
 		initialize();
+		$.movingBy = function(dx, dy) {};
+/*
+		$.movingBy = function(dx, dy) {
+			var os1 = $('#bg1').offset();
+			$('#bg1').css({
+				left : os1.left + dx / 4,
+				top : os1.top + dy / 4
+			});
+			var os2 = $('#bg2').offset();
+			$('#bg2').css({
+				left : os2.left + dx / 8,
+				top : os2.top + dy / 8
+			});
+		};
 
+		for (var i = 0; i < 20; i++) {
+			var $div = $(document.createElement('div'));
+			$div.addClass('triangle1');
+			$div.css({
+				left : 100 * Math.floor(Math.random() * 30),
+				top : 100 * Math.floor(Math.random() * 20),
+				'-webkit-transform' : 'rotate(' + Math.floor(Math.random() * 90) + 'deg)'
+			});
+			$('#bg1').append($div);
+		}
+
+		for (var i = 0; i < 20; i++) {
+			var $div = $(document.createElement('div'));
+			$div.addClass('triangle2');
+			$div.css({
+				left : 100 * Math.floor(Math.random() * 30),
+				top : 100 * Math.floor(Math.random() * 20),
+				'-webkit-transform' : 'rotate(' + Math.floor(Math.random() * 90) + 'deg)'
+			});
+			$('#bg2').append($div);
+		}
+*/
 		$.showMap = function(t, fn) {
 			if (t) {
 				fn();
@@ -57,7 +93,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			pan_tool.attach();
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
-			zui.zoomSet(.5, $(document).width() / 2, $(document).height() / 2);
+			zui.zoomSet(.8, $(document).width() / 2, $(document).height() / 2);
 			$('#zui').dblclick(function(evt) {
 				$('#container ').css({
 					"-webkit-transition" : " all 1s ease-in-out"

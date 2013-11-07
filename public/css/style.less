@@ -169,6 +169,7 @@ body {
 	padding-top: 8px;
 	padding-bottom: 4px;
 	color: white;
+	z-index: 1000;
 }
 
 .url .content {
@@ -187,7 +188,7 @@ body {
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                - 20px;
+	width: @step                     - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -238,19 +239,48 @@ body {
 
 #bg1 {
 	position: fixed;
-	top: 0;
-	left: 0;
-	background: url('/img/bg1.png');
+	top: -500px;
+	left: -250px;
 	width: 3000px;
 	height: 2000px;
+	z-index: -150;
+}
+
+@-webkit-keyframes blink {
+0% { border-right-color: #eee; }
+50% { border-right-color: #888; }
+100% { border-right-color: #eee; }
+}
+.triangle1 {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-bottom: 80px solid transparent; /* left arrow slant */
+	border-top: 80px solid transparent; /* right arrow slant */
+	border-right: 120px solid #888; /* bottom, add background color here */
+	font-size: 0;
+	line-height: 0;
+	-webkit-filter: blur(4px);
 }
 
 #bg2 {
 	z-index: -300;
 	position: fixed;
-	background: url('/img/bg2.png');
-	top: 0;
-	left: 0;
+	top: -500px;
+	left: -150px;
 	width: 3000px;
 	height: 2000px;
+}
+
+.triangle2 {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-bottom: 50px solid transparent; /* left arrow slant */
+	border-top: 50px solid transparent; /* right arrow slant */
+	border-right: 80px solid #aaa; /* bottom, add background color here */
+	font-size: 0;
+	line-height: 0;
+	-webkit-filter: blur(8px);
+	z-index: -300;
 }
