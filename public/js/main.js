@@ -81,6 +81,22 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			$('#bg2').append($div);
 		}
 
+		rAF = window.requestAnimationFrame;
+
+		function update(timestamp) {
+			$('.triangle1').eq(Math.floor(Math.random() * 400)).animate({
+				left : 100 * Math.floor(Math.random() * 100) - 4000,
+				top : 100 * Math.floor(Math.random() * 100) - 4000				
+			}, 20000);
+			$('.triangle2').eq(Math.floor(Math.random() * 400)).animate({
+				left : 100 * Math.floor(Math.random() * 100) - 4000,
+				top : 100 * Math.floor(Math.random() * 100) - 4000
+			}, 20000);
+			rAF(update);
+		}
+
+		rAF(update);
+
 		$.showMap = function(t, fn) {
 			if (t) {
 				fn();
