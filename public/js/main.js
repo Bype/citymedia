@@ -10,7 +10,8 @@ requirejs.config({
 		zui : "lib/zui53",
 		fancybox : "lib/jquery.fancybox",
 		"fancybox-media" : "lib/helpers/jquery.fancybox-media",
-		videoBG : "lib/jquery.videoBG"
+		videoBG : "lib/jquery.videoBG",
+		socket : '/socket.io/socket.io'
 
 	},
 	shim : {
@@ -24,8 +25,17 @@ var step = 128;
 var zui;
 var map;
 
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'videoBG'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
 	$(function() {
+
+		var socket = io.connect("ws://qi.bype.org");
+		socket.on('imgid', function(id) {
+			var t = new Date().getTime();
+			$('#' + id).fadeOut(function() {
+				$('#' + id).attr('src', '/img/' + id + '?r=' + t);
+				$('#' + id).fadeIn();
+			});
+		});
 
 		function initialize() {
 			var mapOptions = {
