@@ -126,6 +126,15 @@ body {
 	width:@step;
 	height:@step;
 }
+
+.qrimg {
+	background-color:#78545C;
+}
+
+.qrimg img {
+	width:@step;
+	height:@step;
+}
 .ytimg {
 	width:@step;
 }
@@ -167,14 +176,14 @@ body {
 	color:white;
 	z-index:1000;
 }
-.url .content {
+.url .content,  {
 	background-color:white;
 	width:@step;
 	height:@step;
 	outline:4px solid #CC333F;
 	outline-offset:-4px;
 }
-.url .qrcode {
+.url .qrcode{
 	position:absolute;
 	-webkit-transform-origin:@step/3 @step/3;
 	-webkit-transform:scale(.25);
@@ -183,7 +192,7 @@ body {
 	position:absolute;
 	left:10px;
 	bottom:@step/8;
-	width:@step                          - 20px;
+	width:@step                           - 20px;
 }
 .url .urltext p {
 	font-size:5px;

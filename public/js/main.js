@@ -29,12 +29,24 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 	$(function() {
 
 		var socket = io.connect("ws://qi.bype.org");
-		socket.on('imgid', function(id) {
-			var t = new Date().getTime();
-			$('#' + id).fadeOut(function() {
-				$('#' + id).attr('src', '/img/' + id + '?r=' + t);
-				$('#' + id).fadeIn();
-			});
+		socket.on('imgid', function(data) {
+			console.log(data);
+			if (data.tag) {
+				var $elt = $('#imgup_' + data.tag.slice(1));
+				if ($elt) {
+					var $div = $(document.createElement('div'));
+					$div.addClass("sq qrimg");
+					var $img = $(document.createElement('img'));
+					var t = new Date().getTime();
+					$img.attr('src', 'http://qi.bype.org/img/' + data.id + '?r=' + t);
+					$img.addClass('content');
+					$div.append($img);
+					var spi = parseInt($elt.attr('spi'));
+					$.spiral(spi, $div);
+					$elt.append($div);
+					$elt.attr('spi', spi + 1);
+				}
+			}
 		});
 
 		function initialize() {

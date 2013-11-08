@@ -151,6 +151,39 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					$div.append($eltitem);
 				}, fn);
 			});
+		},
+		imgup : function($elt, idx, info, fn) {
+			var a = [info];
+			insert($elt, idx, a, 'url', function($div, element) {
+				$elt.attr('id', 'imgup_' + info);
+				var $url = $(document.createElement('div'));
+				$url.addClass("content");
+				var $qrdiv = $(document.createElement('div'));
+				$qrdiv.addClass("qrcode");
+				$qrdiv.qrcode({
+					width : step * 2,
+					height : step * 2,
+					text : "http://citymedialab.org/imgupload/" + element
+				});
+				var $urldiv = $(document.createElement('div'));
+				$urldiv.addClass("urltext");
+				$urldiv.html('<p>Scannez le QRCode et envoyer une image à partir de votre mobile</p>');
+				$url.append($qrdiv);
+				$url.append($urldiv);
+				$div.append($url);
+			}, function(spi) {
+				$.getJSON("http://qi.bype.org/tag/" + info, function(data) {
+					insert($elt, spi, data.slice(0,3).reverse(), 'qrimg', function($div, element) {
+						var $img = $(document.createElement('img'));
+						$img.attr('src', 'http://qi.bype.org/img/' + element.filename);
+						$img.addClass('content');
+						$div.append($img);
+					}, function(spi) {
+						$elt.attr('spi', spi);
+						fn(spi)
+					});
+				});
+			});
 		}
 	};
 });
