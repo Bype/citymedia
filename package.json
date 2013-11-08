@@ -13,6 +13,8 @@
 		"ical": "*",
 		"request": "*",
 		"feedparser": "*",
-		"oauth": "*"
+		"oauth": "*",
+		"node-uuid":"*",
+		"socket.io":"*"
 	}
 }
