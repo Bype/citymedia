@@ -5,6 +5,7 @@
 var admin = require('./admin');
 var trans = require('./translator');
 var view = require('./view');
+var qrimg = require('./qrimg');
 
 module.exports = function(app) {
 	app.get('/project/list', admin.projectlist);
@@ -19,4 +20,5 @@ module.exports = function(app) {
 	app.get('/facebook2json', trans.facebook2json);
 	app.get('/view/map', view.map);
 	app.get('/view/data', view.data);
+	app.get('/imgupload/:tag',qrimg.upload);
 };

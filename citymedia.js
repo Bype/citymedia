@@ -27,6 +27,22 @@ app.configure('development', function() {
 
 var routes = require('./routes')(app);
 
-http.createServer(app).listen(app.get('port'), function() {
+var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log("Express server listening on port " + app.get('port'));
 });
+
+var socket = require('socket.io');
+global.io = socket.listen(server, {
+	log : false
+});
+
+global.io.configure(function() {
+	io.set('log level', 0);
+});
+
+io.sockets.on('connection', function(socket) {
+	socket.on('imgid', function(data) {
+		socket.broadcast.emit('imgid', data);
+	});
+	this.setMaxListeners(0);
+}); 
