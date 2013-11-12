@@ -210,7 +210,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 
 					async.each(data.slice(0, 10).reverse(), function(element, done) {
 						var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
-						$.addQRImg($elt, 'http://qi.bype.org/img/' + element.filename,radius+2);
+						$.addQRImg($elt, 'http://qi.bype.org/img/' + element.filename,radius+1);
 						done(spi);
 					}, fn);
 				});

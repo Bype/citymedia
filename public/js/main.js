@@ -35,7 +35,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				var $elt = $('#imgup_' + data.tag.slice(1));
 				if ($elt) {
 					var t = new Date().getTime();
-					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t, parseInt($elt.attr('radius')) + 2);
+					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t, parseInt($elt.attr('radius')) + 1);
 				}
 			}
 		});
