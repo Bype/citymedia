@@ -72,7 +72,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			//aScale = scale;
 			applyParallax();
 		};
-		for (var i = 0; i < 400; i++) {
+		
+		for (var i = 0; i < 300; i++) {
 			var $div = $(document.createElement('div'));
 			$div.addClass('triangle1');
 			$div.css({
@@ -83,7 +84,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			$('#bg1').append($div);
 		}
 
-		for (var i = 0; i < 600; i++) {
+		for (var i = 0; i < 400; i++) {
 			var $div = $(document.createElement('div'));
 			$div.addClass('triangle2');
 			$div.css({
