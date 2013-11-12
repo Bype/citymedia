@@ -3599,6 +3599,7 @@ function namespace(name, callback) {
 			function Pan(zui) {
 				this._start_with = __bind(this._start_with, this);
 				this._pan_with = __bind(this._pan_with, this);
+				this._stop_with = __bind(this._stop_with, this);
 				this.touch_stop = __bind(this.touch_stop, this);
 				this.touch_move = __bind(this.touch_move, this);
 				this.touch_start = __bind(this.touch_start, this);
@@ -3656,6 +3657,7 @@ function namespace(name, callback) {
 			};
 
 			Pan.prototype.stop = function(e) {
+				this._stop_with(e.screenX, e.screenY);
 				$('body').removeClass('panning');
 				$(this.eventDispatcher).unbind('mousemove', this.pan);
 				$(this.eventDispatcher).unbind('mouseup', this.stop);
@@ -3703,7 +3705,13 @@ function namespace(name, callback) {
 				return this.vp.panBy(dX, dY);
 			};
 
+			Pan.prototype._stop_with = function(x, y) {
+			};
+
 			Pan.prototype._start_with = function(x, y) {
+				$('#container ').css({
+					"-webkit-transition" : ""
+				});
 				this.startX = x;
 				return this.startY = y;
 			};

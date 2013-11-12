@@ -94,7 +94,6 @@ define(['content', 'lib/async'], function(c, async) {
 						$.spiral(i, $elt);
 					}
 
-					
 					var $elt = $(document.createElement('div'));
 					var $mapico = $(document.createElement('img'));
 					$elt.addClass('sq');
@@ -104,9 +103,7 @@ define(['content', 'lib/async'], function(c, async) {
 					$.spiral(3, $elt);
 					$mapico.addClass('ico');
 					$mapico.addClass('mapico');
-					
 					$mapico.attr("src", 'img/map.svg');
-					
 
 					$mapico.click(function() {
 						$.showMap(true, function() {
@@ -114,8 +111,17 @@ define(['content', 'lib/async'], function(c, async) {
 						});
 
 					});
-
-					c.render($prj, 4, prj.modules, 0, done);
+					/*
+					 var $elt = $(document.createElement('div'));
+					 $elt.addClass('circle');
+					 $prj.append($elt);
+					 */
+					c.render($prj, 4, prj.modules, 0, function(spi) {
+						var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
+						$prj.attr('radius',radius);
+						$prj.attr('spi',spi);
+						done();
+					});
 
 				}, function(err) {
 					fn();

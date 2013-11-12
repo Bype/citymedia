@@ -173,13 +173,42 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 				$div.append($url);
 			}, function(spi) {
 				$.getJSON("http://qi.bype.org/tag/" + info, function(data) {
-					insert($elt, spi, data.slice(0,3).reverse(), 'qrimg', function($div, element) {
+					$.addQRImg = function($elt, src) {
+						var $div = $(document.createElement('div'));
+						$div.hide();
+						$div.addClass("sq qrimg needupdate");
+						var angle = 0;
+						$div.attr('angle', angle);
+						$div.attr('step', (Math.random() < .5 ? -1 : 1) * (Math.floor(2 + Math.random() * 10) * 0.000628));
+						$div.css({
+							left : 6 * step * Math.cos(angle),
+							top : 6 * step * Math.sin(angle)
+						});
+						$div.bind('updatestep', function(e) {
+							var $this = $(this);
+							var angle = parseFloat($this.attr('angle'));
+							angle += parseFloat($this.attr('step'));
+							if (6.28 < angle)
+								angle = 0;
+							$this.css({
+								left : 5 * step * Math.cos(angle),
+								top : 5 * step * Math.sin(angle)
+							});
+							$this.attr('angle', angle);
+						});
 						var $img = $(document.createElement('img'));
-						$img.attr('src', 'http://qi.bype.org/img/' + element.filename);
+						$img.attr('src', src);
 						$img.addClass('content');
 						$div.append($img);
+						$elt.append($div);
+						setTimeout(function() {
+							$div.fadeIn(100);
+						}, spi * 50);
+					};
+
+					async.each(data.slice(0, 10).reverse(), function(element, done) {
+						$.addQRImg($elt, 'http://qi.bype.org/img/' + element.filename);
 					}, function(spi) {
-						$elt.attr('spi', spi);
 						fn(spi)
 					});
 				});

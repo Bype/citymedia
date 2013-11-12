@@ -34,17 +34,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			if (data.tag) {
 				var $elt = $('#imgup_' + data.tag.slice(1));
 				if ($elt) {
-					var $div = $(document.createElement('div'));
-					$div.addClass("sq qrimg");
-					var $img = $(document.createElement('img'));
 					var t = new Date().getTime();
-					$img.attr('src', 'http://qi.bype.org/img/' + data.id + '?r=' + t);
-					$img.addClass('content');
-					$div.append($img);
-					var spi = parseInt($elt.attr('spi'));
-					$.spiral(spi, $div);
-					$elt.append($div);
-					$elt.attr('spi', spi + 1);
+					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t);
 				}
 			}
 		});
@@ -117,6 +108,10 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					left : 100 * Math.floor(Math.random() * 100) - 4000,
 					top : 100 * Math.floor(Math.random() * 100) - 4000
 				}, 10000);
+
+			$('.needupdate').trigger('updatestep', {
+				timestamp : timestamp
+			});
 			rAF(update);
 		}
 

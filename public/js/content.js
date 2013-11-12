@@ -13,10 +13,10 @@ define(['content/render'], function(render) {
 					next(spi);
 				}
 			} else {
-				fn();
+				fn(spi);
 			}
 		} else {
-			fn();
+			fn(spi);
 		}
 	};
 
