@@ -173,26 +173,28 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 				$div.append($url);
 			}, function(spi) {
 				$.getJSON("http://qi.bype.org/tag/" + info, function(data) {
-					$.addQRImg = function($elt, src) {
+					$.addQRImg = function($elt, src, radius) {
 						var $div = $(document.createElement('div'));
 						$div.hide();
 						$div.addClass("sq qrimg needupdate");
 						var angle = 0;
 						$div.attr('angle', angle);
+						$div.attr('radius', radius);
 						$div.attr('step', (Math.random() < .5 ? -1 : 1) * (Math.floor(2 + Math.random() * 10) * 0.000628));
 						$div.css({
-							left : 6 * step * Math.cos(angle),
-							top : 6 * step * Math.sin(angle)
+							left : radius * step * Math.cos(angle),
+							top : radius * step * Math.sin(angle)
 						});
 						$div.bind('updatestep', function(e) {
 							var $this = $(this);
 							var angle = parseFloat($this.attr('angle'));
+							var radius = parseInt($this.attr('radius'));
 							angle += parseFloat($this.attr('step'));
 							if (6.28 < angle)
 								angle = 0;
 							$this.css({
-								left : 5 * step * Math.cos(angle),
-								top : 5 * step * Math.sin(angle)
+								left : radius * step * Math.cos(angle),
+								top : radius * step * Math.sin(angle)
 							});
 							$this.attr('angle', angle);
 						});
@@ -203,14 +205,14 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 						$elt.append($div);
 						setTimeout(function() {
 							$div.fadeIn(100);
-						}, spi * 50);
+						}, 1000);
 					};
 
 					async.each(data.slice(0, 10).reverse(), function(element, done) {
-						$.addQRImg($elt, 'http://qi.bype.org/img/' + element.filename);
-					}, function(spi) {
-						fn(spi)
-					});
+						var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
+						$.addQRImg($elt, 'http://qi.bype.org/img/' + element.filename,radius+2);
+						done(spi);
+					}, fn);
 				});
 			});
 		}
