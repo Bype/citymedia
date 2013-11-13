@@ -204,7 +204,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                                   - 20px;
+	width: @step                                         - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -249,11 +249,21 @@ outline-offset:-4px;
 	line-height: 80%;
 }
 .qrss {
-	position:absolute;
+	position: absolute;
 	width: @step/20;
 	height: @step/20;
 	-webkit-transform: scale(.05);
-	top:@step/20;
-	right:@step/5;
+	top: @step/20;
+	right: @step/5;
 }
-
+.qrssmaxi {
+	position: absolute;
+	-webkit-transform: scale(.5);
+	z-index: 1000;
+	padding: 64px 64px 64px 64px;
+	background-color: #eee;
+	width: 256px;
+	height: 256px;
+	top: -128px;
+	right: -128px;
+}

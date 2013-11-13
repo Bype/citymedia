@@ -16,11 +16,21 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					$qrdiv.qrcode({
 						width : step * 2,
 						height : step * 2,
-						foreground : "#000000",
-						background : "#FCB14B",
+						foreground : "#834d04",
+						background : "#eee",
 						text : element.link
 					});
 					$qrdiv.addClass("qrss");
+					$qrdiv.css({
+						"-webkit-transition" : " all 1s ease-in-out"
+					});
+					$qrdiv.click(function() {
+						var $this =$(this); 
+						$this.removeClass("qrss").addClass("qrssmaxi");
+						setTimeout(function() {
+							$this.removeClass("qrssmaxi").addClass("qrss");
+						}, 5000);
+					});
 					$eltitem.append($qrdiv);
 					$div.append($eltitem);
 
