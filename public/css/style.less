@@ -9,10 +9,8 @@ html {
 }
 body {
 	font-family: Geogrotesque;
-	background: -webkit-radial-gradient(rgba(250, 250, 250, 0.5),
-	rgba(230, 230, 230, 0.5) 35%,
-	rgba(128, 128, 128, 0.7));
 	z-index: -1000;
+	background-image: url('/img/bg.jpg');
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -52,7 +50,7 @@ body {
 	border: dotted 4px grey;
 	width: 10 *@step;
 	height: 10 *@step;
-	top: -5*@step;
+	top: -5 *@step;
 	left: -5 *@step;
 	border-radius: 5 *@step;
 	z-index: -10;
@@ -206,7 +204,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                                 - 20px;
+	width: @step                                   - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -250,41 +248,12 @@ outline-offset:-4px;
 	margin-top: 4px;
 	line-height: 80%;
 }
-#bg1 {
-	position: fixed;
-	top: -500px;
-	left: -250px;
-	z-index: -150;
+.qrss {
+	position:absolute;
+	width: @step/20;
+	height: @step/20;
+	-webkit-transform: scale(.05);
+	top:@step/20;
+	right:@step/5;
 }
-@-webkit-keyframes blink {
-0% { border-right-color: #eee; }
-50% { border-right-color: #888; }
-100% { border-right-color: #eee; }
-}
-.triangle1 {
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-bottom: 40px solid transparent; /* left arrow slant */
-	border-top: 40px solid transparent; /* right arrow slant */
-	border-right: 60px solid #acc; /* bottom, add background color here */
-	font-size: 0;
-	line-height: 0;
-}
-#bg2 {
-	z-index: -300;
-	position: fixed;
-	top: -500px;
-	left: -150px;
-}
-.triangle2 {
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-bottom: 20px solid transparent; /* left arrow slant */
-	border-top: 20px solid transparent; /* right arrow slant */
-	border-right: 30px solid #cca; /* bottom, add background color here */
-	font-size: 0;
-	line-height: 0;
-	z-index: -300;
-}
+

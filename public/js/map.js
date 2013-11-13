@@ -9,7 +9,7 @@ define(['content', 'lib/async'], function(c, async) {
 		show : function(fn) {
 			var $container = $('#container');
 			var curPos = 0;
-			var prjPos = [[-8, -8], [8, -4], [6, 8], [-6, 6], [-16, 16], [-16, -16], [20, -16], [20, 32],];
+			var prjPos = [[-8, -8], [8, -4], [6, 8], [-6, 6], [-16, 16], [-16, -16], [20, -16], [20, 32]];
 
 			$.get('/view/data', function(lst) {
 				async.each(lst, function(prj, done) {
@@ -52,23 +52,6 @@ define(['content', 'lib/async'], function(c, async) {
 					$tit.css({
 						left : 0,
 						top : -1.2 * step
-					});
-					$tit.click(function(evt) {
-						$('#container ').css({
-							"-webkit-transition" : " all 1.5s ease-in-out"
-						});
-						if (1 <= zui.getPanAndScale()[2]) {
-
-							zui.panBy(Math.floor($(document).width() / 3) - (step + $(this).parent().offset().left / 2), Math.floor($(document).height() / 3) - (step + $(this).parent().offset().top / 2));
-							zui.zoomSet(2, $(this).parent().offset().left, $(this).parent().offset().top);
-						} else {
-							zui.reset();
-						}
-						setTimeout(function() {
-							$('#container ').css({
-								"-webkit-transition" : ""
-							});
-						}, 1500);
 					});
 
 					var $sub = $(document.createElement('div'));

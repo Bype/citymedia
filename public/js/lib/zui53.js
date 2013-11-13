@@ -3701,7 +3701,6 @@ function namespace(name, callback) {
 				dY = (y - this.startY);
 				this.startX = x;
 				this.startY = y;
-				$.movingBy(dX, dY);
 				return this.vp.panBy(dX, dY);
 			};
 
@@ -4020,7 +4019,6 @@ function namespace(name, callback) {
 			};
 
 			CSS.prototype.apply = function(panX, panY, scale) {
-				$.scaleBy(scale);
 				return $(this.node).transform({
 					matrix : [scale, 0.0, 0.0, scale, panX, panY]
 				});
