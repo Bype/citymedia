@@ -25,6 +25,12 @@ app.configure('development', function() {
 	app.use(express.errorHandler());
 });
 
+global.auth = express.basicAuth(function(user, pass, callback) {
+	var result = (user === 'admin' && pass === 'dummy');
+	callback(null/* error */, result);
+});
+
+
 var routes = require('./routes')(app);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
