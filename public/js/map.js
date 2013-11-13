@@ -9,7 +9,7 @@ define(['content', 'lib/async'], function(c, async) {
 		show : function(fn) {
 			var $container = $('#container');
 			var curPos = 0;
-			var prjPos = [[-8, -8], [8, -4], [6, 8], [-6, 6], [-16, 16], [-16, -16], [20, -16], [20, 32]];
+			var prjPos = [[-8, -8], [8, -4], [6, 8], [-6, 6], [-16, 16], [-16, -16], [20, -16], [20, 16]];
 
 			$.get('/view/data', function(lst) {
 				async.each(lst, function(prj, done) {
