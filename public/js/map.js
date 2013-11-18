@@ -2,16 +2,16 @@ define(['content', 'lib/async'], function(c, async) {
 
 	var nbcol = Math.floor($(document).width() / step);
 	var nbrow = Math.floor($(document).height() / step);
-	var leftOffset = nbcol / 2;
-	var topOffset = nbrow / 2;
+	var leftOffset = -nbcol / 2;
+	var topOffset = nbrow / 4;
 
 	return {
 		show : function(fn) {
 			var $container = $('#container');
 			var curPos = 0;
-			var prjPos = [[-8, -8], [8, -4], [6, 8], [-6, 6], [-16, 16], [-16, -16], [20, -16], [20, 16]];
 
 			$.get('/view/data', function(lst) {
+				$container.attr('nbprj', lst);
 				async.each(lst, function(prj, done) {
 
 					var mappos = new google.maps.LatLng(prj.lat, prj.lon);
@@ -24,9 +24,11 @@ define(['content', 'lib/async'], function(c, async) {
 					$container.append($prj);
 					$prj.attr('id', prj.prjname);
 					$prj.addClass('prj');
+					$prj.attr('curpos', curPos);
+
 					$prj.css({
-						left : (leftOffset + prjPos[curPos][0]) * step,
-						top : (topOffset + prjPos[curPos][1]) * step
+						left : (leftOffset + curPos*6) * step,
+						top : topOffset * step
 					});
 
 					google.maps.event.addListener(marker, 'click', function() {
@@ -100,9 +102,14 @@ define(['content', 'lib/async'], function(c, async) {
 					 $prj.append($elt);
 					 */
 					c.render($prj, 4, prj.modules, 0, function(spi) {
-						var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
-						$prj.attr('radius',radius);
-						$prj.attr('spi',spi);
+						if (isNaN(spi)) {
+							$prj.attr('radius', 1);
+							$prj.attr('spi', 3);
+						} else {
+							var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
+							$prj.attr('radius', radius);
+							$prj.attr('spi', spi);
+						}
 						done();
 					});
 

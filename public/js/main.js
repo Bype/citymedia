@@ -82,7 +82,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			pan_tool.attach();
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
-			zui.zoomSet(.8, $(document).width() / 2, $(document).height() / 2);
+
 			$('#zui').dblclick(function(evt) {
 				$('#container ').css({
 					"-webkit-transition" : " all 1s ease-in-out"
@@ -95,7 +95,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				}, 1000);
 			});
 			setInterval(function() {
-				if (1 < zui.getPanAndScale()[2]) {
+				if (.7 < zui.getPanAndScale()[2]) {
 					if (!$('body').hasClass('panning')) {
 						$('.content').fadeIn();
 					}
@@ -106,6 +106,24 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				}
 			}, 500);
 			m.show(function() {
+
+				var nbcol = Math.floor($(document).width() / step);
+				var nbrow = Math.floor($(document).height() / step);
+				var leftOffset = -nbcol / 2;
+				var topOffset = nbrow / 4;
+				var sign = -1;
+				$('.prj').each(function(idx, prj) {
+					var $prj = $(prj);
+					var radius = parseInt($prj.attr('radius'))+1;
+					leftOffset += radius;
+					sign *= -1;
+					$prj.animate({
+						left : leftOffset * step,
+						top : (topOffset + radius * sign) * step
+					});
+
+				});
+
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {
 					$(zui.viewport).trigger(e);
 					return true;
