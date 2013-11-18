@@ -83,17 +83,6 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
 
-			$('#zui').dblclick(function(evt) {
-				$('#container ').css({
-					"-webkit-transition" : " all 1s ease-in-out"
-				});
-				zui.zoomSet(.5, $(document).width() / 2, $(document).height() / 2);
-				setTimeout(function() {
-					$('#container ').css({
-						"-webkit-transition" : ""
-					});
-				}, 1000);
-			});
 			setInterval(function() {
 				if (.7 < zui.getPanAndScale()[2]) {
 					if (!$('body').hasClass('panning')) {
