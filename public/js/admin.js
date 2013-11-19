@@ -41,7 +41,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 					$('#modinfo').attr('placeholder', 'identifiant du canal');
 					break;
 				case 'youtube':
-					$('#modinfo').attr('placeholder', 'identifiant de la playlist');
+					$('#modinfo').attr('placeholder', 'identifiant de la playlist (après list=)');
 					break;
 				case 'rss':
 					$('#modinfo').attr('placeholder', 'http://<url du flux rss>');
@@ -56,7 +56,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 					$('#modinfo').attr('placeholder', 'https://mapsengine.google.com/map/edit?mid=<identifiant de la carte>');
 					break;
 				case 'tweeter':
-					$('#modinfo').attr('placeholder', 'identifiant teeter');
+					$('#modinfo').attr('placeholder', 'identifiant twitter (sans @)');
 					break;
 				case 'hashtag':
 					$('#modinfo').attr('placeholder', 'hashtag');
@@ -110,10 +110,24 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 			currentid = id;
 		};
 
+		$.prjchange = function(id) {
+			$.get('http://citymedia/project/' + id + '/info', function(data) {
+				$('#prjtitle').val(data.prjtitle);
+				$('#appsubtitle').val(data.appsubtitle);
+				$('#geolat').val(data.lat);
+				$('#geolon').val(data.lon);
+				$('#mongoid').val(data._id);
+				$('#address').val("");
+				$('#projectbox').modal('show');
+			});
+		};
+
 		$('#projectform').ajaxForm(function(data) {
-			showPrj(data[0]);
+			if (data.update)
+				location.reload();
 			$('#projectbox').modal('hide');
 			$('#projectform')[0].reset();
+			showPrj(data[0]);
 		});
 
 		$('#moduleform').ajaxForm({
@@ -142,7 +156,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		}
 
 		function showPrj(data) {
-			var line = Mustache.render("<tr id='{{_id}}'><td onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'>{{prjtitle}}</td><td>{{appsubtitle}}</td><td><i class='icon-wrench' onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'></i><i class='icon-remove'onclick='$.prjdel(\"{{_id}}\")'></i></td>", data);
+			var line = Mustache.render("<tr id='{{_id}}'><td onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'>{{prjtitle}}</td><td>{{appsubtitle}}</td><td><i class='icon-wrench' onclick='$.prjedit(\"{{_id}}\",\"{{prjtitle}}\")'></i><i class='icon-remove' onclick='$.prjdel(\"{{_id}}\")'></i><i class='icon-edit' onclick='$.prjchange(\"{{_id}}\")'></i></td>", data);
 			$('#prjlist').append(line);
 		}
 
@@ -155,3 +169,4 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		});
 	});
 });
+

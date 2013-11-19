@@ -1,5 +1,16 @@
 define([], function() {
+	var marker;
+
+	var setPos = function(pos) {
+		$('#geolat').val(pos.lat());
+		$('#geolon').val(pos.lng());
+		marker.setPosition(pos);
+		map.panTo(pos);
+		console.log(pos);
+	};
+
 	return {
+		setPos : setPos,
 		setup : function() {
 			var mapOptions = {
 				center : new google.maps.LatLng(43.5296189, 5.4438398),
@@ -9,16 +20,6 @@ define([], function() {
 
 			$('#geofind').click(function() {
 
-				function setPos(pos) {
-					$('#geolat').val(pos.lat());
-					$('#geolon').val(pos.lng());
-					marker.setPosition(pos);
-					map.panTo(pos);
-					console.log(pos);
-				}
-
-				var marker;
-				
 				if (!map) {
 					map = new google.maps.Map(document.getElementById("mapcanvas"), mapOptions);
 					google.maps.event.addListener(map, 'click', function(e) {
@@ -37,8 +38,9 @@ define([], function() {
 								map : map,
 								position : results[0].geometry.location
 							});
-						};
-						setPos(results[0].geometry.location);
+						} else {
+							setPos(results[0].geometry.location);
+						}
 					} else {
 						alert('Geocode was not successful for the following reason: ' + status);
 					}

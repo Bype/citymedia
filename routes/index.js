@@ -13,6 +13,7 @@ module.exports = function(app) {
 	app.post('/project/:id/add', auth, admin.moduleadd);
 	app.get('/project/:id/del/:idx', auth, admin.moduledel);
 	app.get('/project/:id/list', auth, admin.modulelist);
+	app.get('/project/:id/info', auth, admin.projectinfo);
 	app.get('/project/del/:id', auth, admin.projectdel);
 	app.get('/gcal2json', trans.gcal2json);
 	app.get('/rss2json', trans.rss2json);
