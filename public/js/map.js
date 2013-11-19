@@ -11,7 +11,7 @@ define(['content', 'lib/async'], function(c, async) {
 			var curPos = 0;
 
 			$.get('/view/data', function(lst) {
-				$container.attr('nbprj', lst);
+				$container.attr('nbprj', lst.length);
 				async.each(lst, function(prj, done) {
 
 					var mappos = new google.maps.LatLng(prj.lat, prj.lon);
