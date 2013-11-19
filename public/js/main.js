@@ -39,7 +39,6 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			});
 			curBG = (curBG + 1) % 6;
 		}, 30000);
-		
 
 		var socket = io.connect("ws://qi.bype.org");
 		socket.on('imgid', function(data) {
@@ -95,6 +94,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			pan_tool.attach();
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
+			zui.addLimits([.3, 4]);
 
 			setInterval(function() {
 				if (.7 < zui.getPanAndScale()[2]) {
@@ -108,6 +108,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 				}
 			}, 500);
+
 			m.show(function() {
 
 				var nbcol = Math.floor($(document).width() / step);
@@ -129,8 +130,26 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {
 					$(zui.viewport).trigger(e);
-					return true;
 				});
+				$('.sq').dblclick(function(e) {
+					$('#container ').css({
+						"-webkit-transition" : " all .5s ease-in-out"
+					});
+
+					var pos = $(this).offset();
+					zui.panBy(($(window).width() / 2) - (pos.left + step / 2), ($(window).height() / 2) - (pos.top + step / 2));
+					setTimeout(function() {
+						zui.zoomSet(2, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
+						setTimeout(function() {
+							$('#container ').css({
+								"-webkit-transition" : ""
+							});
+						}, 500);
+					}, 500);
+					e.preventDefault();
+					return false;
+				});
+
 			});
 		});
 	});
