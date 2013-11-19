@@ -111,7 +111,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		};
 
 		$.prjchange = function(id) {
-			$.get('http://citymedia/project/' + id + '/info', function(data) {
+			$.get('/project/' + id + '/info', function(data) {
 				$('#prjtitle').val(data.prjtitle);
 				$('#appsubtitle').val(data.appsubtitle);
 				$('#geolat').val(data.lat);
