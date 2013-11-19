@@ -118,6 +118,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 				$('#geolon').val(data.lon);
 				$('#mongoid').val(data._id);
 				$('#address').val("");
+				$('#address').attr('placeholder', 'Ne pas remplir si inchangé');
 				$('#projectbox').modal('show');
 			});
 		};
