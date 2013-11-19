@@ -40,10 +40,6 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			curBG = (curBG + 1) % 6;
 		}, 30000);
 		
-		setInterval(function() {
-			if ((zui.getPanAndScale()[2] < .7) && (Math.random() < .5))
-				$('.sq').eq(Math.floor(Math.random() * $('.sq').length)).addClass('animated tada');
-		}, 1000);
 
 		var socket = io.connect("ws://qi.bype.org");
 		socket.on('imgid', function(data) {
