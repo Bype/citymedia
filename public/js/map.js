@@ -17,7 +17,8 @@ define(['content', 'lib/async'], function(c, async) {
 					var mappos = new google.maps.LatLng(prj.lat, prj.lon);
 					marker = new google.maps.Marker({
 						map : map,
-						position : mappos
+						position : mappos,
+						prjname : prj.prjname
 					});
 
 					var $prj = $(document.createElement('div'));
@@ -27,21 +28,26 @@ define(['content', 'lib/async'], function(c, async) {
 					$prj.attr('curpos', curPos);
 
 					$prj.css({
-						left : (leftOffset + curPos*6) * step,
+						left : (leftOffset + curPos * 6) * step,
 						top : topOffset * step
 					});
 
 					google.maps.event.addListener(marker, 'click', function() {
-						$.showMap(false, function() {
+						$.showMap(false, "", function() {
 							$('#container ').css({
-								"-webkit-transition" : " all 1.5s ease-in-out"
+								"-webkit-transition" : " all .5s ease-in-out"
 							});
-							zui.reset();
+							console.log(marker);
+							var pos = $('#map' + marker.prjname).offset();
+							zui.panBy(($(window).width() / 2) - (pos.left + step / 2), ($(window).height() / 2) - (pos.top + step / 2));
 							setTimeout(function() {
-								$('#container ').css({
-									"-webkit-transition" : ""
-								});
-							}, 1500);
+								zui.zoomSet(2, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
+								setTimeout(function() {
+									$('#container ').css({
+										"-webkit-transition" : ""
+									});
+								}, 500);
+							}, 500);
 						});
 					});
 
@@ -86,12 +92,13 @@ define(['content', 'lib/async'], function(c, async) {
 					$elt.append($mapico);
 					$prj.append($elt);
 					$.spiral(3, $elt);
+					$mapico.attr('id', 'map' + prj.prjname);
 					$mapico.addClass('ico');
 					$mapico.addClass('mapico');
 					$mapico.attr("src", 'img/map.svg');
 
 					$mapico.click(function() {
-						$.showMap(true, function() {
+						$.showMap(true, prj.prjtitle, function() {
 							map.setCenter(mappos);
 						});
 

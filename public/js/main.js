@@ -26,6 +26,52 @@ var zui;
 var map;
 
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
+
+	moment.lang('fr', {
+		months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
+		monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
+		weekdays : "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
+		weekdaysShort : "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
+		weekdaysMin : "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
+		longDateFormat : {
+			LT : "HH:mm",
+			L : "DD/MM/YYYY",
+			LL : "D MMMM YYYY",
+			LLL : "D MMMM YYYY LT",
+			LLLL : "dddd D MMMM YYYY LT"
+		},
+		calendar : {
+			sameDay : "[Aujourd'hui à] LT",
+			nextDay : '[Demain à] LT',
+			nextWeek : 'dddd [à] LT',
+			lastDay : '[Hier à] LT',
+			lastWeek : 'dddd [dernier à] LT',
+			sameElse : 'L'
+		},
+		relativeTime : {
+			future : "dans %s",
+			past : "il y a %s",
+			s : "quelques secondes",
+			m : "une minute",
+			mm : "%d minutes",
+			h : "une heure",
+			hh : "%d heures",
+			d : "un jour",
+			dd : "%d jours",
+			M : "un mois",
+			MM : "%d mois",
+			y : "un an",
+			yy : "%d ans"
+		},
+		ordinal : function(number) {
+			return number + (number === 1 ? 'er' : '');
+		},
+		week : {
+			dow : 1, // Monday is the first day of the week.
+			doy : 4 // The week that contains Jan 4th is the first week of the year.
+		}
+	});
+
 	$(function() {
 
 		var curBG = 0;
@@ -47,7 +93,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				var $elt = $('#imgup_' + data.tag.slice(1));
 				if ($elt) {
 					var t = new Date().getTime();
-					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t, parseInt($elt.attr('radius')) + 1);
+					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t);
 				}
 			}
 		});
@@ -63,26 +109,26 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		}
 
 		initialize();
+		/*
+		 rAF = window.requestAnimationFrame;
 
-		rAF = window.requestAnimationFrame;
+		 function update(timestamp) {
 
-		function update(timestamp) {
-
-			$('.needupdate').trigger('updatestep', {
-				timestamp : timestamp
-			});
-			rAF(update);
-		}
-
-		rAF(update);
-
-		$.showMap = function(t, fn) {
+		 $('.needupdate').trigger('updatestep', {
+		 timestamp : timestamp
+		 });
+		 rAF(update);
+		 }
+		 */
+		$.showMap = function(t, title, fn) {
 			if (t) {
 				fn();
+				$('#liftbut').text(title);
 				$('html, body').delay(200).animate({
 					scrollTop : $("#liftbut").offset().top
 				}, 1000, "swing");
 			} else {
+				$('#liftbut').text("^^^^^^^^^^^^^^^^^^^^");
 				$('html, body').animate({
 					scrollTop : 0
 				}, 1000, "swing", fn);
