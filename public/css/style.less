@@ -3,12 +3,16 @@
 @import 'help.css';
 @import 'jquery.fancybox.css';
 @import 'fonts/fonts.css';
+/*
+ @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic");
+ */
 @step:128px;
 html {
 	height: 100%;
 }
 body {
-	font-family: Geogrotesque;
+	font-family: "Geogrotesque";
+	font-weight: lighter;
 	z-index: -1000;
 	background-image: url('/img/bg.jpg');
 	margin: 0;
@@ -22,7 +26,21 @@ body {
 	-webkit-font-smoothing: none;
 	-webkit-backface-visibility: visible;
 	-webkit-transform: translateZ(0);
+	word-spacing: 1ex;
 }
+
+#bg {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	background-image: url('/img/bg/0.jpg');
+	z-index: -500;
+	top:0;
+	left:0;
+	position: fixed;
+}
+
 #map-canvas {
 	position: fixed;
 	height: 100%;
@@ -65,7 +83,7 @@ body {
 	position: absolute;
 	font-weight: normal;
 	font-size: 24px;
-	background-color: black;
+	background: -webkit-linear-gradient(left, #dd037b 0%,#9d2121 100%);
 	color: white;
 	z-index: 100;
 	padding-top: @step/16;
@@ -91,7 +109,7 @@ body {
 	padding-left: @step/5;
 	padding-right: @step/5;
 	padding-bottom: @step/5;
-	font-weight: lighter;
+	font-weight: 300;
 }
 .c0 {
 	background-color: #606060;
@@ -204,7 +222,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                                         - 20px;
+	width: @step                                                - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -216,14 +234,15 @@ outline-offset:-4px;
 	color: white;
 	padding: @step/8 @step/8 @step/8 @step/8;
 	font-size: 9px;
-	font-weight: bold;
+	font-weight: 300;
+	word-wrap: break-word;
 }
 .tweeter p em {
 	font-style: italic;
-	font-weight: lighter;
+	font-weight: 200;
 }
 .tweeter p b {
-	font-weight: lighter;
+	font-weight: 200;
 	font-size: 8px;
 }
 .tweeter p br {

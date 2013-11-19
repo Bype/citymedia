@@ -28,6 +28,23 @@ var map;
 require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
 	$(function() {
 
+		var curBG = 0;
+
+		setInterval(function() {
+			$('#bg').fadeOut(5000, function() {
+				$('#bg').css({
+					"background-image" : "url('/img/bg/" + curBG + ".jpg')"
+				});
+				$('#bg').fadeIn(5000);
+			});
+			curBG = (curBG + 1) % 6;
+		}, 30000);
+		
+		setInterval(function() {
+			if ((zui.getPanAndScale()[2] < .7) && (Math.random() < .5))
+				$('.sq').eq(Math.floor(Math.random() * $('.sq').length)).addClass('animated tada');
+		}, 1000);
+
 		var socket = io.connect("ws://qi.bype.org");
 		socket.on('imgid', function(data) {
 			console.log(data);
@@ -92,6 +109,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				} else {
 					$('.content').fadeOut();
 					//		$('.ico').fadeIn();
+
 				}
 			}, 500);
 			m.show(function() {
@@ -103,7 +121,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				var sign = -1;
 				$('.prj').each(function(idx, prj) {
 					var $prj = $(prj);
-					var radius = parseInt($prj.attr('radius'))+1;
+					var radius = parseInt($prj.attr('radius')) + 1;
 					leftOffset += radius;
 					sign *= -1;
 					$prj.animate({
