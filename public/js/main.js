@@ -124,12 +124,12 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			if (t) {
 				fn();
 				$('#liftbut').text(title);
-				$('html, body').delay(200).animate({
+				$('body').delay(200).animate({
 					scrollTop : $("#liftbut").offset().top
 				}, 1000, "swing");
 			} else {
 				$('#liftbut').text("^^^^^^^^^^^^^^^^^^^^");
-				$('html, body').animate({
+				$('body').animate({
 					scrollTop : 0
 				}, 1000, "swing", fn);
 			}
