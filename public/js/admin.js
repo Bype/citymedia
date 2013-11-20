@@ -113,6 +113,7 @@ require(['jquery', 'underscore', 'mustache', 'util', 'lib/jquery.form', 'bootstr
 		$.prjchange = function(id) {
 			$.get('/project/' + id + '/info', function(data) {
 				$('#prjtitle').val(data.prjtitle);
+				$.changeTitle();
 				$('#appsubtitle').val(data.appsubtitle);
 				$('#geolat').val(data.lat);
 				$('#geolon').val(data.lon);
