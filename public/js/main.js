@@ -106,6 +106,16 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			};
 
 			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+			var vasaLayer = new google.maps.KmlLayer({
+				url : 'http://www.perspective-s.org/Data/Sites/citymedia/kmz/FondationVasarely.kmz'
+			});
+			vasaLayer.setMap(map);
+			var snLayer = new google.maps.KmlLayer({
+				url : 'http://www.perspective-s.org/Data/Sites/citymedia/kmz/SecondeNature.kmz'
+			});
+			snLayer.setMap(map);
+
 		}
 
 		initialize();
