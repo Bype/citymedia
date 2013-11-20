@@ -117,7 +117,7 @@ define(['content', 'lib/async'], function(c, async) {
 							$prj.attr('radius', 1);
 							$prj.attr('spi', 3);
 						} else {
-							var radius = Math.floor((Math.sqrt(spi + 1) - 1) / 2) + 1;
+							var radius = Math.floor((Math.sqrt(spi + 4) - 1) / 2) + 1;
 							$prj.attr('radius', radius);
 							$prj.attr('spi', spi);
 						}
