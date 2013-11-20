@@ -35,7 +35,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 				};
 
 				$.getJSON("http://qi.bype.org/tag/" + info, function(data) {
-					insert($elt, idx, data.slice(0, 6), 'qrimg', function($div, element) {
+					insert($elt, idx, data.slice(0, 16), 'qrimg', function($div, element) {
 						var $img = $(document.createElement('img'));
 						$img.attr('src', 'http://qi.bype.org/img/' + element.filename);
 						$img.addClass('content');
