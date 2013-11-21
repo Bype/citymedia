@@ -4,14 +4,14 @@
 @import 'jquery.fancybox.css';
 @import 'fonts/fonts.css';
 
-@import url("http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700");
+@import url("http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700");
 
 @step:128px;
 html {
 	height: 100%;
 }
 body {
-	font-family: 'Roboto Condensed', sans-serif;
+	font-family: 'Dosis', sans-serif;
 	font-weight: lighter;
 	z-index: -1000;
 	background-image: url('/img/bg.jpg');
@@ -26,8 +26,7 @@ body {
 	-webkit-font-smoothing: none;
 	-webkit-backface-visibility: visible;
 	-webkit-transform: translateZ(0);
-	word-spacing: 1ex;
-	 cursor: none;
+	/* cursor: none;*/
 }
 
 #bg {
@@ -133,6 +132,11 @@ body {
 .rss {
 	background-color: #FCB14B;
 }
+
+.walkpath{
+  background-color: #398791;
+}
+
 .flickr .content {
 	/*
 	 outline: 2px solid #EDC951;
@@ -223,7 +227,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                                                - 20px;
+	width: @step - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -286,4 +290,21 @@ outline-offset:-4px;
 	height: 256px;
 	top: -128px;
 	right: -128px;
+}
+
+.walkpath h1{
+  font-weight: bold;
+  font-size: 10px;
+  color: white;
+  margin-top: @step/16;
+  margin-left: @step/8;
+  line-height: 80%;
+}
+
+.walkpath p{
+  color: white;
+  padding: @step/16 @step/8 @step/8 @step/8;
+  font-size: 9px;
+  font-weight: 300;
+  word-wrap: break-word;
 }

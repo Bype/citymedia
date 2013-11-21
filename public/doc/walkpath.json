@@ -1,0 +1,21 @@
+[
+	{
+		"name": "Seconde Nature",
+		"desc": "Il s&#39;agit d&#39;un lieu mais &#233;galement d&#39;un festival annuel, tous deux d&#233;di&#233;s aux arts multim&#233;dia et aux musiques &#233;lectroniques. Expositions, performances, projections, rencontres et concerts sont pr&#233;sent&#233;s tout au long de l’ann&#233;e.",
+		"tags": "Festival, Musique, Art num&#233;rique",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/SecondeNature.kmz",
+		"imglnk": "./vignettes/secondenature.jpg"
+	}, {
+		"name": "Fondation Vasarely",
+		"desc": "La Fondation Vasarely fut &#233;rig&#233;e en 1976 par Victor Vasarely, artiste contemporain franco-hongrois. En cr&#233;ant cette fondation, Victor Vasarely a voulu d&#233;montrer qu&#39;il &#233;tait possible d&#39;int&#233;grer l&#39;art &#224; l&#39;architecture.",
+		"tags": "Art Optique, Vasarely, Aix en Provence",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/FondationVasarely.kmz",
+		"imglnk": "./vignettes/fondationvasarely.jpg"
+	}, {
+		"name": "Mus&#233;e Granet",
+		"desc": "Au programme de Mus&#233;e Granet, les spectateurs peuvent d&#233;couvrir de nombreuses expositions. Ces artistes ont d&#233;j&#224; pr&#233;sent&#233; leurs cr&#233;ations &#224; Mus&#233;e Granet : Fran&#231;ois Ragot, Paul C&#233;zanne, Jean Planque, Frieder Burda.",
+		"tags": "Mus&#233;e Granet, centre ville, Aix en Provence",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/MuseeGranet.kmz",
+		"imglnk": "./vignettes/museegranet.jpg"
+	}
+]
