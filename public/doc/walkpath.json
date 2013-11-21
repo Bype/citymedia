@@ -17,5 +17,23 @@
 		"tags": "Mus&#233;e Granet, centre ville, Aix en Provence",
 		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/MuseeGranet.kmz",
 		"imglnk": "./vignettes/museegranet.jpg"
+	}, {
+		"name": "Cit&#233; du livre",
+		"desc": "Pr&#233;sentation de la biblioth&#232;que M&#233;janes, plan interactif, patrimoine et fonds particuliers, acc&#232;s au catalogue.",
+		"tags": "Cit&#233; du livre, centre ville, Aix en Provence",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/citedulivre.kmz",
+		"imglnk": "./vignettes/citedulivre.jpg"
+	}, {
+		"name": "Grand Th&#233;&#226;tre de Provence",
+		"desc": "Le Grand Th&#233;&#226;tre de Provence est une salle de spectacle situ&#233;e &#224; Aix-en-Provence dans le nouveau quartier &quot;Sextius Mirabeau&quot;",
+		"tags": "Grand Th&#233;&#226;tre de Provence, centre ville, Aix en Provence",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/GrandTheatredeProvence.kmz",
+		"imglnk": "./vignettes/grandtheatre.jpg"
+	}, {
+		"name": "Le Pavillon Noir",
+		"desc": "Le Pavillon Noir est une salle de spectacle d&#39;Aix-en-Provence, con&#231;ue par l&#39;architecte Rudy Ricciotti en 1999. Elle a &#233;t&#233; inaugur&#233;e en octobre 2006.",
+		"tags": "Le Pavillon Noir, centre ville, Aix en Provence",
+		"kmllink": "http://www.perspective-s.org/Data/Sites/citymedia/kmz/pavillonnoir.kmz",
+		"imglnk": "./vignettes/pavillonnoir.jpg"
 	}
 ]
