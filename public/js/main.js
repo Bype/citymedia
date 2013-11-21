@@ -118,6 +118,17 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 		}
 
+
+		$('body').keypress(function(e) {
+			if (e.charCode == 43) {
+				zui.zoomBy(.1, $(window).width() / 2, $(window).height() / 2);
+			}
+			if (e.charCode == 45) {
+				zui.zoomBy(-.1, $(window).width() / 2, $(window).height() / 2);
+			}
+
+		});
+
 		initialize();
 		/*
 		 rAF = window.requestAnimationFrame;
