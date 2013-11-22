@@ -14,9 +14,6 @@ app.configure(function() {
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-	app.use(helmet.csp());
-	app.use(helmet.xframe());
-	app.use(helmet.contentTypeOptions());
 	app.use(app.router);
 	app.use(require('less-middleware')({
 		src : __dirname + '/public'
