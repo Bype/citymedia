@@ -15,6 +15,7 @@
 		"feedparser": "*",
 		"oauth": "*",
 		"node-uuid":"*",
-		"socket.io":"*"
+		"socket.io":"*",
+		"helmet":"*"
 	}
 }

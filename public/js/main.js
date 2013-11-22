@@ -73,7 +73,6 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 	});
 
 	$(function() {
-
 		var curBG = 0;
 
 		setInterval(function() {
