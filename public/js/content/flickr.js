@@ -7,8 +7,8 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 				success : function(data) {
 					iconHeader($elt, idx, 'flickr');
 					idx++;
-					insert($elt, idx, data.photoset.photo, 'flickr', function($div, element) {
 
+					insert($elt, idx, data.photoset.photo, 'flickr', function($div, element) {
 						var urlm = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_b.jpg", element);
 						var $href = $(document.createElement('a'));
 						$href.addClass("fancybox");
@@ -17,8 +17,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 						var $img = $(document.createElement('img'));
 						var urls = Mustache.render("http://farm{{farm}}.staticflickr.com/{{server}}/{{id}}_{{secret}}_q.jpg", element);
 						$img.attr('src', urls);
-						$img.attr('alt', "");
-						//subtitle
+						$img.attr('alt', "<span style='float:right'>photo : " + data.photoset.ownername+"</span>");
 						$img.addClass('qimg content');
 						$href.append($img);
 						$div.append($href);
