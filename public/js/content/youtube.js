@@ -18,24 +18,14 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					var $elttitle = $(document.createElement('p'));
 					$elttitle.text(element.snippet.title);
 
-					var $eltplay = $("<a class='fancybox-media' href='http://www.youtube.com/watch?v=" + element.snippet.resourceId.videoId + "&autoplay=1'><img src='img/play.svg' class='ytplay'/></a>");
-					$eltplay.click(function() {
-						$.fancybox({
-							'padding' : 0,
-							'autoScale' : true,
-							'title' : this.title,
-							'width' : 1280,
-							'height' : 720,
-							'href' : this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
-							'type' : 'swf',
-							'swf' : {
-								'wmode' : 'transparent',
-								'allowfullscreen' : 'true',
-								'allownetworking' : 'internal'
-							}
-						});
+					var $eltplay = $("<a class='fancybox.iframe' href='http://www.youtube.com/embed/" + element.snippet.resourceId.videoId + "?autoplay=1&iv_load_policy=3&rel=0&fs=0&list=" + info + "'><img src='img/play.svg' class='ytplay'/></a>");
 
-						return false;
+					$eltplay.fancybox({
+						'padding' : 0,
+						'autoScale' : true,
+						'title' : this.title,
+						'width' : 1280,
+						'height' : 720,
 					});
 
 					$eltdiv.append($eltimg);
