@@ -1,5 +1,5 @@
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://dbserver/citymedia", {
+var db = mongo.db("mongodb://localhost/citymedia", {
 	safe : false
 })
 
