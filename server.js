@@ -7,7 +7,7 @@ var express = require('express'), http = require('http'), path = require('path')
 var app = express();
 
 app.configure(function() {
-	app.set('port', process.env.PORT || 5060);
+	app.set('port', process.env.PORT || 8080);
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'hjs');
 	app.use(express.favicon());
