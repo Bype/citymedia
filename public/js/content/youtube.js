@@ -1,7 +1,7 @@
 define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 	return {
 		render : function($elt, idx, info, fn, insert, iconHeader) {
-			$.getJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyCQsEOzxwht2kmbrg50e0TTTt7JVWR7f90&playlistId=' + info, function(data) {
+			$.getJSON('/youtube2json?playlistid='+ info, function(data) {
 				iconHeader($elt, idx, 'youtube');
 				idx++;
 				insert($elt, idx, data.items, 'youtube', function($div, element) {
@@ -18,7 +18,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 					var $elttitle = $(document.createElement('p'));
 					$elttitle.text(element.snippet.title);
 
-					var $eltplay = $("<a class='fancybox.iframe' href='http://www.youtube.com/embed/" + element.snippet.resourceId.videoId + "?autoplay=1&iv_load_policy=3&rel=0&fs=0&list=" + info + "'><img src='img/play.svg' class='ytplay'/></a>");
+					var $eltplay = $("<a class='fancybox.iframe' href='http://www.youtube.com/embed/" + element.snippet.resourceId.videoId + "?autoplay=1&iv_load_policy=3&rel=0&fs=0&modestbranding=1'><img src='img/play.svg' class='ytplay'/></a>");
 
 					$eltplay.fancybox({
 						'padding' : 0,

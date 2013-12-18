@@ -160,20 +160,12 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			pan_tool.attach();
 			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
 			zui.addSurface(sur);
-			zui.addLimits([.3, 4]);
 
-			setInterval(function() {
-				if (.7 < zui.getPanAndScale()[2]) {
-					if (!$('body').hasClass('panning')) {
-						$('.content').fadeIn();
-					}
-					//		$('.ico').fadeOut();
-				} else {
-					$('.content').fadeOut();
-					//		$('.ico').fadeIn();
+			zui.zoomSet(.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
 
-				}
-			}, 500);
+			window.addEventListener("beforeunload", function(event) {
+				event.preventDefault();
+			});
 
 			m.show(function() {
 
@@ -191,7 +183,16 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 						left : leftOffset * step,
 						top : (topOffset + radius * sign) * step
 					});
-
+					setTimeout(function() {
+						$('#container ').css({
+							"-webkit-transition" : " all 1s ease-in-out"
+						});
+						zui.zoomSet(1.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
+						setTimeout(function() {
+							$('.content').fadeIn(1000);
+							zui.addLimits([1.5, 1.5]);
+						}, 1000);
+					}, 1500);
 				});
 
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {

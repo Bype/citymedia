@@ -1,7 +1,7 @@
 define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 	return {
 		render : function($elt, idx, info, fn, insert, iconHeader) {
-			$.getJSON('http://vimeo.com/api/v2/channel/' + info + '/videos.json', function(data) {
+			$.getJSON('/vimeo2json?channelid='+ info, function(data) {
 				iconHeader($elt, idx, 'youtube');
 				idx++;
 				insert($elt, idx, data, 'youtube', function($div, element) {

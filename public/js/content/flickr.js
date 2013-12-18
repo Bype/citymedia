@@ -2,7 +2,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 	return {
 		render : function($elt, idx, info, fn, insert, iconHeader) {
 			$.ajax({
-				url : 'http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=b27e622e07f348e026d868f2ee68830c&photoset_id=' + info + '&per_page=12&format=json&jsoncallback=?',
+				url : '/flickr2json?photosetid=' + info,
 				dataType : 'json',
 				success : function(data) {
 					iconHeader($elt, idx, 'flickr');
