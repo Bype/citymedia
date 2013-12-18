@@ -23,7 +23,16 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 						$href.append($img);
 						$div.append($href);
 					}, function(aIdx) {
-						$("a[rel='gal" + info.slice(0, -1) + "']").fancybox();
+						$("a[rel='gal" + info.slice(0, -1) + "']").fancybox({
+							helpers : {
+								title : {
+									type : 'inside'
+								}
+							},
+							afterLoad : function() {
+								this.title = this.title + ' ' + $(this.element).find('img').attr('alt');
+							}
+						});
 						fn(aIdx);
 					});
 				}
