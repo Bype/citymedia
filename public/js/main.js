@@ -197,7 +197,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {
 					$(zui.viewport).trigger(e);
 				});
-				$('.sq').click(function(e) {
+
+				$('.title').click(function(e) {
 					$('#container ').css({
 						"-webkit-transition" : " all .5s ease-in-out"
 					});
