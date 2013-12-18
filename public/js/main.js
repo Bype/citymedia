@@ -117,29 +117,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 		}
 
-
-		$('body').keypress(function(e) {
-			if (e.charCode == 43) {
-				zui.zoomBy(.1, $(window).width() / 2, $(window).height() / 2);
-			}
-			if (e.charCode == 45) {
-				zui.zoomBy(-.1, $(window).width() / 2, $(window).height() / 2);
-			}
-
-		});
-
 		initialize();
-		/*
-		 rAF = window.requestAnimationFrame;
 
-		 function update(timestamp) {
-
-		 $('.needupdate').trigger('updatestep', {
-		 timestamp : timestamp
-		 });
-		 rAF(update);
-		 }
-		 */
 		$.showMap = function(t, title, fn) {
 			if (t) {
 				fn();
@@ -154,6 +133,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				}, 1000, "swing", fn);
 			}
 		};
+
 		require(['map', 'position'], function(m) {
 			zui = new ZUI53.Viewport('zui');
 			pan_tool = new ZUI53.Tools.Pan(zui);
@@ -185,14 +165,17 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					});
 					setTimeout(function() {
 						$('#container ').css({
-							"-webkit-transition" : " all 1s ease-in-out"
+							"-webkit-transition" : " all 2s ease-in-out"
 						});
-						zui.zoomSet(1.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
+						zui.zoomSet(1.5, $(window).width(), ($(window).height() - step) / 2);
 						setTimeout(function() {
 							$('.content').fadeIn(1000);
 							zui.addLimits([1.5, 1.5]);
-						}, 1000);
-					}, 1500);
+							$('#container ').css({
+								"-webkit-transition" : ""
+							});
+						}, 2000);
+					}, 1000);
 				});
 
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {

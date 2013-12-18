@@ -11,8 +11,8 @@ define(['lib/async'], function(async) {
 			$elt.append($div);
 			spi++;
 			setTimeout(function() {
-				$div.fadeIn(100);
-			}, spi * 50);
+				$div.show();
+			}, spi * 100);
 			done();
 		}, function(err) {
 			fn(spi);
