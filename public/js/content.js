@@ -54,7 +54,7 @@ define(['lib/async'], function(async) {
 
 	return {
 		render : function($elt, spi, modules, modindex, fn) {
-			recMod($elt, spi, modules, modindex, fn)
+			recMod($elt, spi, modules, modindex, fn);
 		}
 	};
 });

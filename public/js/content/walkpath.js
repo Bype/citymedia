@@ -4,7 +4,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 			$.getJSON(info, function(data) {
 				iconHeader($elt, idx, 'walkpath');
 				idx++;
-				var wp=0
+				var wp=0;
 				insert($elt, idx, data, 'walkpath', function($div, element) {
 					$eltitem = $(document.createElement('div'));
 					$eltitem.addClass('content');
