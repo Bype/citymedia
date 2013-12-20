@@ -18,8 +18,19 @@ define(['content', 'lib/async'], function(c, async) {
 					marker = new google.maps.Marker({
 						map : map,
 						position : mappos,
-						prjname : prj.prjname
+						prjname : prj.prjname,
+						icon : "/img/mapr.svg"
 					});
+					var $info = $(document.createElement('div'));
+					$info.css({
+						width : "320px",
+						height : "240px"
+					});
+					$info.append(prj.prjtitle);
+					var infowindow = new google.maps.InfoWindow({
+						content : (prj.prjtitle.length < 16 ? "<div style='width:140px; height:18px;font-size:16px;text-align:center;vertical-align:middle;font-family: Dosis'>" + prj.prjtitle.toUpperCase() + "</h1></div>" : "<div style='width:140px; height:36px;font-size:16px;text-align:center;vertical-align:middle;color#111;font-family: Dosis'>" + prj.prjtitle + "</h1></div>")
+					});
+					infowindow.open(map, marker);
 
 					var $prj = $(document.createElement('div'));
 					$container.append($prj);
@@ -32,16 +43,19 @@ define(['content', 'lib/async'], function(c, async) {
 						top : topOffset * step
 					});
 
+					google.maps.event.addListener(infowindow, 'closeclick', function(e) {
+						throw "désolé, pas trouvé mieux pour l'instant";
+						return false;
+					});
+
 					google.maps.event.addListener(marker, 'click', function(event) {
 						var marker = this;
-						
+
 						$.showMap(false, "", function() {
-							console.log(this);
 							$('#container ').css({
 								"-webkit-transition" : " all .5s ease-in-out"
 							});
 							var pos = $('#map' + marker.prjname).parent().offset();
-							console.log(marker.prjname, pos);
 							zui.panBy(($(window).width() / 2) - (pos.left + step / 2), ($(window).height() / 2) - (pos.top + step / 2));
 							setTimeout(function() {
 								zui.zoomSet(1.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
@@ -52,7 +66,6 @@ define(['content', 'lib/async'], function(c, async) {
 								}, 500);
 							}, 500);
 						});
-
 					});
 
 					curPos++;

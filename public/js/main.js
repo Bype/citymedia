@@ -101,7 +101,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			var mapOptions = {
 				zoom : 18,
 				center : new google.maps.LatLng(43.5296189, 5.4438398),
-				mapTypeId : google.maps.MapTypeId.SATELLITE
+				mapTypeId : google.maps.MapTypeId.SATELLITE,
+				disableDefaultUI : true
 			};
 
 			map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
