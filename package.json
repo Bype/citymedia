@@ -16,8 +16,6 @@
 		"oauth": "*",
 		"node-uuid":"*",
 		"socket.io":"*",
-		"helmet":"*",
-		"redis":"*",
-		"hiredis":"*"
+		"helmet":"*"
 	}
 }
