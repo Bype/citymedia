@@ -133,6 +133,10 @@ body {
 	background-color: #FCB14B;
 }
 
+.sms {
+	background-color: #8F9080;
+}
+
 .walkpath {
 	background-color: #398791;
 }
@@ -200,7 +204,7 @@ to {
 	font-weight: lighter;
 }
 .content {
-	display: none;
+	//display: none;
 }
 .ico {
 	padding: 14px 14px 14px 14px;
@@ -232,7 +236,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step  - 20px;
+	width: @step   - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -240,14 +244,18 @@ outline-offset:-4px;
 	font-family: mono;
 	word-wrap: break-word;
 }
-.tweeter p {
+.tweeter p,.sms p {
 	color: white;
 	padding: @step/8 @step/8 @step/8 @step/8;
-	font-size: 9px;
+	font-size: 10px;
 	font-weight: 300;
 	word-wrap: break-word;
 }
-.tweeter p em {
+.sms em{
+	line-height: @step/8;
+}
+
+.tweeter p em, .sms p em {
 	font-style: italic;
 	font-weight: 200;
 }
@@ -312,4 +320,28 @@ outline-offset:-4px;
 	font-size: 9px;
 	font-weight: 300;
 	word-wrap: break-word;
+}
+
+.phonenum{
+	padding: @step/8 @step/8 @step/8 @step/8;
+	color:white;
+	font-size:120%;
+}
+
+.phonenum p{
+	padding: 0 0 0 0;
+	text-align: center;
+	line-height: 6px;
+}
+
+.phonenum small{
+	font-size:60%;
+	color:red;
+}
+
+
+.phonenum h1{
+	font-weight: bold;
+	text-align: center;
+	font-size:200%;
 }

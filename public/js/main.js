@@ -96,6 +96,13 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				}
 			}
 		});
+		socket.on('newtxt', function(data) {
+			console.log(data);
+			var $elt = $('#smsblock');
+			if ($elt) {
+				$.addSMS($elt,data)
+			}
+		});
 
 		function initialize() {
 			var mapOptions = {
@@ -160,23 +167,26 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					var radius = parseInt($prj.attr('radius')) + 1;
 					leftOffset += radius;
 					sign *= -1;
-					$prj.animate({
-						left : leftOffset * step,
-						top : (topOffset + radius * sign) * step
-					});
-					setTimeout(function() {
-						$('#container ').css({
-							"-webkit-transition" : " all 2s ease-in-out"
-						});
-						zui.zoomSet(1.5, $(window).width(), ($(window).height() - step) / 2);
-						setTimeout(function() {
-							$('.content').fadeIn(1000);
-							zui.addLimits([1.5, 1.5]);
-							$('#container ').css({
-								"-webkit-transition" : ""
-							});
-						}, 2000);
-					}, 1000);
+					$('.content').fadeIn(1000);
+					/*
+					 $prj.animate({
+					 left : leftOffset * step,
+					 top : (topOffset + radius * sign) * step
+					 });
+					 setTimeout(function() {
+					 $('#container ').css({
+					 "-webkit-transition" : " all 2s ease-in-out"
+					 });
+					 zui.zoomSet(1.5, $(window).width(), ($(window).height() - step) / 2);
+					 setTimeout(function() {
+					 $('.content').fadeIn(1000);
+					 zui.addLimits([1.5, 1.5]);
+					 $('#container ').css({
+					 "-webkit-transition" : ""
+					 });
+					 }, 2000);
+					 }, 1000);
+					 */
 				});
 
 				$('.sq').bind('mousedown mousemove mouseup', function(e) {
