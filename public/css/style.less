@@ -6,7 +6,7 @@
 
 @import url("http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700");
 
-@step:128px;
+@step:192px;
 html {
 	height: 100%;
 }
@@ -20,13 +20,14 @@ body {
 	overflow: hidden;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	/* -webkit-transform:scale(.5); */
-	font-size: 11px;
+	font-size: @step/16;
 	height: 100%;
 	-webkit-font-smoothing: none;
 	-webkit-backface-visibility: visible;
-	-webkit-transform: translateZ(0);
-	cursor: none;
+	-webkit-transform: rotateZ(360deg);
+	/*
+	 cursor: none;
+	 */
 }
 
 #bg {
@@ -49,16 +50,18 @@ body {
 	left: 0;
 }
 #container {
-	background-color: transparent;
-	height: 100%;
-	background-size: @step*2 @step* 2;
-	background-position: @step/2 @step;
+	position: absolute;
+	-webkit-transform: scale(.2);
+	-webkit-transform-origin: 0 0;
+	top: @step;
 }
-#zui {
+#boundary_box {
 	margin: 0;
 	padding: 0;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
+	position: relative;
 }
 .prj {
 	position: relative;
@@ -82,7 +85,7 @@ body {
 .title {
 	position: absolute;
 	font-weight: normal;
-	font-size: 24px;
+	font-size: 250%;
 	background: -webkit-linear-gradient(left, #dd037b 0%,#9d2121 100%);
 	color: white;
 	z-index: 100;
@@ -97,7 +100,7 @@ body {
 }
 .subtitle {
 	position: absolute;
-	font-size: 17px;
+	font-size: 175%;
 	width: @step* 2;
 	height: @step* 2;
 	color: white;
@@ -196,19 +199,21 @@ to {
 	text-align: center;
 }
 .youtube .content p {
-	font-size: 6px;
+	font-size: 80%;
 	margin-top: 4px;
 	color: black;
 	text-overflow: ellipsis;
 	width: @step;
 	font-weight: lighter;
 }
-.content {
-	//display: none;
+.content {//
+	display: none;
 }
 .ico {
-	padding: 14px 14px 14px 14px;
+	padding: @step/10 @step/10 @step/10 @step/10;
 	opacity: 0.5;
+	width: 150px;
+	height: 150px;
 }
 #liftbut {
 	width: 100%;
@@ -236,7 +241,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step   - 20px;
+	width: @step             - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -244,14 +249,14 @@ outline-offset:-4px;
 	font-family: mono;
 	word-wrap: break-word;
 }
-.tweeter p,.sms p {
+.tweeter p, .sms p {
 	color: white;
 	padding: @step/8 @step/8 @step/8 @step/8;
-	font-size: 10px;
+	font-size: 120%;
 	font-weight: 300;
 	word-wrap: break-word;
 }
-.sms em{
+.sms em {
 	line-height: @step/8;
 }
 
@@ -261,14 +266,14 @@ outline-offset:-4px;
 }
 .tweeter p b {
 	font-weight: 200;
-	font-size: 8px;
+	font-size: 60%;
 }
 .tweeter p br {
 	line-height: 13px;
 }
 .news {
 	padding: @step/10 @step/10 @step/10 @step/10;
-	font-size: 6px;
+	font-size: 100%;
 }
 .news em {
 	font-style: italic;
@@ -279,7 +284,7 @@ outline-offset:-4px;
 }
 .news h1 {
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 120%;
 	color: white;
 	margin-bottom: 4px;
 	margin-top: 4px;
@@ -307,7 +312,7 @@ outline-offset:-4px;
 
 .walkpath h1 {
 	font-weight: bold;
-	font-size: 10px;
+	font-size: 120%;
 	color: white;
 	margin-top: @step/16;
 	margin-left: @step/8;
@@ -317,31 +322,30 @@ outline-offset:-4px;
 .walkpath p {
 	color: white;
 	padding: @step/16 @step/8 @step/8 @step/8;
-	font-size: 9px;
+	font-size: 100%;
 	font-weight: 300;
 	word-wrap: break-word;
 }
 
-.phonenum{
+.phonenum {
 	padding: @step/8 @step/8 @step/8 @step/8;
-	color:white;
-	font-size:120%;
+	color: white;
+	font-size: 120%;
 }
 
-.phonenum p{
+.phonenum p {
 	padding: 0 0 0 0;
 	text-align: center;
 	line-height: 6px;
 }
 
-.phonenum small{
-	font-size:60%;
-	color:red;
+.phonenum small {
+	font-size: 60%;
+	color: red;
 }
 
-
-.phonenum h1{
+.phonenum h1 {
 	font-weight: bold;
 	text-align: center;
-	font-size:200%;
+	font-size: 200%;
 }

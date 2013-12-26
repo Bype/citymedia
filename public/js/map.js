@@ -2,8 +2,8 @@ define(['content', 'lib/async'], function(c, async) {
 
 	var nbcol = Math.floor($(document).width() / step);
 	var nbrow = Math.floor($(document).height() / step);
-	var leftOffset = -nbcol / 2;
-	var topOffset = nbrow / 4;
+	var leftOffset = 0;
+	var topOffset = 0;
 
 	return {
 		show : function(fn) {
@@ -50,21 +50,16 @@ define(['content', 'lib/async'], function(c, async) {
 
 					google.maps.event.addListener(marker, 'click', function(event) {
 						var marker = this;
-
+						$(".content").hide();
 						$.showMap(false, "", function() {
-							$('#container ').css({
-								"-webkit-transition" : " all .5s ease-in-out"
+							var posO = $('#' + marker.prjname).position();
+							$('#container').animate({
+								left : Math.floor($(document).width() / 2) - posO.left - step,
+								top : Math.floor($(document).height() / 4) - posO.top,
+								useTranslate3d : true
+							}, 1000, "easeInOutQuad", function() {
+								$(".content").fadeIn();
 							});
-							var pos = $('#map' + marker.prjname).parent().offset();
-							zui.panBy(($(window).width() / 2) - (pos.left + step / 2), ($(window).height() / 2) - (pos.top + step / 2));
-							setTimeout(function() {
-								zui.zoomSet(1.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
-								setTimeout(function() {
-									$('#container ').css({
-										"-webkit-transition" : ""
-									});
-								}, 500);
-							}, 500);
 						});
 					});
 
@@ -120,11 +115,6 @@ define(['content', 'lib/async'], function(c, async) {
 						});
 
 					});
-					/*
-					 var $elt = $(document.createElement('div'));
-					 $elt.addClass('circle');
-					 $prj.append($elt);
-					 */
 					c.render($prj, 4, prj.modules, 0, function(spi) {
 						if (isNaN(spi)) {
 							$prj.attr('radius', 1);

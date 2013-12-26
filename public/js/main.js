@@ -11,7 +11,8 @@ requirejs.config({
 		fancybox : "lib/jquery.fancybox",
 		"fancybox-media" : "lib/helpers/jquery.fancybox-media",
 		videoBG : "lib/jquery.videoBG",
-		socket : '/socket.io/socket.io'
+		socket : '/socket.io/socket.io',
+		"jquery.easing.min" : 'http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min'
 
 	},
 	shim : {
@@ -21,11 +22,11 @@ requirejs.config({
 	}
 });
 
-var step = 128;
+var step = 192;
 var zui;
 var map;
 
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', "jquery.easing.min", "lib/dragmom", 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
 
 	moment.lang('fr', {
 		months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
@@ -143,72 +144,57 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		};
 
 		require(['map', 'position'], function(m) {
-			zui = new ZUI53.Viewport('zui');
-			pan_tool = new ZUI53.Tools.Pan(zui);
-			pan_tool.attach();
-			sur = new ZUI53.Surfaces.CSS(document.getElementById('container'));
-			zui.addSurface(sur);
-
-			zui.zoomSet(.5, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
-
-			window.addEventListener("beforeunload", function(event) {
-				event.preventDefault();
-			});
 
 			m.show(function() {
-
 				var nbcol = Math.floor($(document).width() / step);
 				var nbrow = Math.floor($(document).height() / step);
-				var leftOffset = -nbcol / 2;
-				var topOffset = nbrow / 4;
-				var sign = -1;
+				var leftOffset = 1;
+				var topOffset = 0;
+				var fact = 1;
+				var maxRadius = 0;
+				var radius;
+
 				$('.prj').each(function(idx, prj) {
 					var $prj = $(prj);
-					var radius = parseInt($prj.attr('radius')) + 1;
-					leftOffset += radius;
-					sign *= -1;
+					radius = parseInt($prj.attr('radius')) + 1;
 					$prj.animate({
 						left : leftOffset * step,
-						top : (topOffset + radius * sign) * step
+						top : (topOffset + radius * fact) * step
+					}, 300 + idx * 500, "easeInOutQuad");
+					leftOffset += (radius * 2);
+					maxRadius = (maxRadius < radius ? radius : maxRadius);
+					fact = (fact == 1 ? 2 : 1);
+
+				});
+				$("#container").css({
+					width : leftOffset * step,
+					height : (3 * maxRadius * step)
+				});
+				setTimeout(function() {
+					$("#container").css({
+						"-webkit-transition" : " all 2s ease-in-out",
+						"-webkit-transform" : "scale(1)",
+						top : 0
 					});
+
 					setTimeout(function() {
-						$('#container ').css({
-							"-webkit-transition" : " all 2s ease-in-out"
+						$("#container").css({
+							"-webkit-transition" : ""
 						});
-						zui.zoomSet(1.5, $(window).width(), ($(window).height() - step) / 2);
-						setTimeout(function() {
-							$('.content').fadeIn(1000);
-							zui.addLimits([1.5, 1.5]);
-							$('#container ').css({
-								"-webkit-transition" : ""
-							});
-						}, 2000);
-					}, 1000);
+						var posO = $('#office_de_tourisme').position();
+						$("#container").animate({
+							left : Math.floor($(document).width() / 2) - posO.left - step,
+							top : Math.floor($(document).height() / 4) - posO.top,
+						}, 3000, "easeInOutQuad", function() {
 
-				});
-
-				$('.sq').bind('mousedown mousemove mouseup', function(e) {
-					$(zui.viewport).trigger(e);
-				});
-
-				$('.title').click(function(e) {
-					$('#container ').css({
-						"-webkit-transition" : " all .5s ease-in-out"
-					});
-
-					var pos = $(this).offset();
-					zui.panBy(($(window).width() / 2) - (pos.left + step / 2), ($(window).height() / 2) - (pos.top + step / 2));
-					setTimeout(function() {
-						zui.zoomSet(2, ($(window).width() - step) / 2, ($(window).height() - step) / 2);
-						setTimeout(function() {
-							$('#container ').css({
-								"-webkit-transition" : ""
-							});
-						}, 500);
-					}, 500);
-					e.preventDefault();
-					return false;
-				});
+							$(".content").fadeIn();
+							$("#container").draggable({
+								scroll : false,
+								containment : '#boundary_box'
+							}).dragMomentum();
+						});
+					}, 2000);
+				}, 5000);
 
 			});
 		});

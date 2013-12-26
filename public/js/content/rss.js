@@ -10,7 +10,7 @@ define(['lib/mustache', 'lib/async'], function(Mustache, async) {
 
 					var html = '<p><em>' + moment(element.pubdate).fromNow() + '... </em></p>';
 					html += '<h1>' + element.title + '</h1>';
-					html += '<p>' + element.description.replace(/(<([^>]+)>)/ig, "").slice(0, 320) + (320 < element.description.length ? "..." : "") + '</p>';
+					html += '<p>' + element.description.replace(/(<([^>]+)>)/ig, "").slice(0, 140) + (140 < element.description.length ? "..." : "") + '</p>';
 					$eltitem.append(html);
 					var $qrdiv = $(document.createElement('div'));
 					$qrdiv.qrcode({

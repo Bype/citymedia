@@ -9,10 +9,10 @@ define(['lib/async'], function(async) {
 			$div.addClass(type);
 			renderer($div, element);
 			$elt.append($div);
-			spi++;
 			setTimeout(function() {
-				$div.show();
+				$div.fadeIn();
 			}, spi * 100);
+			spi++;
 			done();
 		}, function(err) {
 			fn(spi);
