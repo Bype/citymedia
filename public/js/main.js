@@ -152,6 +152,8 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				var topOffset = 0;
 				var fact = 1;
 				var maxRadius = 0;
+				var maxWidth = 0;
+				var maxHeight = 0;
 				var radius;
 				var radiuses = [];
 				var $prjA = $('.prj');
@@ -180,14 +182,20 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 					});
 					leftOffset += (radius * 2);
+					maxWidth = (maxWidth < leftOffset ? leftOffset : maxWidth);
 					if (nbcol < leftOffset) {
 						leftOffset = 1;
 						topOffset += (maxRadius * 2);
+						maxHeight = (maxHeight < topOffset ? topOffset : maxHeight);
 						maxRadius = 0;
 					}
+
 					//$('#container').append($prj);
 				});
-
+				$("#container").css({
+					width : maxWidth * step,
+					height : (maxHeight+maxRadius*2) * step
+				});
 				var placeRound = function() {
 					var move = 0;
 					var done = 0;
@@ -201,6 +209,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 						if (0 < aTop) {
 							if ((!$(document.elementFromPoint((aLeft + step / 4) / 5, (aTop - 3 * step / 4) / 5)).hasClass('prj')) && (!$(document.elementFromPoint((aLeft + aWidth - step / 4) / 5, (aTop - 3 * step / 4) / 5)).hasClass('prj'))) {
 								done++;
+
 								$prj.animate({
 									top : aTop - step
 								}, 100, function() {
@@ -222,11 +231,6 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					$('#container').css({
 						"-webkit-transition" : "all 2s ease-in-out",
 						"-webkit-transform" : "scale(1)"
-					});
-
-					$("#container").css({
-						width : parseInt($prjA.last().css('left')) + parseInt($prjA.last().css('width')) + 2 * step,
-						height : parseInt($prjA.last().css('top')) + parseInt($prjA.last().css('height')) + 2 * step
 					});
 
 					setTimeout(function() {
