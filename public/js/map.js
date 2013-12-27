@@ -87,6 +87,10 @@ define(['content', 'lib/async'], function(c, async) {
 					var $elt = $(document.createElement('div'));
 					$elt.addClass('sq');
 					$elt.addClass("c0");
+					$elt.css({
+						top : 0,
+						left : 0
+					});
 					$prj.append($elt);
 
 					for (var i = 0; i < 3; i++) {
@@ -116,14 +120,25 @@ define(['content', 'lib/async'], function(c, async) {
 
 					});
 					c.render($prj, 4, prj.modules, 0, function(spi) {
+						var radius = 2;
 						if (isNaN(spi)) {
-							$prj.attr('radius', 1);
+							$prj.attr('radius', 2);
 							$prj.attr('spi', 3);
 						} else {
-							var radius = Math.floor((Math.sqrt(spi + 4) - 1) / 2) + 1;
+							radius = Math.floor(Math.sqrt(spi) - 1);
 							$prj.attr('radius', radius);
 							$prj.attr('spi', spi);
 						}
+						$prj.css({
+							width : 2 * (radius + 1) * step,
+							height : 2 * (radius + 1) * step
+						});
+						$prj.children().each(function(idx, elt) {
+							$(elt).css({
+								top : parseInt($(elt).css('top')) + (radius+1) * step,
+								left : parseInt($(elt).css('left')) + (radius) * step
+							});
+						});
 						done();
 					});
 

@@ -146,56 +146,98 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 		require(['map', 'position'], function(m) {
 
 			m.show(function() {
-				var nbcol = Math.floor($(document).width() / step);
+				var nbcol = 2 * $(document).width() / step;
 				var nbrow = Math.floor($(document).height() / step);
 				var leftOffset = 1;
 				var topOffset = 0;
 				var fact = 1;
 				var maxRadius = 0;
 				var radius;
+				var radiuses = [];
+				var $prjA = $('.prj');
+				/*
+				 $('#container').empty();
 
-				$('.prj').each(function(idx, prj) {
+				 $prjA.sort(function(a, b) {
+				 var aA = parseInt($(a).attr('radius'));
+				 var aB = parseInt($(b).attr('radius'));
+				 return (aA > aB ? 1 : -1);
+				 });
+				 */
+				var done = $prjA.length;
+				$prjA.each(function(idx, prj) {
 					var $prj = $(prj);
 					radius = parseInt($prj.attr('radius')) + 1;
+					maxRadius = (maxRadius < radius ? radius : maxRadius);
 					$prj.animate({
 						left : leftOffset * step,
-						top : (topOffset + radius * fact) * step
-					}, 300 + idx * 500, "easeInOutQuad");
-					leftOffset += (radius * 2);
-					maxRadius = (maxRadius < radius ? radius : maxRadius);
-					fact = (fact == 1 ? 2 : 1);
+						top : topOffset * step,
+					}, 300 + idx * 100, "easeInOutQuad", function() {
+						done--;
+						if (done == 0) {
+							placeRound();
+						}
 
+					});
+					leftOffset += (radius * 2);
+					if (nbcol < leftOffset) {
+						leftOffset = 1;
+						topOffset += (maxRadius * 2);
+						maxRadius = 0;
+					}
+					//$('#container').append($prj);
 				});
-				$("#container").css({
-					width : leftOffset * step,
-					height : (3 * maxRadius * step)
-				});
-				setTimeout(function() {
-					$("#container").css({
-						"-webkit-transition" : " all 2s ease-in-out",
-						"-webkit-transform" : "scale(1)",
-						top : 0
+
+				var placeRound = function() {
+					var move = 0;
+					var done = 0;
+					$prjA.each(function(idx, prj) {
+						var $prj = $(prj);
+						var aTop = parseInt($prj.css('top'));
+						var aLeft = parseInt($prj.css('left'));
+						var aWidth = parseInt($prj.css('width'));
+						var aHeight = parseInt($prj.css('height'));
+
+						if (0 < aTop) {
+							if ((!$(document.elementFromPoint((aLeft + step / 4) / 5, (aTop - 3 * step / 4) / 5)).hasClass('prj')) && (!$(document.elementFromPoint((aLeft + aWidth - step / 4) / 5, (aTop - 3 * step / 4) / 5)).hasClass('prj'))) {
+								done++;
+								$prj.animate({
+									top : aTop - step
+								}, 100, function() {
+									done--;
+									if (done == 0) {
+										placeRound(move);
+									}
+								});
+								move++;
+							}
+						}
+					});
+					if (move == 0)
+						setupDrag();
+				};
+
+				var setupDrag = function() {
+					$('#container').css({
+						"-webkit-transform" : "scale(1)"
 					});
 
+					$("#container").css({
+						width : parseInt($prjA.last().css('left')) + parseInt($prjA.last().css('width')) + 2 * step,
+						height : parseInt($prjA.last().css('top')) + parseInt($prjA.last().css('height')) + 2 * step
+					});
+					$("#container").draggable({
+						scroll : false,
+						containment : '#boundary_box'
+					}).dragMomentum();
+					$('#container').css({
+						left : -1920,
+						top : -1080,
+					});
 					setTimeout(function() {
-						$("#container").css({
-							"-webkit-transition" : ""
-						});
-						var posO = $('#office_de_tourisme').position();
-						$("#container").animate({
-							left : Math.floor($(document).width() / 2) - posO.left - step,
-							top : Math.floor($(document).height() / 4) - posO.top,
-						}, 3000, "easeInOutQuad", function() {
-
-							$(".content").fadeIn();
-							$("#container").draggable({
-								scroll : false,
-								containment : '#boundary_box'
-							}).dragMomentum();
-						});
+						$('.content').fadeIn();
 					}, 2000);
-				}, 5000);
-
+				};
 			});
 		});
 	});
