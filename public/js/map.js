@@ -56,8 +56,8 @@ define(['content', 'lib/async'], function(c, async) {
 							var aTop = parseInt($('#' + marker.prjname).css('top'));
 							var aLeft = parseInt($('#' + marker.prjname).css('left'));
 							$('#container').animate({
-								left : -step-aLeft,
-								top : -step-aTop
+								left : -step - aLeft,
+								top : -step - aTop
 							}, 1000, "easeInOutQuad", function() {
 								$(".content").fadeIn();
 							});
@@ -126,7 +126,9 @@ define(['content', 'lib/async'], function(c, async) {
 							$prj.attr('radius', 2);
 							$prj.attr('spi', 3);
 						} else {
-							radius = Math.floor(Math.sqrt(spi/2) );
+							radius = Math.floor(Math.sqrt(spi / 2));
+							if (radius < 2)
+								radius = 2;
 							$prj.attr('radius', radius);
 							$prj.attr('spi', spi);
 						}
