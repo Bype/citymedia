@@ -33,6 +33,7 @@ define(['content', 'lib/async'], function(c, async) {
 					infowindow.open(map, marker);
 
 					var $prj = $(document.createElement('div'));
+					$prj.hide();
 					$container.append($prj);
 					$prj.attr('id', prj.prjname);
 					$prj.addClass('prj');
@@ -52,11 +53,11 @@ define(['content', 'lib/async'], function(c, async) {
 						var marker = this;
 						$(".content").hide();
 						$.showMap(false, "", function() {
-							var posO = $('#' + marker.prjname).position();
+							var aTop = parseInt($('#' + marker.prjname).css('top'));
+							var aLeft = parseInt($('#' + marker.prjname).css('left'));
 							$('#container').animate({
-								left : Math.floor($(document).width() / 2) - posO.left - step,
-								top : Math.floor($(document).height() / 4) - posO.top,
-								useTranslate3d : true
+								left : -step-aLeft,
+								top : -step-aTop
 							}, 1000, "easeInOutQuad", function() {
 								$(".content").fadeIn();
 							});
@@ -125,7 +126,7 @@ define(['content', 'lib/async'], function(c, async) {
 							$prj.attr('radius', 2);
 							$prj.attr('spi', 3);
 						} else {
-							radius = Math.floor(Math.sqrt(spi) - 1);
+							radius = Math.floor(Math.sqrt(spi/2) );
 							$prj.attr('radius', radius);
 							$prj.attr('spi', spi);
 						}
@@ -135,10 +136,11 @@ define(['content', 'lib/async'], function(c, async) {
 						});
 						$prj.children().each(function(idx, elt) {
 							$(elt).css({
-								top : parseInt($(elt).css('top')) + (radius+1) * step,
+								top : parseInt($(elt).css('top')) + (radius + 1) * step,
 								left : parseInt($(elt).css('left')) + (radius) * step
 							});
 						});
+						$prj.show();
 						done();
 					});
 

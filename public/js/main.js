@@ -172,7 +172,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					$prj.animate({
 						left : leftOffset * step,
 						top : topOffset * step,
-					}, 300 + idx * 100, "easeInOutQuad", function() {
+					}, 100 + idx * 100, "easeInOutQuad", function() {
 						done--;
 						if (done == 0) {
 							placeRound();
@@ -213,12 +213,14 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 							}
 						}
 					});
-					if (move == 0)
+					if (move == 0) {
 						setupDrag();
+					}
 				};
 
 				var setupDrag = function() {
 					$('#container').css({
+						"-webkit-transition" : "all 2s ease-in-out",
 						"-webkit-transform" : "scale(1)"
 					});
 
@@ -226,17 +228,17 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 						width : parseInt($prjA.last().css('left')) + parseInt($prjA.last().css('width')) + 2 * step,
 						height : parseInt($prjA.last().css('top')) + parseInt($prjA.last().css('height')) + 2 * step
 					});
-					$("#container").draggable({
-						scroll : false,
-						containment : '#boundary_box'
-					}).dragMomentum();
-					$('#container').css({
-						left : -1920,
-						top : -1080,
-					});
+
 					setTimeout(function() {
+						$('#container ').css({
+							"-webkit-transition" : ""
+						});
+						$("#container").draggable({
+							scroll : false,
+							containment : '#boundary_box'
+						}).dragMomentum();
 						$('.content').fadeIn();
-					}, 2000);
+					}, 2100);
 				};
 			});
 		});

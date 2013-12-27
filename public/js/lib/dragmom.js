@@ -52,8 +52,6 @@ define([], function() {
 					dragMoment.bounds[elemID][3] = dragMoment.cPadding[3];
 				} else {// container was set, so calibrate the boundaries
 					var cOffset = $(containment).offset();
-					console.log('cOffset');
-					console.log(cOffset);
 					var cWidth = $(containment).outerWidth();
 					var cHeight = $(containment).outerHeight();
 					var bTop = parseInt(cOffset.top + dragMoment.cPadding[0]);
