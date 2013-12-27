@@ -53,6 +53,7 @@ body {
 	position: absolute;
 	-webkit-transform: scale(.2);
 	-webkit-transform-origin: 0 0;
+	border: solid 1px #baa;
 }
 #boundary_box {
 	margin: 0;
@@ -240,7 +241,7 @@ outline-offset:-4px;
 	position: absolute;
 	left: 10px;
 	bottom: @step/8;
-	width: @step                 - 20px;
+	width: @step                   - 20px;
 }
 .url .urltext p {
 	font-size: 5px;
@@ -301,12 +302,12 @@ outline-offset:-4px;
 	position: absolute;
 	-webkit-transform: scale(.5);
 	z-index: 1000;
-	padding: 64px 64px 64px 64px;
+	padding: @step/2 @step/2 @step/2 @step/2;
 	background-color: #eee;
-	width: 256px;
-	height: 256px;
-	top: -128px;
-	right: -128px;
+	width: @step* 2;
+	height: @step* 2;
+	top: -@step/2;
+	right: -@step/2;
 }
 
 .walkpath h1 {
