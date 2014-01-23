@@ -183,14 +183,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 					});
 					leftOffset += (radius * 2);
 					maxWidth = (maxWidth < leftOffset ? leftOffset : maxWidth);
-					if (nbcol < leftOffset) {
-						leftOffset = 1;
-						topOffset += (maxRadius * 2);
-						maxHeight = (maxHeight < topOffset ? topOffset : maxHeight);
-						maxRadius = 0;
-					}
 
-					//$('#container').append($prj);
 				});
 				$("#container").css({
 					width : maxWidth * step,
@@ -228,6 +221,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				};
 
 				var setupDrag = function() {
+					
 					$('#container').css({
 						"-webkit-transition" : "all 2s ease-in-out",
 						"-webkit-transform" : "scale(1)"
@@ -242,7 +236,9 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 							containment : '#boundary_box'
 						}).dragMomentum();
 						$('.content').fadeIn();
+					
 					}, 2100);
+					
 				};
 			});
 		});
