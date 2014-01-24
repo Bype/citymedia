@@ -143,6 +143,17 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 			}
 		};
 
+		$.goType = function(type) {
+
+			var aTop = 0;
+			var aLeft = (parseInt($('.' + type).last().css('left')) + parseInt($('.' + type).first().css('left'))) / 2;
+		
+			$('#container').animate({
+				left : -step - aLeft,
+				top : -step - aTop
+			}, 1000, "easeInOutQuad");
+		};
+
 		require(['map', 'position'], function(m) {
 
 			m.show(function() {
@@ -187,7 +198,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				});
 				$("#container").css({
 					width : maxWidth * step,
-					height : (maxHeight+maxRadius*2) * step
+					height : (maxHeight + maxRadius * 2) * step
 				});
 				var placeRound = function() {
 					var move = 0;
@@ -221,7 +232,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 				};
 
 				var setupDrag = function() {
-					
+
 					$('#container').css({
 						"-webkit-transition" : "all 2s ease-in-out",
 						"-webkit-transform" : "scale(1)"
@@ -236,9 +247,9 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 							containment : '#boundary_box'
 						}).dragMomentum();
 						$('.content').fadeIn();
-					
+
 					}, 2100);
-					
+
 				};
 			});
 		});
