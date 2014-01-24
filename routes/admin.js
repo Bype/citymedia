@@ -92,7 +92,8 @@ exports.projectinfo = function(req, res) {
 exports.projectlist = function(req, res) {
 	db.project.find({}, {
 		prjtitle : 1,
-		appsubtitle : 1
+		appsubtitle : 1,
+		type : 1
 	}).toArray(function(err, prjs) {
 		res.json(prjs);
 	});

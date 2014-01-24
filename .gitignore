@@ -13,4 +13,7 @@ logs
 results
 .git
 npm-debug.log
+admin.css
+help.css
+style.css
 

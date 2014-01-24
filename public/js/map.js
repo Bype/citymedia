@@ -37,6 +37,7 @@ define(['content', 'lib/async'], function(c, async) {
 					$container.append($prj);
 					$prj.attr('id', prj.prjname);
 					$prj.addClass('prj');
+					$prj.addClass('t_' + prj.type);
 					$prj.attr('curpos', curPos);
 
 					$prj.css({

@@ -30,7 +30,8 @@
 							<tr>
 								<th> Nom du projet </th>
 								<th> Présentation </th>
-								<th> &nbsp; </th>
+								<th> Catégorie </th>
+								<th> Action </th>
 							</tr>
 						</thead>
 						<tbody id='prjlist'></tbody>
@@ -76,8 +77,18 @@
 							<textarea id="appsubtitle" rows='3' type='text' name="appsubtitle" placeholder="Petit texte d'introduction" class="controls input-xxlarge"></textarea>
 						</div>
 						<div class="control-group">
+							<label for="category" class="control-label">Catégorie</label>
+							<select id="moduletype" name="type" class="controls input-medium">
+								<option value="tourisme">Tourisme</option>
+								<option value="culture">Culture</option>
+								<option value="urbanisme">Urbanisme</option>
+								<option value="vous">Vous</option>
+							</select>
+						</div>
+						<div class="control-group">
 							<label for="address" class="control-label">Géo Localisation</label>
-							<input id="address" type="text" class="controls input-xxlarge" value="Office de tourisme, Aix En Provence"><br>
+							<input id="address" type="text" class="controls input-xxlarge" value="Office de tourisme, Aix En Provence">
+							<br>
 							<input type="button" class="btn" value="Trouver" id='geofind'>
 						</div>
 						<div class="container" id='mapcont' style="width: 530px; height: 300px; display:none;">

@@ -8,7 +8,9 @@ db.bind('project');
 var type = new Array();
 
 exports.data = function(req, res) {
-	db.project.find().toArray(function(err, prjs) {
+	db.project.find().sort({
+		type : 1
+	}).toArray(function(err, prjs) {
 		res.json(prjs);
 	});
 };
