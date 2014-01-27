@@ -13,25 +13,28 @@ define(['content', 'lib/async'], function(c, async) {
 			$.get('/view/data', function(lst) {
 				$container.attr('nbprj', lst.length);
 				async.each(lst, function(prj, done) {
-
-					var mappos = new google.maps.LatLng(prj.lat, prj.lon);
-					marker = new google.maps.Marker({
-						map : map,
-						position : mappos,
-						prjname : prj.prjname,
-						icon : "/img/mapr.svg"
-					});
+					var isMAPPOS = (prj.lat != "") && (prj.lon != "");
+					if (isMAPPOS) {
+						var mappos = new google.maps.LatLng(prj.lat, prj.lon);
+						marker = new google.maps.Marker({
+							map : map,
+							position : mappos,
+							prjname : prj.prjname,
+							icon : "/img/mapr.svg"
+						});
+					}
 					var $info = $(document.createElement('div'));
 					$info.css({
 						width : "320px",
 						height : "240px"
 					});
 					$info.append(prj.prjtitle);
-					var infowindow = new google.maps.InfoWindow({
-						content : (prj.prjtitle.length < 16 ? "<div style='width:140px; height:18px;font-size:16px;text-align:center;vertical-align:middle;font-family: Dosis'>" + prj.prjtitle.toUpperCase() + "</h1></div>" : "<div style='width:140px; height:36px;font-size:16px;text-align:center;vertical-align:middle;color#111;font-family: Dosis'>" + prj.prjtitle + "</h1></div>")
-					});
-					infowindow.open(map, marker);
-
+					if (isMAPPOS) {
+						var infowindow = new google.maps.InfoWindow({
+							content : (prj.prjtitle.length < 16 ? "<div style='width:140px; height:18px;font-size:16px;text-align:center;vertical-align:middle;font-family: Dosis'>" + prj.prjtitle.toUpperCase() + "</h1></div>" : "<div style='width:140px; height:36px;font-size:16px;text-align:center;vertical-align:middle;color#111;font-family: Dosis'>" + prj.prjtitle + "</h1></div>")
+						});
+						infowindow.open(map, marker);
+					}
 					var $prj = $(document.createElement('div'));
 					$prj.hide();
 					$container.append($prj);
@@ -44,26 +47,27 @@ define(['content', 'lib/async'], function(c, async) {
 						left : (leftOffset + curPos * 6) * step,
 						top : topOffset * step
 					});
+					if (isMAPPOS) {
+						google.maps.event.addListener(infowindow, 'closeclick', function(e) {
+							throw "désolé, pas trouvé mieux pour l'instant";
+							return false;
+						});
 
-					google.maps.event.addListener(infowindow, 'closeclick', function(e) {
-						throw "désolé, pas trouvé mieux pour l'instant";
-						return false;
-					});
-
-					google.maps.event.addListener(marker, 'click', function(event) {
-						var marker = this;
-						$(".content").hide();
-						$.showMap(false, "", function() {
-							var aTop = parseInt($('#' + marker.prjname).css('top'));
-							var aLeft = parseInt($('#' + marker.prjname).css('left'));
-							$('#container').animate({
-								left : -step - aLeft,
-								top : -step - aTop
-							}, 1000, "easeInOutQuad", function() {
-								$(".content").fadeIn();
+						google.maps.event.addListener(marker, 'click', function(event) {
+							var marker = this;
+							$(".content").hide();
+							$.showMap(false, "", function() {
+								var aTop = parseInt($('#' + marker.prjname).css('top'));
+								var aLeft = parseInt($('#' + marker.prjname).css('left'));
+								$('#container').animate({
+									left : -step - aLeft,
+									top : -step - aTop
+								}, 1000, "easeInOutQuad", function() {
+									$(".content").fadeIn();
+								});
 							});
 						});
-					});
+					}
 
 					curPos++;
 					var $tit = $(document.createElement('div'));
@@ -102,26 +106,27 @@ define(['content', 'lib/async'], function(c, async) {
 						$prj.append($elt);
 						$.spiral(i, $elt);
 					}
+					if (isMAPPOS) {
+						var $elt = $(document.createElement('div'));
+						var $mapico = $(document.createElement('img'));
+						$elt.addClass('sq');
+						$elt.addClass('c0');
+						$elt.append($mapico);
+						$prj.append($elt);
+						$.spiral(3, $elt);
+						$elt.attr('id', 'map' + prj.prjname);
+						$mapico.addClass('ico');
+						$mapico.addClass('mapico');
+						$mapico.attr("src", 'img/map.svg');
 
-					var $elt = $(document.createElement('div'));
-					var $mapico = $(document.createElement('img'));
-					$elt.addClass('sq');
-					$elt.addClass('c0');
-					$elt.append($mapico);
-					$prj.append($elt);
-					$.spiral(3, $elt);
-					$elt.attr('id', 'map' + prj.prjname);
-					$mapico.addClass('ico');
-					$mapico.addClass('mapico');
-					$mapico.attr("src", 'img/map.svg');
+						$mapico.click(function() {
+							$.showMap(true, prj.prjtitle, function() {
+								map.setCenter(mappos);
+							});
 
-					$mapico.click(function() {
-						$.showMap(true, prj.prjtitle, function() {
-							map.setCenter(mappos);
 						});
-
-					});
-					c.render($prj, 4, prj.modules, 0, function(spi) {
+					}
+					c.render($prj, ( isMAPPOS ? 4 : 3), prj.modules, 0, function(spi) {
 						var radius = 2;
 						if (isNaN(spi)) {
 							$prj.attr('radius', 2);
