@@ -26,7 +26,7 @@ var step = 192;
 var zui;
 var map;
 
-require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', "jquery.easing.min", "lib/dragmom", 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket'], function($, _, moment) {
+require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min', "jquery.easing.min", "lib/dragmom", 'arbor', 'arbor_tween', 'jqui', 'zui', 'fancybox', 'socket', 'notify_theme'], function($, _, moment) {
 
 	moment.lang('fr', {
 		months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
@@ -88,21 +88,28 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 		var socket = io.connect("ws://qi.bype.org");
 		socket.on('imgid', function(data) {
-			console.log(data);
-			if (data.tag) {
-				var $elt = $('#imgup_' + data.tag.slice(1));
-				if ($elt) {
-					var t = new Date().getTime();
-					$.addQRImg($elt, 'http://qi.bype.org/img/' + data.id + '?r=' + t);
-				}
-			}
+			var t = new Date().getTime();
+			$.notify({
+				title : '<h1>Image</h1>',
+				text : '<img src="http://qi.bype.org/img/' + data.id + '?r=' + t + '"/>'
+			}, {
+				className : "info",
+				style : 'metro',
+				autoHide : false,
+				position : "bottom left"
+			});
+
 		});
 		socket.on('newtxt', function(data) {
-			console.log(data);
-			var $elt = $('#smsblock');
-			if ($elt) {
-				$.addSMS($elt, data)
-			}
+			$.notify({
+				title : '<h1>SMS</h1>',
+				text : '<p>' + data.txt + '</p>'
+			}, {
+				className : "info",
+				style : 'metro',
+				autoHide : false,
+				position : "bottom left"
+			});
 		});
 
 		function initialize() {
@@ -147,7 +154,7 @@ require(['jquery', 'underscore', 'moment', 'bootstrap', 'lib/jquery.qrcode.min',
 
 			var aTop = 0;
 			var aLeft = (parseInt($('.' + type).last().css('left')) + parseInt($('.' + type).first().css('left'))) / 2;
-		
+
 			$('#container').animate({
 				left : -step - aLeft,
 				top : -step - aTop
