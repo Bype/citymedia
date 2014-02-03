@@ -31,7 +31,8 @@ define(['content', 'lib/async'], function(c, async) {
 					$info.append(prj.prjtitle);
 					if (isMAPPOS) {
 						var infowindow = new google.maps.InfoWindow({
-							content : (prj.prjtitle.length < 16 ? "<div style='width:140px; height:18px;font-size:16px;text-align:center;vertical-align:middle;font-family: Dosis'>" + prj.prjtitle.toUpperCase() + "</h1></div>" : "<div style='width:140px; height:36px;font-size:16px;text-align:center;vertical-align:middle;color#111;font-family: Dosis'>" + prj.prjtitle + "</h1></div>")
+							content : "<div style='width:134px; height:180px;font-size:16px;text-align:center;vertical-align:middle;font-family: Dosis;overflow:hidden'>" 
+							+ prj.prjtitle.toUpperCase() + "</h1><img width='128px' height='128px' src='http://qi.bype.org/img/"+prj.prjname+"'/></div>"
 						});
 						infowindow.open(map, marker);
 					}
